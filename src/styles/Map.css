@@ -1,0 +1,21 @@
+.main_svg{
+  max-width: 300px;
+}
+
+
+.main_map_container{
+  background-color: rgb(104, 104, 104);
+  width: 400px;
+  height: 300px;
+}
+
+
+.map-container {
+  width: 100vw;
+  height: auto;
+}
+
+#main_svg {
+  width: 100%;
+  height: auto;
+}
