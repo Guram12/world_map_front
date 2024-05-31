@@ -1,13 +1,13 @@
-.map-container {
+.map_container {
   width: 100vw;
   height: auto;
   position: relative;
+  overflow: hidden;
 }
 
 #main_svg {
   width: 100%;
   height: auto;
-  cursor: pointer; /* Add a cursor pointer for better UX */
 }
 
 .go-back-button {
@@ -25,4 +25,10 @@
 
 .go-back-button:hover {
   background-color: #0056b3;
+}
+
+svg {
+  display: block; /* Ensures no additional space is added */
+  width: 100%;
+  height: 100%;
 }

@@ -1,13 +1,33 @@
 import "../styles/Map.css"
-import React, { useRef , useState , useEffect } from 'react';
-
-
+import React, { useRef, useState, useEffect } from 'react';
 
 function Map() {
   const svgRef = useRef(null);
   const [initialViewBox] = useState("0 0 2000 857");
 
+  const animateZoom = (startViewBox, endViewBox, duration) => {
+    const startTime = performance.now();
 
+    const animate = (currentTime) => {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+
+      const interpolate = (start, end) => start + (end - start) * progress;
+
+      const viewBoxX = interpolate(startViewBox[0], endViewBox[0]);
+      const viewBoxY = interpolate(startViewBox[1], endViewBox[1]);
+      const viewBoxWidth = interpolate(startViewBox[2], endViewBox[2]);
+      const viewBoxHeight = interpolate(startViewBox[3], endViewBox[3]);
+
+      svgRef.current.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${viewBoxWidth} ${viewBoxHeight}`);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
 
   const handleCountryClick = (event) => {
     const countryPath = event.target;
@@ -17,40 +37,32 @@ function Map() {
 
     // Calculate the new viewBox
     const viewBoxX = bbox.x - bbox.width * (scale - 1) / 2;
-    const viewBoxY = bbox.y - bbox.height * (scale - 1) / 7;
+    const viewBoxY = bbox.y - bbox.height * (scale - 1) / 7; // Adjusted to center zoom
     const viewBoxWidth = bbox.width * scale;
     const viewBoxHeight = bbox.height * scale;
 
-    // Set the new viewBox attribute
-    svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${viewBoxWidth} ${viewBoxHeight}`);
+    const startViewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    const endViewBox = [viewBoxX, viewBoxY, viewBoxWidth, viewBoxHeight];
+
+    // Animate zoom
+    animateZoom(startViewBox, endViewBox, 1000); // 1000 ms = 1 second
   };
 
   const handleGoBack = () => {
     const svg = svgRef.current;
-    svg.setAttribute('viewBox', initialViewBox);
+    const startViewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    const endViewBox = initialViewBox.split(' ').map(Number);
+
+    // Animate zoom out
+    animateZoom(startViewBox, endViewBox, 1000); // 1000 ms = 1 second
   };
 
+
   return (
-    <div className="map_container"   >
-
+    <div className="map_container">
       <button className="go-back-button" onClick={handleGoBack}>Go Back</button>
-
-
       <svg
-        // id="main_svg"
-        // baseprofile="tiny"
-        // fill="#ececec"
-        // height="857"
-        // stroke="black"
-        // stroke-linecap="round"
-        // stroke-linejoin="round"
-        // stroke-width=".2"
-        // version="1.2"
-        // viewbox="0 0 2000 857"
-        // width="2000"
-        // xmlns="http://www.w3.org/2000/svg"
         ref={svgRef}
-
         id="main_svg"
         baseProfile="tiny"
         fill="#ececec"
@@ -62,7 +74,6 @@ function Map() {
         viewBox="0 0 2000 857"
         xmlns="http://www.w3.org/2000/svg"
       >
-
         <path
           d="M1383 261.6l1.5 1.8-2.9 0.8-2.4 1.1-5.9 0.8-5.3 1.3-2.4 2.8 1.9 2.7 1.4 3.2-2 2.7 0.8 2.5-0.9 2.3-5.2-0.2 3.1 4.2-3.1 1.7-1.4 3.8 1.1 3.9-1.8 1.8-2.1-0.6-4 0.9-0.2 1.7-4.1 0-2.3 3.7 0.8 5.4-6.6 2.7-3.9-0.6-0.9 1.4-3.4-0.8-5.3 1-9.6-3.3 3.9-5.8-1.1-4.1-4.3-1.1-1.2-4.1-2.7-5.1 1.6-3.5-2.5-1 0.5-4.7 0.6-8 5.9 2.5 3.9-0.9 0.4-2.9 4-0.9 2.6-2-0.2-5.1 4.2-1.3 0.3-2.2 2.9 1.7 1.6 0.2 3 0 4.3 1.4 1.8 0.7 3.4-2 2.1 1.2 0.9-2.9 3.2 0.1 0.6-0.9-0.2-2.6 1.7-2.2 3.3 1.4-0.1 2 1.7 0.3 0.9 5.4 2.7 2.1 1.5-1.4 2.2-0.6 2.5-2.9 3.8 0.5 5.4 0z"
           id="AF" name="Afghanistan">
@@ -152,7 +163,10 @@ function Map() {
         </path>
         <path
           d="M665.8 489.6l3.1 0.6 0.6-1.4-1-1.2 0.6-1.9 2.3 0.6 2.7-0.7 3.2 1.4 2.5 1.3 1.7-1.7 1.3 0.2 0.8 1.8 2.7-0.4 2.2-2.5 1.8-4.7 3.4-5.9 2-0.3 1.3 3.6 3 11.2 3.1 1.1 0.1 4.4-4.3 5.3 1.7 1.9 10.1 1 0.2 6.5 4.3-4.2 7.1 2.3 9.5 3.9 2.8 3.7-0.9 3.6 6.6-2 11 3.4 8.5-0.2 8.4 5.3 7.4 7.2 4.4 1.8 4.8 0.3 2.1 2 2 8.2 1.1 3.9-2.1 10.6-2.7 4.2-7.7 8.9-3.4 7.3-4 5.5-1.4 0.2-1.3 4.7 0.9 12-1.1 9.9-0.3 4.2-1.6 2.6-0.5 8.6-5.2 8.3-0.5 6.7-4.3 2.7-1.1 3.9-6 0-8.5 2.4-3.7 2.9-6 1.9-6.1 5.1-4.1 6.4-0.3 4.8 1.3 3.5-0.3 6.5-0.8 3.1-3.4 3.6-4.5 11.3-4 5-3.2 3.1-1.5 6.1-2.9 3.6-2.1-3.6 1.8-3.1-3.8-4.3-4.8-3.6-6.3-4.1-1.9 0.2-6.3-5-3.4 0.7 6-8.7 5.3-6.3 3.3-2.6 4.2-3.5-0.4-5.1-3.2-3.8-2.6 1.3 0.7-3.7 0.3-3.8-0.3-3.6-2.1-1.1-2 1-2.1-0.3-0.8-2.4-1.1-5.9-1.2-1.9-3.9-1.8-2.2 1.3-5.9-1.3-0.4-8.7-2-3.5 1.6-1.4-0.8-3.6 1.3-2.8 0.6-5.1-1.7-4-3.2-1.8-0.8-2.5 0.5-3.7-10.7-0.3-2.8-7.5 1.7-0.1-0.3-2.7-1.2-1.9-0.5-3.7-3.4-1.9-3.5 0-2.5-1.8-3.9-1.3-2.3-2.4-6.4-1.1-6.5-5.7 0.3-4.3-0.9-2.5 0.4-4.8-7.3 1.1-2.9 2.4-4.8 2.6-1.1 1.9-2.9 0.2-4.2-0.6-3.2 1.1-2.6-0.7-0.1-9.7-4.4 3.7-5-0.1-2.3-3.5-3.8-0.3 1-2.8-3.3-3.9-2.6-5.8 1.5-1.1-0.2-2.8 3.4-1.8-0.7-3.5 1.4-2.2 0.3-3 6.3-4.4 4.6-1.2 0.8-1 5.1 0.3 2.2-17.6 0.1-2.8-0.9-3.6-2.6-2.4 0.1-4.7 3.2-1 1.1 0.7 0.2-2.5-3.3-0.7 0-4 11 0.2 1.9-2.3 1.6 2.1 1 3.8 1.1-0.8 3.1 3.4 4.4-0.4 1.1-2 4.2-1.5 2.4-1.1 0.7-2.7 4.1-1.8-0.3-1.4-4.8-0.5-0.7-4.1 0.3-4.3-2.5-1.6 1.1-0.6 4.1 0.8 4.5 1.6 1.7-1.5 4.1-1 6.4-2.4 2.1-2.5-0.7-1.8 3-0.2 1.2 1.4-0.8 2.9 2 0.9 1.2 3-1.6 2.3-1 5.4 1.4 3.3 0.3 3 3.5 3 2.8 0.3 0.6-1.3 1.8-0.3 2.6-1.1 1.8-1.7 3.2 0.6 1.3-0.3z"
-          id="BR" name="Brazil">
+          id="BR" name="Brazil"
+          onClick={handleCountryClick}
+          
+          >
         </path>
         <path d="M1633.1 472.8l2.2-2.4 4.6-3.6-0.1 3.2-0.1 4.1-2.7-0.2-1.1 2.2-2.8-3.3z" id="BN"
           name="Brunei Darussalam">
@@ -362,7 +376,10 @@ function Map() {
         </path>
         <path
           d="M1215.7 227.9l5.1 1.3 2.1 2.6 3.6 1.5-1.2 0.8 3.3 3.5-0.6 0.7-2.9-0.3-4.2-1.9-1.1 1.1-7 1-5.6-3.2-5.5 0.3 0.3-2.7-2.1-4.3-3.4-2.4-3-0.7-2.2-1.9 0.4-0.8 4.6 1.1 7.7 1 7.6 3.1 1.2 1.2 2.9-1z"
-          id="GE" name="Georgia">
+          id="GE" name="Georgia"
+          onClick={handleCountryClick}
+          
+          >
         </path>
         <path
           d="M986.5 431.1l-0.4 2 2.3 3.3 0 4.7 0.6 5 1.4 2.4-1.3 5.7 0.5 3.2 1.5 4.1 1.3 2.3-8.9 3.7-3.2 2.2-5.1 1.9-5-1.8 0.2-2.6-2.4-5.5 1.5-7.3 2.4-5.3-1.5-9.2-0.8-4.8 0.2-3.7 9.8-0.3 2.5 0.5 1.8-1 2.6 0.5z"
@@ -480,13 +497,16 @@ function Map() {
           d="M1179.1 288.2l0.4 2.6-0.6 1 0.1 0-0.7 2-2.1-0.8-0.7 4.2 1.5 0.7-1.3 0.9-0.1 1.7 2.5-0.8 0.4 2.5-1.8 10.2-0.7-1.6-3.9-9.4 1.4-2.1-0.4-0.4 1.1-3 0.6-4.8 0.6-1.7 0.1 0 1.8 0 0.4-1.1 1.4-0.1z"
           id="IL" name="Israel">
         </path>
-        <path className="Italy"
+        <path className="Italy" 
           d="M 1068.2 256.4 1066.5 261.5 1067.4 263.4 1066.5 266.7 1062.3 264.3 1059.6 263.6 1052.1 260.4 1052.6 257.1 1058.8 257.7 1064.2 257 1068.2 256.4 Z">
         </path>
         <path className="Italy"
+        
           d="M 1034.2 237.4 1037.5 241.9 1037.1 250.4 1034.7 250 1032.6 252.1 1030.6 250.4 1030.1 242.7 1028.8 239.1 1031.7 239.4 1034.2 237.4 Z">
         </path>
         <path className="Italy"
+          onClick={handleCountryClick}
+
           d="M 1055.9 203.9 1055.5 207 1056.9 209.7 1052.8 208.7 1048.9 211 1049.3 214.1 1048.8 215.9 1050.7 219.1 1055.7 222.3 1058.6 227.6 1064.7 232.7 1068.7 232.6 1070.1 234 1068.7 235.3 1073.5 237.6 1077.5 239.5 1082.2 242.9 1082.8 244 1082 246.3 1078.9 243.3 1074.3 242.3 1072.4 246.4 1076.3 248.8 1075.9 252.1 1073.8 252.5 1071.3 258 1069.1 258.5 1069 256.5 1069.9 253.1 1071 251.7 1068.7 248 1066.9 244.8 1064.7 244 1062.9 241.3 1059.5 240.1 1057.1 237.5 1053.3 237.1 1049 234.3 1044.1 230.1 1040.4 226.5 1038.5 220.2 1035.9 219.5 1031.7 217.4 1029.4 218.2 1026.5 221.2 1024.4 221.6 1024.9 218.9 1022.1 218.1 1020.6 213.2 1022.3 211.3 1020.8 208.9 1020.9 207.1 1023.1 208.5 1025.6 208.2 1028.3 206 1029.2 207 1031.6 206.8 1032.6 204.3 1036.4 205.1 1038.5 204 1038.8 201.5 1041.9 202.4 1042.4 201.2 1047.3 200.1 1048.6 202.2 1055.9 203.9 Z">
         </path>
         <path
