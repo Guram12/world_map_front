@@ -36,15 +36,20 @@
 
 /* Hover effects for countries */
 path {
-  transition: all 0.3s ease;  /* Smooth transition for the hover effect */
+  transition: all 0.3s ease;
+  /* Smooth transition for the hover effect */
 }
 
 path:hover {
   /* fill: orange;  */
-  transform: translateY(-2px);  /* Move the country slightly upwards on hover */
-  stroke: red;  /* Change the stroke color on hover */
-  stroke-width: 0.5;  /* Increase the stroke width on hover */
-  animation: border-animation 0.5s infinite;  /* Apply the border animation */
+  transform: translateY(-2px);
+  /* Move the country slightly upwards on hover */
+  stroke: red;
+  /* Change the stroke color on hover */
+  stroke-width: 0.5;
+  /* Increase the stroke width on hover */
+  animation: border-animation 0.5s infinite;
+  /* Apply the border animation */
   z-index: 99999999999;
 }
 
@@ -54,10 +59,24 @@ path:hover {
     stroke-dasharray: 5, 5;
     stroke-dashoffset: 0;
   }
+
   100% {
     stroke-dasharray: 5, 5;
     stroke-dashoffset: 10;
   }
+}
+
+
+#antarctita :hover {
+  transform: translate(30px);
+  /* Move the country slightly upwards on hover */
+  stroke: rgb(70, 185, 104);
+  /* Change the stroke color on hover */
+  stroke-width: 0.5;
+  /* Increase the stroke width on hover */
+  animation: border-animation 0.5s infinite;
+  /* Apply the border animation */
+  z-index: 99999999999;
 }
 
 
