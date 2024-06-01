@@ -1466,3 +1466,25 @@ function Map2() {
 
 
 export default Map2;
+
+
+
+
+
+
+
+
+// const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
+
+// const { isLoaded, loadError } = useJsApiLoader({
+// 	googleMapsApiKey: js_api_key,
+// });
+
+
+
+// if (loadError) {
+// 	return <div>Error loading maps</div>;
+// }
+// if (!isLoaded) {
+// 	return <div>Loading...</div>;
+// }
