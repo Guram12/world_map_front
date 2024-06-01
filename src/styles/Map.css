@@ -40,7 +40,7 @@ path {
 }
 
 path:hover {
-  fill: orange;  /* Change the fill color on hover */
+  /* fill: orange;  */
   transform: translateY(-2px);  /* Move the country slightly upwards on hover */
   stroke: red;  /* Change the stroke color on hover */
   stroke-width: 0.5;  /* Increase the stroke width on hover */
@@ -58,4 +58,17 @@ path:hover {
     stroke-dasharray: 5, 5;
     stroke-dashoffset: 10;
   }
+}
+
+
+
+/* Tooltip styles */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  pointer-events: none;
+  visibility: hidden;
 }
