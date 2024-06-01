@@ -2,33 +2,60 @@
   width: 100vw;
   height: auto;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
 }
 
 #main_svg {
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.go-back-button {
+
+.reset-button {
   position: absolute;
   top: 10px;
-  left: 10px;
+  right: 10px;
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  z-index: 10;
 }
 
-.go-back-button:hover {
+.reset-button:hover {
   background-color: #0056b3;
 }
 
-svg {
-  display: block; /* Ensures no additional space is added */
-  width: 100%;
-  height: 100%;
+/* =====================================  hover efects on counry ==================================== */
+
+
+/* Hover effects for countries */
+path {
+  transition: all 0.3s ease;  /* Smooth transition for the hover effect */
+}
+
+path:hover {
+  fill: orange;  /* Change the fill color on hover */
+  transform: translateY(-2px);  /* Move the country slightly upwards on hover */
+  stroke: red;  /* Change the stroke color on hover */
+  stroke-width: 0.5;  /* Increase the stroke width on hover */
+  animation: border-animation 0.5s infinite;  /* Apply the border animation */
+  z-index: 99999999999;
+}
+
+/* Keyframes for the border animation */
+@keyframes border-animation {
+  0% {
+    stroke-dasharray: 5, 5;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 5, 5;
+    stroke-dashoffset: 10;
+  }
 }
