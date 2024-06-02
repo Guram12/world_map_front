@@ -5,15 +5,18 @@
 
 
 export const countryCoordinates = {
-  JAPAN: { lat: 36.2048, lng: 138.2529 },
-  RUSSIA: { lat: 61.5240, lng: 105.3188 },
-  CHINA: { lat: 35.8617, lng: 104.1954 },
-  AFGHANISTAN: { lat: 33.9391, lng: 67.7100 },
-  georgia : { lat: 41.7151 , lng : 44.8271},
+  JP: { lat: 36.2048, lng: 138.2529 },
+  RU: { lat: 61.5240, lng: 105.3188 },
+  CN: { lat: 35.8617, lng: 104.1954 },
+  AF: { lat: 33.9391, lng: 67.7100 },
+  GE : { lat: 41.7151 , lng : 44.8271},
   United_Kingdom : { lat : 55.3781 , lng : -3.4360},
-  Papua_New_Guinea : {lat : -6.2384, lng :143.7144}
+  Papua_New_Guinea : {lat : -6.2384, lng :143.7144},
+  PK : { lat: 33.9391, lng: 67.7100 },
+  IN :  { lat: 20.5937, lng: 78.9629 },
+  US_AZ :   { lat: 34.8396, lng: -112.01026 }, //arizona state
+  NV : { lat: 40.00342, lng: -117.00467 }, 
 };
-
 // export const countryCoordinates = {
 //   Albania: { lat: 41, lng: 20 },
 //   Algeria: { lat: 28, lng: 3 },
