@@ -4,6 +4,9 @@
 
 
 
+// ====>>>> ქვეყნის სახელები უნდა იყოს ISO 3166-2 სტანდარტის მიხედვიტ დარქმეული 
+
+
 export const countryCoordinates = {
   JP: { lat: 36.2048, lng: 138.2529 },
   RU: { lat: 61.5240, lng: 105.3188 },
@@ -15,8 +18,12 @@ export const countryCoordinates = {
   PK : { lat: 33.9391, lng: 67.7100 },
   IN :  { lat: 20.5937, lng: 78.9629 },
   US_AZ :   { lat: 34.8396, lng: -112.01026 }, //arizona state
-  NV : { lat: 40.00342, lng: -117.00467 }, 
+  US_NV : { lat: 40.00342, lng: -117.00467 }, // nevada state
+  RO : { lat: 46.18498, lng: 25.38239 },
+  GB : { lat: 53.68936, lng: -3.92341 }
 };
+
+
 // export const countryCoordinates = {
 //   Albania: { lat: 41, lng: 20 },
 //   Algeria: { lat: 28, lng: 3 },
