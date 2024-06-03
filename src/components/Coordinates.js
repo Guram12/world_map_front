@@ -21,6 +21,7 @@ export const countryCoordinates = {
   US_NV : { lat: 40.00342, lng: -117.00467 }, // nevada state
   RO : { lat: 46.18498, lng: 25.38239 },
   GB : { lat: 53.68936, lng: -3.92341 }
+  
 };
 
 
