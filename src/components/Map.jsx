@@ -3766,7 +3766,6 @@ function Map() {
               arg="US_FJ"
               d="M 1989.1 624.9 1988.8 625 1988.9 624.6 1989.1 624.9 Z"
             ></path>
-
             <path
               className="Fiji"
               id="FJ"
