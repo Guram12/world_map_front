@@ -6,8 +6,27 @@
   justify-content: center;
   align-items: center;
   overflow-y: hidden;
-  background-color: rgb(68, 125, 163);
+  background: hsla(224, 90%, 47%, 1);
 
+  background: linear-gradient(
+    315deg,
+    hsla(224, 90%, 47%, 1) 12%,
+    hsla(210, 5%, 8%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    315deg,
+    hsla(224, 90%, 47%, 1) 12%,
+    hsla(210, 5%, 8%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    315deg,
+    hsla(224, 90%, 47%, 1) 12%,
+    hsla(210, 5%, 8%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#0C45E2", endColorstr="#141516", GradientType=1 );
 }
 
 #main_svg {
@@ -15,7 +34,6 @@
   height: 100vh;
   overflow: hidden;
 }
-
 
 .reset-button {
   position: absolute;
@@ -33,7 +51,6 @@
   background-color: #0056b3;
 }
 
-
 .back_button {
   position: absolute;
   top: 70px;
@@ -47,30 +64,20 @@
   z-index: 9999999999999999999999999999 !important;
 }
 
-
 /* =====================================  hover efects on counry ==================================== */
 
-
-/* Hover effects for countries */
 path {
   transition: all 0.3s ease;
-  /* Smooth transition for the hover effect */
 }
 
 path:hover {
-  /* fill: orange;  */
   transform: translateY(-2px);
-  /* Move the country slightly upwards on hover */
   stroke: red;
-  /* Change the stroke color on hover */
   stroke-width: 0.5;
-  /* Increase the stroke width on hover */
   animation: border-animation 0.5s infinite;
-  /* Apply the border animation */
   z-index: 99999999999;
 }
 
-/* Keyframes for the border animation */
 @keyframes border-animation {
   0% {
     stroke-dasharray: 5, 5;
@@ -83,22 +90,14 @@ path:hover {
   }
 }
 
-
 #antarctita :hover {
   transform: translate(30px);
-  /* Move the country slightly upwards on hover */
   stroke: rgb(70, 185, 104);
-  /* Change the stroke color on hover */
   stroke-width: 0.5;
-  /* Increase the stroke width on hover */
   animation: border-animation 0.5s infinite;
-  /* Apply the border animation */
   z-index: 99999999999;
 }
 
-
-
-/* Tooltip styles */
 .tooltip {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.75);
@@ -108,5 +107,3 @@ path:hover {
   pointer-events: none;
   visibility: hidden;
 }
-
-
