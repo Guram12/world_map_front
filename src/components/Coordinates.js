@@ -172,7 +172,9 @@ export const countryCoordinates =
     NG: { lat: 9.081999, lng: 8.675277 }, // Nigeria +
     NI: { lat: 12.865416, lng: -85.207229 }, // Nicaragua +
     NL: { lat: 52.132633, lng: 5.291266 }, // Netherlands +
-    NO: { lat: 60.472024, lng: 8.468946 }, // Norway + 
+
+    NO: { lat: 59.934566, lng: 10.702521 }, // Norway + 
+
     NP: { lat: 28.394857, lng: 84.124008 }, // Nepal +
     NR: { lat: -0.522778, lng: 166.931503 }, // Nauru +
     NU: { lat: -19.054445, lng: -169.867233 }, // Niue
