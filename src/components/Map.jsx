@@ -168,6 +168,12 @@ function Map() {
     };
   }, [createPatterns]);
 
+
+// useEffect(()=> {
+//   console.log("norvegiis centris monacemebi",countryCoordinates[selectedCountry] )
+
+// }, [selectedCountry])
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -189,6 +195,7 @@ function Map() {
       {selectedCountry && isLoaded ? (
         <GoogleMap
           mapContainerStyle={{ width: "100%", height: "100vh" }}
+          // center={countryCoordinates[selectedCountry]}
           options={{
             restriction: {
               latLngBounds: {
