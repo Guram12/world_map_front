@@ -29,42 +29,52 @@ function Map() {
     libraries, // Use the constant libraries array
   });
 
+
+
+  // ============================== function for fetching  country iso codes and images ===========================
   useEffect(() => {
+    const fetchCountryImages = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/countries/");
+        setCountryImages(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching country images:", error);
+      }
+    };
+
     fetchCountryImages();
-  }, []);
 
-  const fetchCountryImages = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/countries/");
-      setCountryImages(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching country images:", error);
-    }
-  };
+  }, []);
+  // =============================================================================================================
 
   useEffect(() => {
+
+    const fetchBusinessLocations = async (country) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/fetch-locations/?iso_code=${country}`
+        );
+        const { locations } = response.data;
+        setBusinessLocations(locations);
+      } catch (error) {
+        console.error("Error fetching business locations:", error);
+      }
+    };
+
     if (selectedCountry && isLoaded) {
       fetchBusinessLocations(selectedCountry);
     }
   }, [selectedCountry, isLoaded]);
 
-  const fetchBusinessLocations = async (country) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/api/fetch-locations/?iso_code=${country}`
-      );
-      const { locations } = response.data;
-      setBusinessLocations(locations);
-    } catch (error) {
-      console.error("Error fetching business locations:", error);
-    }
-  };
 
   useEffect(() => {
     console.log("business locations", businessLocations);
     console.log("country images", countryImages);
   }, [businessLocations, countryImages]);
+
+
+  // ========================    function for reset zoom button    ============================             
 
   const resetZoom = () => {
     const svg = d3.select(svgRef.current);
@@ -74,6 +84,10 @@ function Map() {
       .call(zoomRef.current.transform, d3.zoomIdentity);
     setSelectedCountry(null);
   };
+
+  // ===========================================================================================
+
+  // ========================    function for setting selected images on its country   ============================             
 
   const createPatterns = () => {
     const svg = svgRef.current;
@@ -119,6 +133,9 @@ function Map() {
       }
     });
   };
+  // ===========================================================================================
+
+  // ========================    function for zooming in and out ============================             
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -168,11 +185,11 @@ function Map() {
     };
   }, [createPatterns]);
 
+  // ===========================================================================================================
+  // useEffect(()=> {
+  //   console.log("norvegiis centris monacemebi",countryCoordinates[selectedCountry] )
 
-// useEffect(()=> {
-//   console.log("norvegiis centris monacemebi",countryCoordinates[selectedCountry] )
-
-// }, [selectedCountry])
+  // }, [selectedCountry])
 
   if (loading) {
     return <div>Loading...</div>;
@@ -1962,9 +1979,9 @@ function Map() {
               d="M 237.2 99.6 238.4 100.6 241.9 100.1 243.5 101.6 246.8 102.3 245.6 103 240.7 104.2 239 102.9 238.7 101.9 234.4 102.2 234.1 101.7 237.2 99.6 Z">
             </path> */}
             {/* ALIASKA */}
-          
 
-{/* ===================================     shtatebis dasawyisi       =============================== */}
+
+            {/* ===================================     shtatebis dasawyisi       =============================== */}
 
 
             <path
@@ -2831,7 +2848,7 @@ function Map() {
 
 
 
-{/* ================================      shtatebis dasasruli    ================================= */}
+            {/* ================================      shtatebis dasasruli    ================================= */}
 
 
 
@@ -2854,7 +2871,7 @@ function Map() {
               id="MV"
               arg="MV"
               name="Maldives"
-              // ----------- bounding koordinatebi ar aqvs 
+            // ----------- bounding koordinatebi ar aqvs 
             ></path>
 
             <path
@@ -2862,7 +2879,7 @@ function Map() {
               id="MH"
               arg="MH"
               name="Marshall Islands"
-              // ----------- bounding koordinatebi ar aqvs 
+            // ----------- bounding koordinatebi ar aqvs 
             ></path>
 
             <path
@@ -3538,7 +3555,7 @@ function Map() {
               arg="VG"
               name="British Virgin Islands"
             ></path> */}
-{/* 
+            {/* 
             <path
               className="United States Virgin Islands"
               id="VI"
@@ -3685,7 +3702,7 @@ function Map() {
               id="VU"
               d="M 1923.4 586.5 1923.3 586.4 1923.4 585.9 1923.6 586.1 1923.4 586.5 Z"
             ></path> */}
-{/* 
+            {/* 
             <path
               className="Samoa"
               arg="WS"
