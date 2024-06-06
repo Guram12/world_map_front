@@ -11,8 +11,7 @@ import CountryMap from "./GoogleMapWindow";
 
 const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
-const libraries = ["core", "places"]; // Define libraries array as a constant
-
+const libraries = ["core", "places"]; 
 function Map() {
   const svgRef = useRef(null);
   const zoomRef = useRef(null);
