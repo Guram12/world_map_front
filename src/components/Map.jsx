@@ -7,10 +7,12 @@ import countryBounds from "./country_bounds.json"; // Import the JSON data
 import axios from "axios";
 import ReactDOM from "react-dom/client"; // Correct import for createRoot
 import CountryMap from "./GoogleMapWindow";
+import LanguageJson from "./language.json";
 
 const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
 const libraries = ["core", "places"];
+
 function Map() {
   const svgRef = useRef(null);
   const zoomRef = useRef(null);
@@ -19,13 +21,13 @@ function Map() {
   const [businessLocations, setBusinessLocations] = useState([]);
   const [countryImages, setCountryImages] = useState({});
   const [loading, setLoading] = useState(true);
+  const [language, setLanguage] = useState("en"); // State for selected language
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: js_api_key,
     libraries, // Use the constant libraries array
   });
 
-  // ============================== function for fetching  country iso codes and images ===========================
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
@@ -41,7 +43,6 @@ function Map() {
 
     fetchCountryImages();
   }, []);
-  // =============================================================================================================
 
   useEffect(() => {
     const fetchBusinessLocations = async (country) => {
@@ -66,8 +67,6 @@ function Map() {
     console.log("country images", countryImages);
   }, [businessLocations, countryImages]);
 
-  // ========================    function for reset zoom button    ============================
-
   const resetZoom = () => {
     const svg = d3.select(svgRef.current);
     svg
@@ -76,10 +75,6 @@ function Map() {
       .call(zoomRef.current.transform, d3.zoomIdentity);
     setSelectedCountry(null);
   };
-
-  // ===========================================================================================
-
-  // ========================    function for setting selected images on its country   ============================
 
   const createPatterns = () => {
     const svg = svgRef.current;
@@ -125,9 +120,6 @@ function Map() {
       }
     });
   };
-  // ===========================================================================================
-
-  // ========================    function for zooming in and out ============================
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -148,8 +140,13 @@ function Map() {
     svg
       .selectAll("path")
       .on("mouseover", function (event) {
-        const arg = d3.select(this).attr("name");
-        tooltip.style("visibility", "visible").text(arg);
+        const arg = d3.select(this).attr("arg");
+        const countryName = LanguageJson[arg];
+        if (countryName) {
+          tooltip
+            .style("visibility", "visible")
+            .html(`<strong>${countryName[language]}</strong>`);
+        }
       })
       .on("mousemove", function (event) {
         tooltip
@@ -176,13 +173,7 @@ function Map() {
         .on("click", null);
       svg.call(zoom.on("zoom", null));
     };
-  }, [createPatterns]);
-
-  // ===========================================================================================================
-  // useEffect(()=> {
-  //   console.log("norvegiis centris monacemebi",countryCoordinates[selectedCountry] )
-
-  // }, [selectedCountry])
+  }, [createPatterns, language]); // Added language dependency to update on language change
 
   const handleCountryClick = (arg) => {
     const windowFeatures =
@@ -216,6 +207,11 @@ function Map() {
       <button onClick={resetZoom} className="reset-button">
         Reset Zoom
       </button>
+      <select onChange={(e) => setLanguage(e.target.value)} value={language}>
+        <option value="en">English</option>
+        <option value="ru">Russian</option>
+        <option value="ge">Georgian</option>
+      </select>
       <div ref={tooltipRef} className="tooltip"></div>
       <svg
         ref={svgRef}
