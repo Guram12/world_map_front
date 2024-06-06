@@ -148,7 +148,7 @@ function Map() {
     svg
       .selectAll("path")
       .on("mouseover", function (event) {
-        const arg = d3.select(this).attr("arg");
+        const arg = d3.select(this).attr("name");
         tooltip.style("visibility", "visible").text(arg);
       })
       .on("mousemove", function (event) {
