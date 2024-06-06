@@ -1,78 +1,17 @@
 import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import { countryCoordinates } from "./Coordinates";
-import countryBounds from "./country_bounds.json"; // Import the JSON data
-import axios from "axios";
-import ReactDOM from "react-dom/client"; // Correct import for createRoot
-import CountryMap from "./GoogleMapWindow";
 
 
-const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
-const libraries = ["core", "places"]; 
-function Map() {
+function Map({countryData , loading , handle_Set_Selected_Country}) {
   const svgRef = useRef(null);
   const zoomRef = useRef(null);
   const tooltipRef = useRef(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [businessLocations, setBusinessLocations] = useState([]);
-  const [countryImages, setCountryImages] = useState({});
-  const [loading, setLoading] = useState(true);
 
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: js_api_key,
-    libraries, // Use the constant libraries array
-  });
-
-
-
-  // ============================== function for fetching  country iso codes and images ===========================
-  useEffect(() => {
-    const fetchCountryImages = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/api/countries/");
-        setCountryImages(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching country images:", error);
-      }
-    };
-
-    fetchCountryImages();
-
-  }, []);
-  // =============================================================================================================
-
-  useEffect(() => {
-
-    const fetchBusinessLocations = async (country) => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/api/fetch-locations/?iso_code=${country}`
-        );
-        const { locations } = response.data;
-        setBusinessLocations(locations);
-      } catch (error) {
-        console.error("Error fetching business locations:", error);
-      }
-    };
-
-    if (selectedCountry && isLoaded) {
-      fetchBusinessLocations(selectedCountry);
-    }
-  }, [selectedCountry, isLoaded]);
-
-
-  useEffect(() => {
-    console.log("business locations", businessLocations);
-    console.log("country images", countryImages);
-  }, [businessLocations, countryImages]);
 
 
   // ========================    function for reset zoom button    ============================             
-
   const resetZoom = () => {
     const svg = d3.select(svgRef.current);
     svg
@@ -83,9 +22,7 @@ function Map() {
   };
 
   // ===========================================================================================
-
   // ========================    function for setting selected images on its country   ============================             
-
   const createPatterns = () => {
     const svg = svgRef.current;
     if (!svg) return;
@@ -97,7 +34,7 @@ function Map() {
 
     svg.querySelectorAll("path[arg]").forEach((countryPath, index) => {
       const arg = countryPath.getAttribute("arg");
-      const imageUrl = countryImages[arg];
+      const imageUrl = countryData[arg]?.image_url;
       if (imageUrl) {
         const bbox = countryPath.getBBox();
 
@@ -131,7 +68,6 @@ function Map() {
     });
   };
   // ===========================================================================================
-
   // ========================    function for zooming in and out ============================             
 
   useEffect(() => {
@@ -166,7 +102,7 @@ function Map() {
       })
       .on("click", function () {
         const arg = d3.select(this).attr("arg");
-        setSelectedCountry(arg);
+        handle_Set_Selected_Country(arg);
         handleCountryClick(arg)
       });
 
@@ -184,37 +120,30 @@ function Map() {
   }, [createPatterns]);
 
   // ===========================================================================================================
-  // useEffect(()=> {
-  //   console.log("norvegiis centris monacemebi",countryCoordinates[selectedCountry] )
-
-  // }, [selectedCountry])
-
 
   const handleCountryClick = (arg) => {
-    const windowFeatures =
-      "width=800,height=600,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes";
+    const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
+    const consumerWebsiteUrl = countryData[arg]?.customer_website; // Ensure this is defined and valid
 
-    const newWindow = window.open("", "_blank", windowFeatures);
+    // Open the consumer website in a new tab
+    if (consumerWebsiteUrl) {
+      window.open(consumerWebsiteUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      console.warn(`No consumer website URL for country: ${arg}`);
+    }
 
-    newWindow.document.write(
-      "<html><head><title>Country Map</title><style>body { margin: 0; }</style></head><body>"
-    );
-    newWindow.document.write(
-      '<div id="root" style="width: 100vw; height: 100vh;"></div>'
-    );
-    newWindow.document.write("</body></html>");
-    newWindow.document.close();
-
-    newWindow.onload = () => {
-      const root = ReactDOM.createRoot(
-        newWindow.document.getElementById("root")
-      );
-      root.render(<CountryMap country={arg} />);
-    };
+    // Open the CountryMap component in a new tab
+    window.open(countryMapUrl, '_blank', 'noopener,noreferrer');
   };
 
+
+useEffect(()=> {
+  console.log("countrydata"  ,  countryData)
+},[countryData])
+
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading" >Loading...</div>;
   }
 
   return (
