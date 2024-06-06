@@ -1,6 +1,6 @@
-// CountryMap.js
 import React, { useEffect, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { useParams } from "react-router-dom";
 import countryBounds from "./country_bounds.json"; // Import the JSON data
 import axios from "axios";
 
@@ -8,13 +8,14 @@ const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
 const libraries = ["core", "places"];
 
-const CountryMap = ({ country }) => {
+const CountryMap = () => {
+  const { country } = useParams(); // Retrieve country parameter from URL
+  const [businessLocations, setBusinessLocations] = useState([]);
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: js_api_key,
     libraries,
   });
-
-  const [businessLocations, setBusinessLocations] = useState([]);
 
   useEffect(() => {
     const fetchBusinessLocations = async () => {
@@ -38,30 +39,34 @@ const CountryMap = ({ country }) => {
     return <div>Loading...</div>;
   }
 
+  const bounds = countryBounds[country];
+  if (!bounds) {
+    return <div>Error: Invalid country selected</div>;
+  }
+
+  const { north, south, east, west } = bounds;
+  if (typeof north !== "number" || typeof south !== "number" || typeof east !== "number" || typeof west !== "number") {
+    return <div>Error: Invalid bounds for the selected country</div>;
+  }
+
   return (
     <GoogleMap
       mapContainerStyle={{ width: "100%", height: "100vh" }}
       options={{
         restriction: {
           latLngBounds: {
-            north: countryBounds[country]?.north,
-            south: countryBounds[country]?.south,
-            east: countryBounds[country]?.east,
-            west: countryBounds[country]?.west,
+            north,
+            south,
+            east,
+            west,
           },
           strictBounds: true,
         },
       }}
       onLoad={(map) => {
         const bounds = new window.google.maps.LatLngBounds(
-          new window.google.maps.LatLng(
-            countryBounds[country].south,
-            countryBounds[country].west
-          ),
-          new window.google.maps.LatLng(
-            countryBounds[country].north,
-            countryBounds[country].east
-          )
+          new window.google.maps.LatLng(south, west),
+          new window.google.maps.LatLng(north, east)
         );
         map.fitBounds(bounds);
       }}
