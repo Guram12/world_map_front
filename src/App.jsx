@@ -10,28 +10,28 @@ import axios from 'axios';
 
 
 
-export const BaseURLs = {
-  forvarded : "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/" ,
-  local : "http://localhost:8000/"
-
-};
-
-
 
 
 
 
 function App() {
-
+  
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
-
-
+  
+  
   const handle_Set_Selected_Country = (country) => {
     setSelectedCountry(country)
-  }
-
+    }
+    
+    
+    const BaseURLs = {
+      forvarded : "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/" ,
+      local : "http://localhost:8000/"
+    
+    };
+    
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
