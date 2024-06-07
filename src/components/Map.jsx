@@ -155,7 +155,7 @@ useEffect(()=> {
       <button onClick={resetZoom} className="reset-button">
         Reset Zoom
       </button>
-      <select onChange={(e) => setLanguage(e.target.value)} value={language}>
+      <select  className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
         <option value="en">English</option>
         <option value="ru">Russian</option>
         <option value="ge">Georgian</option>
