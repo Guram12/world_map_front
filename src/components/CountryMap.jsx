@@ -25,13 +25,14 @@ const CountryMap = () => {
   const BaseURLs = {
     forvarded: "https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/",
     local: "http://localhost:8000/"
-
   };
+
+
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`
+          `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
         );
         const { locations } = response.data;
         setBusinessLocations(locations);
