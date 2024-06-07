@@ -3,6 +3,8 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
 import countryBounds from "./country_bounds.json"; // Import the JSON data
 import axios from "axios";
+import { BaseURLs } from "../App";
+
 
 const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
@@ -21,7 +23,7 @@ const CountryMap = () => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/fetch-locations/?iso_code=${country}`
+          `${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`
         );
         const { locations } = response.data;
         setBusinessLocations(locations);
