@@ -47,7 +47,7 @@ const CountryMap = () => {
   }, [country, isLoaded]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div>Loading map...</div>;
   }
 
   const bounds = countryBounds[country];
