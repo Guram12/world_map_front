@@ -32,7 +32,9 @@ const CountryMap = () => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
+          // `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
+          `https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/api/fetch-locations/?iso_code=${country}`
+
         );
         const { locations } = response.data;
         setBusinessLocations(locations);
