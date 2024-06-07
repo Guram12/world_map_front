@@ -10,12 +10,6 @@ const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 const libraries = ["core", "places"];
 
 
-// useEffect(()=> { 
-//   console.log("base url from map" , BaseURLs.forvarded)
-// },[BaseURLs])
-
-
-// https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/api/fetch-locations/?iso_code=TR
 
 const CountryMap = () => {
   const { country } = useParams(); // Retrieve country parameter from URL

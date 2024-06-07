@@ -7,31 +7,30 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import axios from 'axios';
 
 
-
-
+import Planets from './components/planets';
 
 
 
 
 
 function App() {
-  
+
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  
-  
+
+
   const handle_Set_Selected_Country = (country) => {
     setSelectedCountry(country)
-    }
-    
-    
-    const BaseURLs = {
-      forvarded : "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/" ,
-      local : "http://localhost:8000/"
-    
-    };
-    
+  }
+
+
+  const BaseURLs = {
+    forvarded: "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/",
+    local: "http://localhost:8000/"
+
+  };
+
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
@@ -50,7 +49,7 @@ function App() {
   return (
     <div id='main_app_container' >
 
-      <Router>
+      {/* <Router>
         <Routes>
           <Route path="/" element={
             <Map
@@ -60,7 +59,12 @@ function App() {
             />} />
           <Route path="/country-map/:country" element={<CountryMap selectedCountry={selectedCountry} />} />
         </Routes>
-      </Router>
+      </Router> */}
+          <div >
+      <Planets />
+
+          </div>
+
     </div>
   )
 }
