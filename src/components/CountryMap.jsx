@@ -3,12 +3,19 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
 import countryBounds from "./country_bounds.json"; // Import the JSON data
 import axios from "axios";
-import { BaseURLs } from "../App";
 
 
 const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
 const libraries = ["core", "places"];
+
+
+// useEffect(()=> { 
+//   console.log("base url from map" , BaseURLs.forvarded)
+// },[BaseURLs])
+
+
+// https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/api/fetch-locations/?iso_code=TR
 
 const CountryMap = () => {
   const { country } = useParams(); // Retrieve country parameter from URL
@@ -18,6 +25,14 @@ const CountryMap = () => {
     googleMapsApiKey: js_api_key,
     libraries,
   });
+
+
+    
+  const BaseURLs = {
+    forvarded : "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/" ,
+    local : "http://localhost:8000/"
+  
+  };
 
   useEffect(() => {
     const fetchBusinessLocations = async () => {
