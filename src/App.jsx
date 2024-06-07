@@ -26,10 +26,12 @@ function App() {
 
 
   const BaseURLs = {
-    forvarded: "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/",
+    forvarded: "https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/",
     local: "http://localhost:8000/"
 
   };
+
+
 
   useEffect(() => {
     const fetchCountryImages = async () => {
@@ -49,7 +51,7 @@ function App() {
   return (
     <div id='main_app_container' >
 
-      {/* <Router>
+      <Router>
         <Routes>
           <Route path="/" element={
             <Map
@@ -59,11 +61,12 @@ function App() {
             />} />
           <Route path="/country-map/:country" element={<CountryMap selectedCountry={selectedCountry} />} />
         </Routes>
-      </Router> */}
-          <div >
-      <Planets />
+      </Router>
 
-          </div>
+      
+      {/* <div >
+          <Planets />
+      </div> */}
 
     </div>
   )
