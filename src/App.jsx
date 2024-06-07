@@ -5,11 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CountryMap from './components/CountryMap';
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import axios from 'axios';
-
-
 import Planets from './components/planets';
-
-
 
 
 
@@ -62,12 +58,6 @@ function App() {
           <Route path="/country-map/:country" element={<CountryMap selectedCountry={selectedCountry} />} />
         </Routes>
       </Router>
-
-      
-      {/* <div >
-          <Planets />
-      </div> */}
-
     </div>
   )
 }
