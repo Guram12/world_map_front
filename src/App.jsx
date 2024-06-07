@@ -9,6 +9,18 @@ import axios from 'axios';
 
 
 
+
+export const BaseURLs = {
+  forvarded : "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/" ,
+  local : "http://localhost:8000/"
+
+};
+
+
+
+
+
+
 function App() {
 
   const [countryData, setCountryData] = useState({});
@@ -23,7 +35,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/countries/");
+        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
