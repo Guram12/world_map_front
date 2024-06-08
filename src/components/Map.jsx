@@ -128,7 +128,9 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     });
   };
   // ===========================================================================================
-  // ========================    function for zooming in and out ============================             
+  // ========================    function for zooming in and out ============================  
+  
+
   useEffect(() => {
     if (!svgRef.current) return;
   
@@ -150,18 +152,18 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .on("mouseover", function (event) {
         const arg = d3.select(this).attr("arg");
         const countryName = LanguageJson[arg];
-        
-        // Highlight all African countries
+  
+        // Scale up all African countries
         if (continentMapping["AF"].includes(arg)) {
           svg.selectAll("path")
             .filter(function () {
               return continentMapping["AF"].includes(d3.select(this).attr("arg"));
             })
-            .classed("country-hover", true);
+            .classed("country-scale", true);
         }
   
-        // Highlight the selected country differently
-        d3.select(this).classed("selected-country-hover", true);
+        // Scale up the selected country differently
+        d3.select(this).classed("selected-country-scale", true);
   
         if (countryName) {
           tooltip
@@ -175,8 +177,8 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           .style("left", `${event.pageX + 15}px`);
       })
       .on("mouseout", function () {
-        // Remove all hover classes
-        svg.selectAll("path").classed("country-hover", false).classed("selected-country-hover", false);
+        // Remove all scale classes
+        svg.selectAll("path").classed("country-scale", false).classed("selected-country-scale", false);
         tooltip.style("visibility", "hidden");
       })
       .on("click", function () {
@@ -198,8 +200,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     };
   }, [createPatterns, language]); // Added language dependency to update on language change
   
-
-
 
 
 

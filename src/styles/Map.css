@@ -128,7 +128,7 @@
 
 /* =====================================  hover efects on counry ==================================== */
 
-path {
+/* path {
   transition: all 0.3s ease;
 }
 
@@ -138,7 +138,7 @@ path:hover {
   stroke-width: 0.5;
   animation: border-animation 0.5s infinite;
   z-index: 99999999999 !important;
-}
+} */
 
 @keyframes border-animation {
   0% {
@@ -206,11 +206,26 @@ path:hover {
 
   */
 
-.continent-hover {
+/* .continent-hover {
   transition: transform 0.5s ease;
   transform-origin: center center;
 }
 
 .country-hover {
-  fill: yellow; /* Change this to your desired color */
+  fill: yellow; 
+} */
+
+
+/* Map.css */
+.country-scale {
+  transform: scale(1.7); /* Adjust the scale factor as needed */
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  z-index: 9999999999999;
+}
+
+.selected-country-scale {
+  transform: scale(1.8); /* Adjust the scale factor as needed */
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
