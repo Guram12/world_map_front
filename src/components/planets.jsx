@@ -18,7 +18,7 @@ export default function Planets() {
     earth.classList.add("grow-earth");
     setTimeout(() => {
       navigate("/map");
-    }, 2000);
+    }, 1000);
   };
 
   const onclick = () => {
@@ -31,9 +31,6 @@ export default function Planets() {
   return (
     <div className="main_planets_container">
       <Starfield />
-      {/* <div className="logo">
-        <img src={Logo} alt=""></img>
-      </div> */}
       <div className="same_class">
         <motion.div
           className="column"
@@ -71,9 +68,7 @@ export default function Planets() {
           className="moon_earth_container"
         >
           <div className="earth_bck_styles">
-            <div className="earth" onClick={handleClick}>
-              {/* <h1 id="clickable"></h1> */}
-            </div>
+            <div className="earth" onClick={handleClick}></div>
           </div>
           <div className="moon_bck_styles">
             <div className="moon">
@@ -105,7 +100,7 @@ export default function Planets() {
                   startOffset="50%"
                   textAnchor="middle"
                 >
-                  Contact Us{" "}
+                  Contact Us
                 </textPath>
               </text>
             </svg>
