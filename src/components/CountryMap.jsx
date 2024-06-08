@@ -22,6 +22,7 @@ const CountryMap = () => {
     local: "http://localhost:8000/",
   };
 
+
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
@@ -41,7 +42,7 @@ const CountryMap = () => {
   }, [country, isLoaded]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div>Loading map...</div>;
   }
 
   const bounds = countryBounds[country];
