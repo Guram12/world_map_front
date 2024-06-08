@@ -1,7 +1,69 @@
 import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
-import LanguageJson from "./language.json"
+import LanguageJson from "./language.json";
+
+const continentMapping = {
+  "AF": [
+    "DZ", // Algeria
+    "AO", // Angola
+    "BJ", // Benin
+    "BW", // Botswana
+    "BF", // Burkina Faso
+    "BI", // Burundi
+    "CV", // Cape Verde
+    "CM", // Cameroon
+    "CF", // Central African Republic
+    "TD", // Chad
+    "KM", // Comoros
+    "CG", // Congo (Brazzaville)
+    "CD", // Congo (Kinshasa)
+    "CI", // Côte d'Ivoire
+    "DJ", // Djibouti
+    "EG", // Egypt
+    "GQ", // Equatorial Guinea
+    "ER", // Eritrea
+    "SZ", // Eswatini (Swaziland)
+    "ET", // Ethiopia
+    "GA", // Gabon
+    "GM", // Gambia
+    "GH", // Ghana
+    "GN", // Guinea
+    "GW", // Guinea-Bissau
+    "KE", // Kenya
+    "LS", // Lesotho
+    "LR", // Liberia
+    "LY", // Libya
+    "MG", // Madagascar
+    "MW", // Malawi
+    "ML", // Mali
+    "MR", // Mauritania
+    "MU", // Mauritius
+    "MA", // Morocco
+    "MZ", // Mozambique
+    "NA", // Namibia
+    "NE", // Niger
+    "NG", // Nigeria
+    "RW", // Rwanda
+    "ST", // Sao Tome and Principe
+    "SN", // Senegal
+    "SC", // Seychelles
+    "SL", // Sierra Leone
+    "SO", // Somalia
+    "ZA", // South Africa
+    "SS", // South Sudan
+    "SD", // Sudan
+    "TZ", // Tanzania
+    "TG", // Togo
+    "TN", // Tunisia
+    "UG", // Uganda
+    "ZM", // Zambia
+    "ZW", // Zimbabwe
+    "EH"
+  ]
+};
+
+
 
 function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const svgRef = useRef(null);
@@ -10,8 +72,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   const [language, setLanguage] = useState("en"); // State for selected language
 
-
-
   // ========================    function for reset zoom button    ============================             
   const resetZoom = () => {
     const svg = d3.select(svgRef.current);
@@ -19,10 +79,9 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .transition()
       .duration(750)
       .call(zoomRef.current.transform, d3.zoomIdentity);
-    setSelectedCountry(null);
+    handle_Set_Selected_Country(null);
   };
 
-  // ===========================================================================================
   // ========================    function for setting selected images on its country   ============================             
   const createPatterns = () => {
     const svg = svgRef.current;
@@ -69,29 +128,43 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     });
   };
   // ===========================================================================================
-  // ========================    function for zooming in and out ============================             
+  // ========================    function for zooming in and out ============================  
+  
 
   useEffect(() => {
     if (!svgRef.current) return;
-
+  
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
-
+  
     const zoom = d3
       .zoom()
       .scaleExtent([1, 10])
       .on("zoom", (event) => {
         svg.selectAll("g").attr("transform", event.transform);
       });
-
+  
     svg.call(zoom);
     zoomRef.current = zoom;
-
+  
     svg
       .selectAll("path")
       .on("mouseover", function (event) {
         const arg = d3.select(this).attr("arg");
         const countryName = LanguageJson[arg];
+  
+        // Scale up all African countries
+        if (continentMapping["AF"].includes(arg)) {
+          svg.selectAll("path")
+            .filter(function () {
+              return continentMapping["AF"].includes(d3.select(this).attr("arg"));
+            })
+            .classed("country-scale", true);
+        }
+  
+        // Scale up the selected country differently
+        d3.select(this).classed("selected-country-scale", true);
+  
         if (countryName) {
           tooltip
             .style("visibility", "visible")
@@ -104,16 +177,18 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           .style("left", `${event.pageX + 15}px`);
       })
       .on("mouseout", function () {
+        // Remove all scale classes
+        svg.selectAll("path").classed("country-scale", false).classed("selected-country-scale", false);
         tooltip.style("visibility", "hidden");
       })
       .on("click", function () {
         const arg = d3.select(this).attr("arg");
         handle_Set_Selected_Country(arg);
-        handleCountryClick(arg)
+        handleCountryClick(arg);
       });
-
+  
     createPatterns();
-
+  
     return () => {
       svg
         .selectAll("path")
@@ -124,6 +199,15 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       svg.call(zoom.on("zoom", null));
     };
   }, [createPatterns, language]); // Added language dependency to update on language change
+  
+
+
+
+
+
+
+
+
 
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
@@ -131,28 +215,57 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
     // Open the consumer website in a new tab
     if (consumerWebsiteUrl) {
-      window.open(consumerWebsiteUrl, '_blank', 'noopener,noreferrer');
+      window.open(consumerWebsiteUrl, "_blank", "noopener,noreferrer");
     } else {
       console.warn(`No consumer website URL for country: ${arg}`);
     }
 
     // Open the CountryMap component in a new tab
-    window.open(countryMapUrl, '_blank', 'noopener,noreferrer');
+    window.open(countryMapUrl, "_blank", "noopener,noreferrer");
   };
 
+  useEffect(() => {
+    console.log("countrydata", countryData);
+  }, [countryData]);
 
   useEffect(() => {
-    console.log("countrydata", countryData)
-  }, [countryData])
+    const applyAnimation = () => {
+      if (svgRef.current) {
+        const paths = svgRef.current.querySelectorAll("path");
+        const totalDuration = 2; // Total duration in seconds
+        const elementCount = paths.length;
+        const delay = totalDuration / elementCount;
 
+        paths.forEach((path, index) => {
+          path.style.animationDelay = `${index * delay}s`;
+          path.classList.add("path-element");
+
+          // Remove the animation class after the animation ends
+          path.addEventListener("animationend", () => {
+            path.classList.remove("path-element");
+          });
+        });
+
+        // Remove and re-add paths to force reflow/repaint
+        const svg = svgRef.current;
+        paths.forEach((path) => {
+          svg.removeChild(path);
+          svg.appendChild(path);
+        });
+      }
+    };
+
+    // Delay the animation application to ensure all elements are rendered
+    setTimeout(applyAnimation, 0);
+  }, [countryData]);
 
   if (loading) {
     return (
-      <div class="loading">
-        <div class="d1"></div>
-        <div class="d2"></div>
+      <div className="loading">
+        <div className="d1"></div>
+        <div className="d2"></div>
       </div>
-    )
+    );
   }
 
   return (

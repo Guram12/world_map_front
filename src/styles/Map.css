@@ -128,17 +128,17 @@
 
 /* =====================================  hover efects on counry ==================================== */
 
-path {
+/* path {
   transition: all 0.3s ease;
 }
 
 path:hover {
-  transform: translateY(-2px);
+  transform: translateY(-15px);
   stroke: red;
   stroke-width: 0.5;
   animation: border-animation 0.5s infinite;
-  z-index: 99999999999;
-}
+  z-index: 99999999999 !important;
+} */
 
 @keyframes border-animation {
   0% {
@@ -153,7 +153,7 @@ path:hover {
 }
 
 #antarctita :hover {
-  transform: translate(30px);
+  transform: translate(60px);
   stroke: rgb(70, 185, 104);
   stroke-width: 0.5;
   animation: border-animation 0.5s infinite;
@@ -179,4 +179,53 @@ path:hover {
   border-radius: 8px;
   pointer-events: none;
   visibility: hidden;
+}
+
+@keyframes comeFromBack {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.path-element {
+  opacity: 0;
+  animation: comeFromBack 1s forwards;
+}
+
+/* 
+.country-hover {
+  fill: yellow;
+  stroke: red;
+  stroke-width: 2px;
+} 
+
+  */
+
+/* .continent-hover {
+  transition: transform 0.5s ease;
+  transform-origin: center center;
+}
+
+.country-hover {
+  fill: yellow; 
+} */
+
+
+/* Map.css */
+.country-scale {
+  transform: scale(1.7); /* Adjust the scale factor as needed */
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  z-index: 9999999999999;
+}
+
+.selected-country-scale {
+  transform: scale(1.8); /* Adjust the scale factor as needed */
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
