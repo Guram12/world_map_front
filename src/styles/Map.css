@@ -180,3 +180,19 @@ path:hover {
   pointer-events: none;
   visibility: hidden;
 }
+
+@keyframes comeFromBack {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.path-element {
+  opacity: 0;
+  animation: comeFromBack 1s forwards;
+}
