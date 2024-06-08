@@ -4,12 +4,9 @@ import { useParams } from "react-router-dom";
 import countryBounds from "./country_bounds.json"; // Import the JSON data
 import axios from "axios";
 
-
 const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 
 const libraries = ["core", "places"];
-
-
 
 const CountryMap = () => {
   const { country } = useParams(); // Retrieve country parameter from URL
@@ -20,19 +17,16 @@ const CountryMap = () => {
     libraries,
   });
 
-
-    
   const BaseURLs = {
-    forvarded : "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/" ,
-    local : "http://localhost:8000/"
-  
+    forvarded: "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/",
+    local: "http://localhost:8000/",
   };
 
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`
+          `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
         );
         const { locations } = response.data;
         setBusinessLocations(locations);
@@ -56,7 +50,12 @@ const CountryMap = () => {
   }
 
   const { north, south, east, west } = bounds;
-  if (typeof north !== "number" || typeof south !== "number" || typeof east !== "number" || typeof west !== "number") {
+  if (
+    typeof north !== "number" ||
+    typeof south !== "number" ||
+    typeof east !== "number" ||
+    typeof west !== "number"
+  ) {
     return <div>Error: Invalid bounds for the selected country</div>;
   }
 

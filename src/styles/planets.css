@@ -1,0 +1,199 @@
+.main_planets_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 120px;
+  position: relative;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  margin: 0;
+  overflow: hidden;
+}
+.logo-container {
+  width: 150px;
+  height: 150px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+.same_class {
+  width: 100%;
+  /* height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 130px;
+}
+.background_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.links,
+.link {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: white;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  transition: transform 2s ease, opacity 2s ease;
+}
+.link_contact {
+  background-image: url("../asset/planet1.png");
+}
+.link_about {
+  background-image: url("../asset/planet2.png");
+  transition: transform 2s ease, opacity 2s ease;
+}
+
+.main_planets_container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+.planet_img {
+  /* border: 3px solid red; */
+  position: relative;
+  font-size: 30px;
+  width: 100px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.links {
+  position: relative;
+  z-index: 1;
+}
+
+.link_about {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.moon_earth_container {
+  position: relative;
+  z-index: 1;
+}
+
+.earth_bck_styles,
+.moon_bck_styles {
+  position: relative;
+  display: inline-block;
+}
+
+.moon_earth_container {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  /* border: 3px solid red; */
+}
+
+.earth_bck_styles {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moon {
+  width: 190px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../asset/moon1.png");
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+}
+.earth {
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* color: aliceblue; */
+  background-image: url("../asset/earth1.png");
+  box-shadow: 0 0 12em 1em rgba(110, 140, 200, 0.6);
+  transition: transform 2s ease, opacity 2s ease;
+  /* border: 1px solid red; */
+}
+
+.moon {
+  animation: orbit 40s linear infinite;
+  box-shadow: 0 0 12em 1em rgba(110, 140, 200, 0.6);
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotateZ(0deg) translateX(420px) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg) translateX(420px) rotateZ(-360deg);
+  }
+}
+
+.grow-earth {
+  transform: scale(10);
+  opacity: 0;
+}
+
+.grow_link_about {
+  transform: scale(10);
+  opacity: 0;
+}
+
+.textt {
+  font-size: 30px;
+  fill: #f1f5f8;
+  letter-spacing: 7px;
+}
+
+.link_about {
+  background-image: url("../asset/planet2.png");
+  text-align: center;
+  position: relative;
+  transition: transform 2s ease, opacity 2s ease;
+}
