@@ -1,30 +1,28 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Map from './components/Map'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CountryMap from './components/CountryMap';
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import axios from 'axios';
-import Planets from './components/planets';
 
+import { useState, useEffect } from "react";
+import "./App.css";
+import Map from "./components/Map";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import CountryMap from "./components/CountryMap";
+// import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import axios from "axios";
+import Planets from "./components/planets";
 
 
 function App() {
-
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
 
-
   const handle_Set_Selected_Country = (country) => {
-    setSelectedCountry(country)
-  }
-
+    setSelectedCountry(country);
+  };
 
   const BaseURLs = {
     forvarded: "https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/",
     local: "http://localhost:8000/"
-
   };
 
 
@@ -44,24 +42,32 @@ function App() {
     fetchCountryImages();
   }, []);
 
-
-
   return (
     <div id='main_app_container' >
 
       <Router>
         <Routes>
-          <Route path="/" element={
-            <Map
-              countryData={countryData}
-              loading={loading}
-              handle_Set_Selected_Country={handle_Set_Selected_Country}
-            />} />
-          <Route path="/country-map/:country" element={<CountryMap selectedCountry={selectedCountry} />} />
+          <Route path="/" element={<Planets />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/map"
+            element={
+              <Map
+                countryData={countryData}
+                loading={loading}
+                handle_Set_Selected_Country={handle_Set_Selected_Country}
+              />
+            }
+          />
+          <Route
+            path="/country-map/:country"
+            element={<CountryMap selectedCountry={selectedCountry} />}
+          />
         </Routes>
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
