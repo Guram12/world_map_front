@@ -3,6 +3,68 @@ import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import LanguageJson from "./language.json";
 
+const continentMapping = {
+  "AF": [
+    "DZ", // Algeria
+    "AO", // Angola
+    "BJ", // Benin
+    "BW", // Botswana
+    "BF", // Burkina Faso
+    "BI", // Burundi
+    "CV", // Cape Verde
+    "CM", // Cameroon
+    "CF", // Central African Republic
+    "TD", // Chad
+    "KM", // Comoros
+    "CG", // Congo (Brazzaville)
+    "CD", // Congo (Kinshasa)
+    "CI", // Côte d'Ivoire
+    "DJ", // Djibouti
+    "EG", // Egypt
+    "GQ", // Equatorial Guinea
+    "ER", // Eritrea
+    "SZ", // Eswatini (Swaziland)
+    "ET", // Ethiopia
+    "GA", // Gabon
+    "GM", // Gambia
+    "GH", // Ghana
+    "GN", // Guinea
+    "GW", // Guinea-Bissau
+    "KE", // Kenya
+    "LS", // Lesotho
+    "LR", // Liberia
+    "LY", // Libya
+    "MG", // Madagascar
+    "MW", // Malawi
+    "ML", // Mali
+    "MR", // Mauritania
+    "MU", // Mauritius
+    "MA", // Morocco
+    "MZ", // Mozambique
+    "NA", // Namibia
+    "NE", // Niger
+    "NG", // Nigeria
+    "RW", // Rwanda
+    "ST", // Sao Tome and Principe
+    "SN", // Senegal
+    "SC", // Seychelles
+    "SL", // Sierra Leone
+    "SO", // Somalia
+    "ZA", // South Africa
+    "SS", // South Sudan
+    "SD", // Sudan
+    "TZ", // Tanzania
+    "TG", // Togo
+    "TN", // Tunisia
+    "UG", // Uganda
+    "ZM", // Zambia
+    "ZW", // Zimbabwe
+    "EH"
+  ]
+};
+
+
+
 function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const svgRef = useRef(null);
   const zoomRef = useRef(null);
@@ -67,28 +129,40 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   };
   // ===========================================================================================
   // ========================    function for zooming in and out ============================             
-
   useEffect(() => {
     if (!svgRef.current) return;
-
+  
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
-
+  
     const zoom = d3
       .zoom()
       .scaleExtent([1, 10])
       .on("zoom", (event) => {
         svg.selectAll("g").attr("transform", event.transform);
       });
-
+  
     svg.call(zoom);
     zoomRef.current = zoom;
-
+  
     svg
       .selectAll("path")
       .on("mouseover", function (event) {
         const arg = d3.select(this).attr("arg");
         const countryName = LanguageJson[arg];
+        
+        // Highlight all African countries
+        if (continentMapping["AF"].includes(arg)) {
+          svg.selectAll("path")
+            .filter(function () {
+              return continentMapping["AF"].includes(d3.select(this).attr("arg"));
+            })
+            .classed("country-hover", true);
+        }
+  
+        // Highlight the selected country differently
+        d3.select(this).classed("selected-country-hover", true);
+  
         if (countryName) {
           tooltip
             .style("visibility", "visible")
@@ -101,6 +175,8 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           .style("left", `${event.pageX + 15}px`);
       })
       .on("mouseout", function () {
+        // Remove all hover classes
+        svg.selectAll("path").classed("country-hover", false).classed("selected-country-hover", false);
         tooltip.style("visibility", "hidden");
       })
       .on("click", function () {
@@ -108,9 +184,9 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         handle_Set_Selected_Country(arg);
         handleCountryClick(arg);
       });
-
+  
     createPatterns();
-
+  
     return () => {
       svg
         .selectAll("path")
@@ -121,6 +197,17 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       svg.call(zoom.on("zoom", null));
     };
   }, [createPatterns, language]); // Added language dependency to update on language change
+  
+
+
+
+
+
+
+
+
+
+
 
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
