@@ -27,7 +27,7 @@ const CountryMap = () => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`
+          `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
 
         );
         const { locations } = response.data;

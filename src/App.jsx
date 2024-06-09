@@ -30,8 +30,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
-        // const response = await axios.get(`https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/api/countries/`);
+        const response = await axios.get(`${BaseURLs.local}api/countries/`);
 
         setCountryData(response.data);
         setLoading(false);
