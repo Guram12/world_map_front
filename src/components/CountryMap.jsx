@@ -17,18 +17,20 @@ const CountryMap = () => {
     libraries,
   });
 
+
+
   const BaseURLs = {
-    forvarded: "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/",
+    forvarded: "https://7c109a58cfd0107a02c5e66cbd850b96.serveo.net/",
     local: "http://localhost:8000/",
   };
+
 
 
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
-          // `https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/api/fetch-locations/?iso_code=${country}`
+          `${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`
 
         );
         const { locations } = response.data;

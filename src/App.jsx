@@ -19,6 +19,7 @@ function App() {
     setSelectedCountry(country);
   };
 
+
   const BaseURLs = {
     forvarded: "https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/",
     local: "http://localhost:8000/",
@@ -36,7 +37,6 @@ function App() {
         setIsLandscape(window.innerWidth > window.innerHeight);
       }
     };
-
     if (isMobile()) {
       setIsLandscape(window.innerWidth > window.innerHeight);
       window.addEventListener("resize", handleResize);
