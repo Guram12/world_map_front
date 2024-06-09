@@ -167,42 +167,42 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     console.log("countrydata", countryData);
   }, [countryData]);
 
-  useEffect(() => {
-    const applyAnimation = () => {
-      if (svgRef.current) {
-        const svg = svgRef.current;
-        const paths = svg.querySelectorAll("path");
-        const totalDuration = 2; // Total duration in seconds
-        const elementCount = paths.length;
-        const delay = totalDuration / elementCount;
-  
-        paths.forEach((path, index) => {
-          path.style.animationDelay = `${index * delay}s`;
-          path.classList.add("path-element");
-  
-          // Remove the animation class after the animation ends
-          path.addEventListener("animationend", () => {
-            path.classList.remove("path-element");
-          });
+useEffect(() => {
+  const applyAnimation = () => {
+    if (svgRef.current) {
+      const svg = svgRef.current;
+      const paths = svg.querySelectorAll("path");
+      const totalDuration = 2; // Total duration in seconds
+      const elementCount = paths.length;
+      const delay = totalDuration / elementCount;
+
+      paths.forEach((path, index) => {
+        path.style.animationDelay = `${index * delay}s`;
+        path.classList.add("path-element");
+
+        // Remove the animation class after the animation ends
+        path.addEventListener("animationend", () => {
+          path.classList.remove("path-element");
         });
-  
-        // Remove and re-add paths to force reflow/repaint
-        paths.forEach((path) => {
-          const parent = path.parentNode;
-          if (parent === svg) {
-            parent.removeChild(path);
-            parent.appendChild(path);
-          } else {
-            console.warn(`Path element is not a direct child of the SVG element: ${path}`);
-          }
-        });
-      }
-    };
-  
-    // Delay the animation application to ensure all elements are rendered
-    setTimeout(applyAnimation, 0);
-  }, [countryData]);
-  
+      });
+
+      // Remove and re-add paths to force reflow/repaint
+      paths.forEach((path) => {
+        const parent = path.parentNode;
+        if (parent === svg) {
+          parent.removeChild(path);
+          parent.appendChild(path);
+        } else {
+          console.warn(`Path element is not a direct child of the SVG element: ${path}`);
+        }
+      });
+    }
+  };
+
+  // Delay the animation application to ensure all elements are rendered
+  setTimeout(applyAnimation, 0);
+}, [countryData]);
+
 
 
 

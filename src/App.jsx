@@ -20,17 +20,17 @@ function App() {
     setSelectedCountry(country);
   };
 
-  const BaseURLs = {
-    forvarded: "https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/",
-    local: "http://localhost:8000/"
-  };
 
+  const BaseURLs = {
+    forvarded: "https://7cbc1c42c4e820f908e1d94544e3dc06.serveo.net/",
+    local: "http://localhost:8000/",
+  };
 
 
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/countries/`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
         // const response = await axios.get(`https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/api/countries/`);
 
         setCountryData(response.data);

@@ -18,7 +18,7 @@ const CountryMap = () => {
   });
 
   const BaseURLs = {
-    forvarded: "https://2a7034df6ad2cc84bd18dfc76a12afc7.serveo.net/",
+    forvarded: "https://7cbc1c42c4e820f908e1d94544e3dc06.serveo.net/",
     local: "http://localhost:8000/",
   };
 
@@ -27,8 +27,7 @@ const CountryMap = () => {
     const fetchBusinessLocations = async () => {
       try {
         const response = await axios.get(
-          `${BaseURLs.local}api/fetch-locations/?iso_code=${country}`
-          // `https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/api/fetch-locations/?iso_code=${country}`
+          `${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`
 
         );
         const { locations } = response.data;
