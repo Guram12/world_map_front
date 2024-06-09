@@ -60,7 +60,60 @@ const continentMapping = {
     "ZM", // Zambia
     "ZW", // Zimbabwe
     "EH"
-  ]
+  ],
+  "EU": [
+    "AL", // Albania
+    "AD", // Andorra
+    "AM", // Armenia
+    "AT", // Austria
+    "AZ", // Azerbaijan
+    "BY", // Belarus
+    "BE", // Belgium
+    "BA", // Bosnia and Herzegovina
+    "BG", // Bulgaria
+    "HR", // Croatia
+    "CY", // Cyprus
+    "CZ", // Czech Republic
+    "DK", // Denmark
+    "EE", // Estonia
+    "FI", // Finland
+    "FR", // France
+    "GE", // Georgia
+    "DE", // Germany
+    "GR", // Greece
+    "HU", // Hungary
+    "IS", // Iceland
+    "IE", // Ireland
+    "IT", // Italy
+    "KZ", // Kazakhstan
+    "XK", // Kosovo
+    "LV", // Latvia
+    "LI", // Liechtenstein
+    "LT", // Lithuania
+    "LU", // Luxembourg
+    "MT", // Malta
+    "MD", // Moldova
+    "MC", // Monaco
+    "ME", // Montenegro
+    "NL", // Netherlands
+    "MK", // North Macedonia
+    "NO", // Norway
+    "PL", // Poland
+    "PT", // Portugal
+    "RO", // Romania
+    "RU", // Russia
+    "SM", // San Marino
+    "RS", // Serbia
+    "SK", // Slovakia
+    "SI", // Slovenia
+    "ES", // Spain
+    "SE", // Sweden
+    "CH", // Switzerland
+    "TR", // Turkey
+    "UA", // Ukraine
+    "GB", // United Kingdom
+    "VA"  // Vatican City
+  ],
 };
 
 
@@ -71,6 +124,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const tooltipRef = useRef(null);
 
   const [language, setLanguage] = useState("en"); // State for selected language
+  const [hoveredContinent, setHoveredContinent] = useState(null); // State for hovered continent
 
   // ========================    function for reset zoom button    ============================             
   const resetZoom = () => {
@@ -80,6 +134,8 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .duration(750)
       .call(zoomRef.current.transform, d3.zoomIdentity);
     handle_Set_Selected_Country(null);
+    // setHoveredContinent(null);
+
   };
 
   // ========================    function for setting selected images on its country   ============================             
@@ -129,56 +185,48 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   };
   // ===========================================================================================
   // ========================    function for zooming in and out ============================  
-  
 
   useEffect(() => {
     if (!svgRef.current) return;
-  
+
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
-  
-    const zoom = d3
-      .zoom()
-      .scaleExtent([1, 10])
-      .on("zoom", (event) => {
-        svg.selectAll("g").attr("transform", event.transform);
-      });
-  
+
+    const zoom = d3.zoom().scaleExtent([1, 10]).on("zoom", (event) => {
+      svg.selectAll("g").attr("transform", event.transform);
+    });
+
     svg.call(zoom);
     zoomRef.current = zoom;
-  
-    svg
-      .selectAll("path")
+
+    svg.selectAll("path")
       .on("mouseover", function (event) {
         const arg = d3.select(this).attr("arg");
         const countryName = LanguageJson[arg];
-  
-        // Scale up all African countries
-        if (continentMapping["AF"].includes(arg)) {
+
+        const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
+        setHoveredContinent(continent);
+
+        if (continent) {
           svg.selectAll("path")
+            .classed("continent-scale", false)
             .filter(function () {
-              return continentMapping["AF"].includes(d3.select(this).attr("arg"));
+              return continentMapping[continent].includes(d3.select(this).attr("arg"));
             })
-            .classed("country-scale", true);
+            .classed("continent-scale", true);
         }
-  
-        // Scale up the selected country differently
+
         d3.select(this).classed("selected-country-scale", true);
-  
+
         if (countryName) {
-          tooltip
-            .style("visibility", "visible")
-            .html(`<strong>${countryName[language]}</strong>`);
+          tooltip.style("visibility", "visible").html(`<strong>${countryName[language]}</strong>`);
         }
       })
       .on("mousemove", function (event) {
-        tooltip
-          .style("top", `${event.pageY + 15}px`)
-          .style("left", `${event.pageX + 15}px`);
+        tooltip.style("top", `${event.pageY + 15}px`).style("left", `${event.pageX + 15}px`);
       })
       .on("mouseout", function () {
-        // Remove all scale classes
-        svg.selectAll("path").classed("country-scale", false).classed("selected-country-scale", false);
+        svg.selectAll("path").classed("selected-country-scale", false);
         tooltip.style("visibility", "hidden");
       })
       .on("click", function () {
@@ -186,22 +234,14 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         handle_Set_Selected_Country(arg);
         handleCountryClick(arg);
       });
-  
+
     createPatterns();
-  
+
     return () => {
-      svg
-        .selectAll("path")
-        .on("mouseover", null)
-        .on("mousemove", null)
-        .on("mouseout", null)
-        .on("click", null);
+      svg.selectAll("path").on("mouseover", null).on("mousemove", null).on("mouseout", null).on("click", null);
       svg.call(zoom.on("zoom", null));
     };
-  }, [createPatterns, language]); // Added language dependency to update on language change
-  
-
-
+  }, [createPatterns, language, continentMapping]);
 
 
 
