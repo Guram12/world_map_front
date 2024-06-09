@@ -8,7 +8,7 @@ import Starfield from "./Starfield"; // Adjust the import path accordingly
 export default function Planets() {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleEarthClick = () => {
     document.querySelector(".moon").style.display = "none";
     document.querySelector(".links").style.display = "none";
     document.querySelector(".link").style.display = "none";
@@ -21,11 +21,31 @@ export default function Planets() {
     }, 1000);
   };
 
-  const onclick = () => {
+  const handleContactClick = () => {
+    document.querySelector(".moon").style.display = "none";
+    document.querySelector(".links").style.display = "none";
+    document.querySelector(".earth").style.display = "none";
+    document.querySelector(".textt").style.display = "none";
+    document.querySelector(".txt").style.display = "none";
+    // document.querySelector(".planet_img").style.display = "none";
+    const contact = document.querySelector(".link_contact");
+    contact.classList.add("grow-contact");
+    setTimeout(() => {
+      navigate("/contact");
+    }, 1000);
+  };
+  const handleAboutClick = () => {
+    document.querySelector(".moon").style.display = "none";
+    document.querySelector(".link_contact").style.display = "none";
+    document.querySelector(".earth").style.display = "none";
+    document.querySelector(".textt").style.display = "none";
+    document.querySelector(".txt").style.display = "none";
+    // document.querySelector(".planet_img").style.display = "none";
+    const about = document.querySelector(".link_about");
+    about.classList.add("grow-about");
     setTimeout(() => {
       navigate("/about");
-      navigate("/contact");
-    }, 100);
+    }, 1000);
   };
 
   return (
@@ -38,7 +58,7 @@ export default function Planets() {
           animate={{ opacity: 1, x: 0, transition: { duration: 2 } }}
           exit={{ opacity: 0, x: "-100%", transition: { duration: 2 } }}
         >
-          <div className="planet_img " onClick={onclick}>
+          <div className="planet_img " onClick={handleContactClick}>
             <svg
               width="200"
               height="200"
@@ -59,7 +79,7 @@ export default function Planets() {
               </text>
             </svg>
           </div>
-          <div className="links link_about"></div>
+          <div className="links link_about" onClick={handleAboutClick}></div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -68,7 +88,7 @@ export default function Planets() {
           className="moon_earth_container"
         >
           <div className="earth_bck_styles">
-            <div className="earth" onClick={handleClick}></div>
+            <div className="earth" onClick={handleEarthClick}></div>
           </div>
           <div className="moon_bck_styles">
             <div className="moon">
@@ -84,7 +104,7 @@ export default function Planets() {
           animate={{ opacity: 1, x: 0, transition: { duration: 2 } }}
           exit={{ opacity: 0, x: "100%", transition: { duration: 2 } }}
         >
-          <div className="planet_img none" onClick={onclick}>
+          <div className="planet_img none ">
             <svg
               width="200"
               height="200"
@@ -94,7 +114,7 @@ export default function Planets() {
               <defs>
                 <path id="arc-path" d="M 10, 110 A 100, 100 0 0, 1 190, 110" />
               </defs>
-              <text className="textt">
+              <text className="textt txt">
                 <textPath
                   href="#arc-path"
                   startOffset="50%"
@@ -105,7 +125,10 @@ export default function Planets() {
               </text>
             </svg>
           </div>
-          <div className="link link_contact"></div>
+          <div
+            className="link link_contact hover"
+            onClick={handleContactClick}
+          ></div>
         </motion.div>
       </div>
     </div>
