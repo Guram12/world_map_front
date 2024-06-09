@@ -203,26 +203,6 @@ useEffect(() => {
   setTimeout(applyAnimation, 0);
 }, [countryData]);
 
-
-
-
-
-
-
-    //     // Remove and re-add paths to force reflow/repaint
-    //     const svg = svgRef.current;
-    //     paths.forEach((path) => {
-    //       if (path.parentNode === svg) {
-    //         svg.removeChild(path);
-    //         svg.appendChild(path);
-    //       } else {
-    //         console.warn(`Path element is not a direct child of the SVG element: ${path}`);
-    //       }
-    //     });
-    //   }
-    // };
-  
-
   if (loading) {
     return (
       <div className="loading">

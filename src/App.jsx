@@ -22,7 +22,7 @@ function App() {
 
 
   const BaseURLs = {
-    forvarded: "https://7cbc1c42c4e820f908e1d94544e3dc06.serveo.net/",
+    forvarded: "https://7c109a58cfd0107a02c5e66cbd850b96.serveo.net/",
     local: "http://localhost:8000/",
   };
 
@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/countries/`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
 
         setCountryData(response.data);
         setLoading(false);

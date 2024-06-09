@@ -133,14 +133,14 @@
 
 
 .selected-country-scale {
-  transform: scale(1.01) !important; 
+  transform: scale(1.26) !important; 
   transform-origin: center;
   transition: transform 0.3s ease;
   fill: aqua;
 }
 
 .continent-scale {
-  /* transform: scale(1.15);  */
+  transform: scale(1.25); 
   transform-origin: bottom;
   transition: transform 0.3s ease;
 }
