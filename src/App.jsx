@@ -21,7 +21,7 @@ function App() {
 
 
   const BaseURLs = {
-    forvarded: "https://4f15a70ad9cc92b7506df5ca44a0ae2e.serveo.net/",
+    forvarded: "https://3e81668fe96d02981e23f71ca231a3d6.serveo.net/",
     local: "http://localhost:8000/",
   };
 
@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/countries/`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
@@ -103,7 +103,11 @@ function App() {
           />
           <Route
             path="/country-map/:country"
-            element={<CountryMap selectedCountry={selectedCountry} />}
+            element={
+              <CountryMap
+                selectedCountry={selectedCountry}
+                countryData={countryData}
+              />}
           />
         </Routes>
       </Router>
