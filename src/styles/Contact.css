@@ -11,6 +11,7 @@
 .logo_image_contact {
   /* border: 1px solid red; */
   display: flex;
+  cursor: pointer;
 }
 .logo_img_cont {
   width: 250px;

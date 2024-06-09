@@ -21,14 +21,14 @@ function CountryMap({ countryData, selectedCountry }) {
   });
 
   const BaseURLs = {
-    forvarded: "https://7c109a58cfd0107a02c5e66cbd850b96.serveo.net/",
+    forvarded: "https://3e81668fe96d02981e23f71ca231a3d6.serveo.net/",
     local: "http://localhost:8000/",
   };
 
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/countries/`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
         setImage_url(response.data);
         setLoading(false);
       } catch (error) {
@@ -45,7 +45,7 @@ function CountryMap({ countryData, selectedCountry }) {
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/fetch-locations/?iso_code=${country}`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`);
         const { locations } = response.data;
         setBusinessLocations(locations);
       } catch (error) {

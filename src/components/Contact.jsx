@@ -21,6 +21,18 @@ const Contact = () => {
       navigate("/");
     }, 1000);
   };
+
+  const textVariant = (direction, delay) => ({
+    hidden: { opacity: 0, x: direction === "left" ? -50 : 50 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: delay,
+        duration: 0.5,
+      },
+    },
+  });
   return (
     <div className="contact_container">
       <motion.h1
@@ -50,33 +62,33 @@ const Contact = () => {
           viewport={{ once: false, amount: 0.3 }}
           className="paragraph_contact"
         >
-          <p>
+          <motion.p variants={textVariant("right", 0.1)}>
             This setup ensures that each text block animates down from the top
             sequentially, with a one-second delay between each. The title will
             appear last, after all other elements. This setup ensures that each
             text block animates down from the top sequentially, with a
             one-second delay between each. The title will appear last, after all
             other elements.
-          </p>
-          <div className="contact_info">
-            <p>
+          </motion.p>
+          <motion.div className="contact_info">
+            <motion.p variants={textVariant("right", 0.2)}>
               . Email:<span>robakidzenino89@mail.com</span>
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={textVariant("right", 0.3)}>
               . Phone:<span>577424310</span>
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={textVariant("right", 0.4)}>
               . Address:<span>Mtatsminda, Vedzini #9</span>
-            </p>
-          </div>
-          <p>
+            </motion.p>
+          </motion.div>
+          <motion.p variants={textVariant("right", 0.5)}>
             This setup ensures that each text block animates down from the top
             sequentially, with a one-second delay between each. The title will
             appear last, after all other elements. This setup ensures that each
             text block animates down from the top sequentially, with a
             one-second delay between each. The title will appear last, after all
             other elements.
-          </p>
+          </motion.p>
           {/* <div className="social_links">
             <a href="">
               <img src={Inst} alt=""></img>
