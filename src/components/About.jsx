@@ -17,6 +17,19 @@ const About = () => {
       navigate("/");
     }, 1000);
   };
+
+  const textVariant = (direction, delay) => ({
+    hidden: { opacity: 0, x: direction === "left" ? -50 : 50 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: delay,
+        duration: 0.5,
+      },
+    },
+  });
+
   return (
     <div className="about_container">
       <motion.h1
@@ -36,66 +49,82 @@ const About = () => {
           viewport={{ once: false, amount: 0.3 }}
           className="paragraph"
         >
-          <p>
+          <motion.p variants={textVariant("left", 0.1)}>
             This setup will move the Contact Us element to the center of the
             screen and scale it up when clicked, then navigate to the contact
             page after the animation completes.
-          </p>
+          </motion.p>
+
           <div className="para_span">
-            <p className="tit">Our mission</p>
-            <span>
+            <motion.p className="tit" variants={textVariant("left", 0.2)}>
+              Our mission
+            </motion.p>
+            <motion.span variants={textVariant("left", 0.3)}>
               This setup will move the Contact Us element to the center of the
               screen and scale it up when clicked, then navigate to the contact
               page after the animation completes.
-            </span>
+            </motion.span>
           </div>
+
           <div className="para_span">
-            <p className="tit">Our mission</p>
-            <span>
+            <motion.p className="tit" variants={textVariant("left", 0.4)}>
+              Our mission
+            </motion.p>
+            <motion.span variants={textVariant("left", 0.5)}>
               This setup will move the Contact Us element to the center of the
               screen and scale it up when clicked, then navigate to the contact
               page after the animation completes.
-            </span>
+            </motion.span>
           </div>
+
           <div className="para_span">
-            <p className="tit">Our mission</p>
-            <span>
+            <motion.p className="tit" variants={textVariant("left", 0.6)}>
+              Our mission
+            </motion.p>
+            <motion.span variants={textVariant("left", 0.7)}>
               . This setup will move the Contact Us element to the center of the
               to the contact page after the animation
-            </span>
-            <span>
+            </motion.span>
+            <motion.span variants={textVariant("left", 0.8)}>
               . This setup will move the Contact Us element to the center of the
               to the contact page after the animation
-            </span>
-            <span>
+            </motion.span>
+            <motion.span variants={textVariant("left", 0.9)}>
               . This setup will move the Contact Us element to the center of the
               to the contact page after the animation
-            </span>
+            </motion.span>
           </div>
+
           <div className="para_span">
-            <p className="tit">Our mission</p>
-            <span>
+            <motion.p className="tit" variants={textVariant("left", 1.0)}>
+              Our mission
+            </motion.p>
+            <motion.span variants={textVariant("left", 1.1)}>
               . This setup will move the Contact Us element to the center of the
               to the contact page after the animation
-            </span>
-            <span>
+            </motion.span>
+            <motion.span variants={textVariant("left", 1.2)}>
               . This setup will move the Contact Us element to the center of the
               to the contact page after the animation
-            </span>
-            <span>
+            </motion.span>
+            <motion.span variants={textVariant("left", 1.3)}>
               . This setup will move the Contact Us element to the center of the
               to the contact page after the animation
-            </span>
+            </motion.span>
           </div>
+
           <div className="para_span">
-            <p className="tit">Our mission</p>
-            <span>
+            <motion.p className="tit" variants={textVariant("left", 1.4)}>
+              Our mission
+            </motion.p>
+            <motion.span variants={textVariant("left", 1.5)}>
               This setup will move the Contact Us element to the center of the
               screen and scale it up when clicked, then navigate to the contact
               page after the animation completes.
-            </span>
+            </motion.span>
           </div>
         </motion.div>
+
         <motion.div
           variants={fadeIn("left", 0.3)}
           initial="hidden"
@@ -110,4 +139,5 @@ const About = () => {
     </div>
   );
 };
+
 export default About;
