@@ -21,7 +21,7 @@ function CountryMap({ countryData, selectedCountry }) {
   });
 
   const BaseURLs = {
-    forvarded: "https://3e81668fe96d02981e23f71ca231a3d6.serveo.net/",
+    forvarded: "https://wild-jobs-hide.loca.lt/",
     local: "http://localhost:8000/",
   };
 
