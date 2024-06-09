@@ -2,119 +2,8 @@ import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import LanguageJson from "./language.json";
+import { continentMapping } from "./ContinentCountries";
 
-const continentMapping = {
-  "AF": [
-    "DZ", // Algeria
-    "AO", // Angola
-    "BJ", // Benin
-    "BW", // Botswana
-    "BF", // Burkina Faso
-    "BI", // Burundi
-    "CV", // Cape Verde
-    "CM", // Cameroon
-    "CF", // Central African Republic
-    "TD", // Chad
-    "KM", // Comoros
-    "CG", // Congo (Brazzaville)
-    "CD", // Congo (Kinshasa)
-    "CI", // Côte d'Ivoire
-    "DJ", // Djibouti
-    "EG", // Egypt
-    "GQ", // Equatorial Guinea
-    "ER", // Eritrea
-    "SZ", // Eswatini (Swaziland)
-    "ET", // Ethiopia
-    "GA", // Gabon
-    "GM", // Gambia
-    "GH", // Ghana
-    "GN", // Guinea
-    "GW", // Guinea-Bissau
-    "KE", // Kenya
-    "LS", // Lesotho
-    "LR", // Liberia
-    "LY", // Libya
-    "MG", // Madagascar
-    "MW", // Malawi
-    "ML", // Mali
-    "MR", // Mauritania
-    "MU", // Mauritius
-    "MA", // Morocco
-    "MZ", // Mozambique
-    "NA", // Namibia
-    "NE", // Niger
-    "NG", // Nigeria
-    "RW", // Rwanda
-    "ST", // Sao Tome and Principe
-    "SN", // Senegal
-    "SC", // Seychelles
-    "SL", // Sierra Leone
-    "SO", // Somalia
-    "ZA", // South Africa
-    "SS", // South Sudan
-    "SD", // Sudan
-    "TZ", // Tanzania
-    "TG", // Togo
-    "TN", // Tunisia
-    "UG", // Uganda
-    "ZM", // Zambia
-    "ZW", // Zimbabwe
-    "EH"
-  ],
-  "EU": [
-    "AL", // Albania
-    "AD", // Andorra
-    "AM", // Armenia
-    "AT", // Austria
-    "AZ", // Azerbaijan
-    "BY", // Belarus
-    "BE", // Belgium
-    "BA", // Bosnia and Herzegovina
-    "BG", // Bulgaria
-    "HR", // Croatia
-    "CY", // Cyprus
-    "CZ", // Czech Republic
-    "DK", // Denmark
-    "EE", // Estonia
-    "FI", // Finland
-    "FR", // France
-    "GE", // Georgia
-    "DE", // Germany
-    "GR", // Greece
-    "HU", // Hungary
-    "IS", // Iceland
-    "IE", // Ireland
-    "IT", // Italy
-    "KZ", // Kazakhstan
-    "XK", // Kosovo
-    "LV", // Latvia
-    "LI", // Liechtenstein
-    "LT", // Lithuania
-    "LU", // Luxembourg
-    "MT", // Malta
-    "MD", // Moldova
-    "MC", // Monaco
-    "ME", // Montenegro
-    "NL", // Netherlands
-    "MK", // North Macedonia
-    "NO", // Norway
-    "PL", // Poland
-    "PT", // Portugal
-    "RO", // Romania
-    "RU", // Russia
-    "SM", // San Marino
-    "RS", // Serbia
-    "SK", // Slovakia
-    "SI", // Slovenia
-    "ES", // Spain
-    "SE", // Sweden
-    "CH", // Switzerland
-    "TR", // Turkey
-    "UA", // Ukraine
-    "GB", // United Kingdom
-    "VA"  // Vatican City
-  ],
-};
 
 
 
@@ -125,6 +14,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   const [language, setLanguage] = useState("en"); // State for selected language
   const [hoveredContinent, setHoveredContinent] = useState(null); // State for hovered continent
+  const [hoveredCountry, setHoveredCountry] = useState(null); // State for hovered country
 
   // ========================    function for reset zoom button    ============================             
   const resetZoom = () => {
@@ -134,28 +24,34 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .duration(750)
       .call(zoomRef.current.transform, d3.zoomIdentity);
     handle_Set_Selected_Country(null);
-    // setHoveredContinent(null);
-
+    setHoveredContinent(null);
+    setHoveredCountry(null)
   };
 
   // ========================    function for setting selected images on its country   ============================             
   const createPatterns = () => {
     const svg = svgRef.current;
     if (!svg) return;
-
-    const defs =
-      svg.querySelector("defs") ||
-      document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    if (!svg.querySelector("defs")) svg.prepend(defs);
-
+  
+    let defs = svg.querySelector("defs");
+    if (!defs) {
+      defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      svg.prepend(defs);
+    } else {
+      // Clear existing patterns
+      while (defs.firstChild) {
+        defs.removeChild(defs.firstChild);
+      }
+    }
+  
     svg.querySelectorAll("path[arg]").forEach((countryPath, index) => {
       const arg = countryPath.getAttribute("arg");
       const imageUrl = countryData[arg]?.image_url;
       if (imageUrl) {
         const bbox = countryPath.getBBox();
-
+  
         const patternId = `pattern-${arg}-${index}`;
-
+  
         const pattern = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "pattern"
@@ -166,7 +62,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         pattern.setAttribute("height", bbox.height);
         pattern.setAttribute("x", bbox.x);
         pattern.setAttribute("y", bbox.y);
-
+  
         const image = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "image"
@@ -175,24 +71,24 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         image.setAttribute("width", bbox.width);
         image.setAttribute("height", bbox.height);
         image.setAttribute("preserveAspectRatio", "xMidYMid slice");
-
+  
         pattern.appendChild(image);
         defs.appendChild(pattern);
-
+  
         countryPath.setAttribute("fill", `url(#${patternId})`);
       }
     });
   };
+  
   // ===========================================================================================
   // ========================    function for zooming in and out ============================  
-
   useEffect(() => {
     if (!svgRef.current) return;
 
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
 
-    const zoom = d3.zoom().scaleExtent([1, 10]).on("zoom", (event) => {
+    const zoom = d3.zoom().scaleExtent([1, 50]).on("zoom", (event) => {
       svg.selectAll("g").attr("transform", event.transform);
     });
 
@@ -206,17 +102,23 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
         const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
         setHoveredContinent(continent);
+        setHoveredCountry(arg);
 
         if (continent) {
           svg.selectAll("path")
             .classed("continent-scale", false)
+            .classed("continent-dark", true)
             .filter(function () {
               return continentMapping[continent].includes(d3.select(this).attr("arg"));
             })
+            .classed("continent-dark", false)
             .classed("continent-scale", true);
         }
 
         d3.select(this).classed("selected-country-scale", true);
+
+        // Bring the hovered country to the front
+        this.parentNode.appendChild(this);
 
         if (countryName) {
           tooltip.style("visibility", "visible").html(`<strong>${countryName[language]}</strong>`);
@@ -246,9 +148,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
 
 
-
-
-
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
     const consumerWebsiteUrl = countryData[arg]?.customer_website; // Ensure this is defined and valid
@@ -271,33 +170,58 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   useEffect(() => {
     const applyAnimation = () => {
       if (svgRef.current) {
-        const paths = svgRef.current.querySelectorAll("path");
+        const svg = svgRef.current;
+        const paths = svg.querySelectorAll("path");
         const totalDuration = 2; // Total duration in seconds
         const elementCount = paths.length;
         const delay = totalDuration / elementCount;
-
+  
         paths.forEach((path, index) => {
           path.style.animationDelay = `${index * delay}s`;
           path.classList.add("path-element");
-
+  
           // Remove the animation class after the animation ends
           path.addEventListener("animationend", () => {
             path.classList.remove("path-element");
           });
         });
-
+  
         // Remove and re-add paths to force reflow/repaint
-        const svg = svgRef.current;
         paths.forEach((path) => {
-          svg.removeChild(path);
-          svg.appendChild(path);
+          const parent = path.parentNode;
+          if (parent === svg) {
+            parent.removeChild(path);
+            parent.appendChild(path);
+          } else {
+            console.warn(`Path element is not a direct child of the SVG element: ${path}`);
+          }
         });
       }
     };
-
+  
     // Delay the animation application to ensure all elements are rendered
     setTimeout(applyAnimation, 0);
   }, [countryData]);
+  
+
+
+
+
+
+
+    //     // Remove and re-add paths to force reflow/repaint
+    //     const svg = svgRef.current;
+    //     paths.forEach((path) => {
+    //       if (path.parentNode === svg) {
+    //         svg.removeChild(path);
+    //         svg.appendChild(path);
+    //       } else {
+    //         console.warn(`Path element is not a direct child of the SVG element: ${path}`);
+    //       }
+    //     });
+    //   }
+    // };
+  
 
   if (loading) {
     return (
@@ -2152,7 +2076,14 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             </path> */}
           {/* ALIASKA */}
 
+
+
+
           {/* ===================================     shtatebis dasawyisi       =============================== */}
+          {/* ===================================     shtatebis dasawyisi       =============================== */}
+          {/* ===================================     shtatebis dasawyisi       =============================== */}
+          {/* ===================================     shtatebis dasawyisi       =============================== */}
+
 
           <path
             arg="US_AK"
@@ -2253,7 +2184,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_MAINE"
             name="Maine"
-            arg="	US_ME"
+            arg="US_ME"
             className="cls-1"
             d="M645.75 211.32 645.95 213.44 639.55 216.47 633.55 218.69 627.55 220.61 626.18 221.93 622.82 217.85 622.46 213.68 623.05 212.13 623.25 212.13 624.46 211.16 626.05 210.31 628.97 209.55 631.95 206.4 634.93 202.31 640.12 197.46 641.15 198.28 644.85 197.27 646.45 199.09 643.55 207.68 645.75 211.32z"
           />
@@ -2286,7 +2217,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_CONNECTICUT"
             name="Connecticut"
-            arg="	US_CT"
+            arg="US_CT"
             className="cls-1"
             d="M604.98 233 603.48 234.66 602.5 237.55 603.08 238.28 608.25 236.37 615.47 235.43 615.87 231.75 604.98 233z"
           />
@@ -2326,7 +2257,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_VIRGINIA"
             name="Virginia"
-            arg="	US_VA"
+            arg="US_VA"
             className="cls-1"
             d="M538.6 263.49 553.35 263.68 562.48 263.46 575.78 262.48 582.91 262.42 583.85 257.69 581.34 255.6 578.16 253.28 579.12 251.76 577.69 249.26 575.37 247.9 573.89 247.32 572.62 250.21 569.03 251.45 565.6 253.6 564.9 255.39 562.93 256.31 561.74 259.02 556.35 260.64 553.21 258 538.6 263.49z"
           />
@@ -2350,7 +2281,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_PENNSILVANIA"
             name="Pennsilvania"
-            arg="PA"
+            arg="US_PA"
             className="cls-1"
             d="M563.06 234.35 563.68 238.94 563.4 245.29 566.02 244.94 574.4 244.68 583.79 244.15 590.62 242.89 590.27 245.03 594.37 242.14 592.84 239.92 594.06 237.39 596.61 235.2 594.2 233.97 594.64 231.81 590.27 231.02 583.77 233.4 583.39 231.99 571.54 234.05 572.87 230.46 567.59 232.33 564.36 233.82 563.06 234.35z"
           />
@@ -2358,7 +2289,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_TENNESSEE"
             name="Tennessee"
-            arg="	US_TN"
+            arg="US_TN"
             className="cls-1"
             d="M510.33 271.42 512.79 268.58 514 266.56 518.37 266.69 526.38 264.6 536.77 264.15 538.6 263.49 562.48 263.46 555.97 264.65 547.06 270.33 543.14 271.26 540.71 274.01 535.21 274.12 521.5 276.33 508.8 276.48 509.34 275.01 510.4 273.48 510.33 271.42z"
           />
@@ -2366,7 +2297,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_KENTUCKY"
             name="Kentucky"
-            arg="	US_KY"
+            arg="US_KY"
             className="cls-1"
             d="M514 266.56 514.85 263.33 513.92 261.4 517.83 261.52 519.23 258.52 519.35 257.08 523.89 257.08 529.78 258.06 529.88 256.43 529.88 255.3 531.77 255.56 534.06 256.34 536.28 254.07 536.91 252.16 537.51 250.69 539.6 251.37 541.07 249.27 541.68 248.04 544.03 246.4 544.44 250.35 547.63 250.19 549 248.8 551.51 249.75 553.43 250.62 551.35 253.25 550.04 252.54 549.49 253.69 550.14 256.45 553.21 258 536.77 264.15 526.38 264.6 518.37 266.69 514 266.56z"
           />
@@ -2432,7 +2363,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_WISCONSIN"
             name="Wisconsin"
-            arg="	US_WI"
+            arg="US_WI"
             className="cls-1"
             d="M523.85 201.31 518.75 201.82 515.87 203.92 515.48 206.22 513.52 206.89 511.82 207.36 510.61 210.37 508.8 210.37 508.88 213.15 509.32 217.95 511.78 219.55 511.73 224.93 512.85 226.37 529.8 226.48 535.27 224.48 535.23 223.63 540.55 215.62 545.35 210.51 544.74 210.52 539.5 214.39 538.75 213.94 539.11 213.66 539.44 209.89 540.41 207.75 538.94 205.89 536.02 204.88 532.64 204.32 531.65 202.12 529.55 200 523.85 201.31z"
           />
@@ -2456,7 +2387,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_COLORADO"
             name="Colorado"
-            arg="	US_CO"
+            arg="US_CO"
             className="cls-1"
             d="M400.61 260.78 410.02 232.34 450.84 235.94 450.35 241.89 447.95 241.89 441.41 264.71 435.09 264.6 400.61 260.78z"
           />
@@ -2505,7 +2436,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_IDAHO"
             name="Idaho"
-            arg="	US_ID"
+            arg="US_ID"
             className="cls-1"
             d="M404.89 209.56 399.96 229.84 384.85 228.45 386.76 218.44 387.43 217.24 388.38 215.55 386.48 213.62 389.1 210.56 390.81 209.22 391.7 206.16 389.82 204.63 395.16 186.87 395.26 186.54 400.61 186.54 400.19 189.28 397.87 190.95 397.78 193.9 399.15 194.33 398.79 196.32 401.75 197.6 400.85 199.75 398.48 201.97 398.33 204.98 399.76 205.47 400.61 204.31 401.75 204.75 401.6 209.19 404.89 209.56z"
           />
@@ -2529,7 +2460,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_CALIFORNIA"
             name="California"
-            arg="	US_CA"
+            arg="US_CA"
             className="cls-1"
             d="M362.52 279.94 360.97 282.78 363.53 284.58 365.37 287.63 365.95 289.51 362.93 291.34 367.24 291.34 367.16 291.42 366.56 291.48 365.88 291.55 363.74 291.76 360.85 292.05 354.55 292.55 354.85 289.32 352.82 285.71 352.75 285.58 351.95 285.28 350.55 284.77 350.65 282.95 347.75 282.55 346.55 280.83 344.09 280.52 343.62 280.46 341.75 280.23 340.85 279.11 341.45 276.47 341.54 276.06 341.65 275.58 339.82 270.85 339.37 269.69 339.15 269.11 339.15 269.04 339.12 268.65 338.65 260.12 339.55 258.6 338.25 256.48 336.75 251.03 338.55 245.77 337.65 242.23 341.55 236.88 343.46 233.15 344.35 231.42 345.45 226.47 347.86 223.82 348.12 223.52 349.55 221.95 355.18 222.98 362.04 224.4 352.89 242.38 367.25 269.13 365.75 269.81 366.75 271.58 367.51 272.92 369.19 276.44 367.95 276.6 366.58 277.07 366.51 279.53 362.52 279.94z"
           />
@@ -2537,7 +2468,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_OREGON"
             name="Oregon"
-            arg="	US_OR"
+            arg="US_OR"
             className="cls-1"
             d="M388.57 211.5 386.48 213.62 388.38 215.55 386.76 218.44 385.9 222.95 385.76 223.82 384.86 228.43 384.85 228.45 371.33 226.8 363.76 225.51 362.56 224.33 355.18 222.98 354.89 222.92 349.7 221.82 351 220.64 351.01 220.63 358.19 210.15 358.7 209.25 358.95 208.89 359.29 208.21 360.24 206.3 361.91 202.96 362.25 202.29 362.26 202.29 362.42 201.97 362.74 201.32 365.06 201.32 369.19 203.48 368.7 204.83 367.25 205.95 369.19 206.82 372.61 205.22 377.93 205.95 381.99 207.84 385.51 208.43 390.01 208.69 390.81 209.22 388.57 211.5z"
           />
@@ -2545,7 +2476,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             id="US_WASHINGTON"
             name="washington"
-            arg="	US_WA"
+            arg="US_WA"
             className="cls-1"
             d="M389.82 204.63 391.7 206.16 390.81 209.22 390.01 208.69 385.51 208.43 381.99 207.84 377.93 205.95 372.61 205.22 369.19 206.82 367.25 205.95 368.7 204.83 369.19 203.48 365.06 201.32 362.74 201.32 363.25 200.3 364.57 196.37 364.82 195.64 365.05 194.95 365.45 192.02 366.85 190.7 372.65 192.93 372.24 195.36 372.14 195.97 372.04 196.58 371.97 196.97 371.8 197.98 371.74 198.37 371.65 198.89 372.43 198.28 373.2 197.68 373.85 197.17 374.8 195.2 374.99 194.81 375 194.81 376.35 192.02 377.95 186.87 395.16 186.87 389.82 204.63z"
           />
@@ -2558,12 +2489,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             d="M384.85 228.45 373.31 258.25 372.72 260.44 372.61 264.71 369.95 264.03 367.92 263.55 366.92 265.89 367.25 269.13 352.89 242.38 362.04 224.4 355.18 222.98 362.56 224.33 363.76 225.51 371.33 226.8 384.85 228.45z"
           />
 
-          <path
-            d="M677.3 487l1.5-2.8 0.5-2.9 1-2.7-2.1-3.8-0.3-4.4 3.1-5.5 1.9 0.7 4.1 1.5 5.9 5.4 0.8 2.6-3.4 5.9-1.8 4.7-2.2 2.5-2.7 0.4-0.8-1.8-1.3-0.2-1.7 1.7-2.5-1.3z"
-            id="GF"
-            arg="US_GF"
-            name="French Guiana"
-          ></path>
 
           <path
             d="M592.9 422l-0.5-0.2-0.5-0.5 0.1-0.6 0.2 0.3 0.4 0.4 0.3 0.5 0 0.1z"
@@ -2933,7 +2858,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 697.4 836.2 697.8 836.1 697.8 836.5 697 836.2 697.3 835.9 697.5 835.8 697.4 836.2 Z"
           ></path>
 
@@ -2941,7 +2866,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 696.7 834.8 696.9 835 697.3 835.1 697.4 835.5 697.1 835.6 697 835.2 696.8 835 696.7 834.8 Z"
           ></path>
 
@@ -2949,7 +2874,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 702.9 834 703.1 834.1 703 834.5 702.7 834.4 702.5 834.1 702.8 833.9 702.9 834 Z"
           ></path>
 
@@ -2957,7 +2882,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 690.8 833.1 690.8 833.3 690.9 833.6 690.5 833.7 690.2 833.6 690 833.4 689.7 833.3 689.6 832.9 689.8 832.9 689.9 832.7 690.2 832.6 690.4 832.7 690.1 833 690.4 833.1 690.7 832.8 690.8 833.1 Z"
           ></path>
 
@@ -2965,7 +2890,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 693.7 831.8 693.3 831.6 692.8 831.3 692 831 692.1 830.6 691.4 830.5 691.1 830.4 690.8 830 691 829.9 691.8 830.2 692.6 830.6 693.1 830.7 693.5 830.8 693.8 830.5 693.9 830.2 694.1 830.3 694.5 830.1 694.6 830.3 695.1 830.3 695.1 830.6 695.4 830.6 696.3 830.4 696.4 830.6 696.7 830.6 697.1 830.5 696.8 830.3 696.7 830 697.1 830 697.7 830.2 697.8 830.6 697.4 831.1 697.5 831.4 697.3 831.6 696.9 831.6 696.6 832.4 696.3 832.7 696 833.3 695.9 833.6 695.4 833.9 695.3 833.7 694.9 833.7 694.9 834 694.1 833.9 694 834 694.3 834.4 694.2 834.5 694 834.9 693.6 834.9 693.3 835.3 693 835.4 692.8 835.4 692.6 835.1 692.2 834.8 692.2 834.6 691.7 834.6 692.3 835 691.9 835 691.4 834.7 691.2 834.6 690.8 834.4 690.5 834.2 690.5 834 691.2 834.2 691.8 834 691.3 833.8 691.2 833.7 692.1 833.7 692.5 833.8 692.8 834 692.8 833.8 693.2 833.7 693.3 833.4 692.9 833.2 692.7 832.7 692.8 832.5 693.4 832.5 693.6 832.6 694 832.5 693.9 832.2 693.1 832.2 693.1 832.3 692.7 832.5 692.1 832.5 691.6 832.2 691.6 831.9 692.3 832.1 692.9 831.9 693.2 831.9 693.7 831.8 694.1 832 694.1 831.9 693.7 831.8 Z"
           ></path>
 
@@ -2973,7 +2898,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 695.3 829.9 695.6 829.9 695.9 830.2 695.6 830.3 695.3 830.3 695.3 829.9 Z"
           ></path>
 
@@ -2981,7 +2906,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 694.3 829.9 694 829.9 693.9 829.6 694.3 829.7 694.3 829.9 Z"
           ></path>
 
@@ -2989,7 +2914,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 692.9 829.7 693.5 829.6 693.7 829.9 693.4 830.3 693.2 830.2 692.9 830.3 692.6 830.1 692.9 829.9 693.2 830.1 693.3 829.9 692.8 829.8 692.9 829.7 Z"
           ></path>
 
@@ -2997,7 +2922,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 700.1 829.8 700.7 829.8 700.8 829.7 701.3 829.6 701.7 829.8 702.1 830.1 702.2 830.4 702.2 830.5 701.7 830.6 701.5 830.3 701.3 830.2 701.2 830.5 701.4 830.6 701.5 830.9 701.8 830.7 702 830.8 702.1 831.2 702.4 831.3 702.5 831.2 703 831.5 703.1 831.1 702.3 830.9 702.4 830.4 702.7 830.2 704.2 830.1 704.9 830.7 705.1 830.8 705.1 831.2 704.5 831.1 704 830.9 703.4 831.1 703.7 831.3 704.1 831.4 705 831.5 705.3 831.6 705.4 831.8 705.2 832.3 704.7 832.3 704.6 832.4 703.9 832.5 703.4 832.7 703.7 832.9 702.8 833.3 702.4 833.2 701.9 833.3 701.2 833.3 700.6 833.1 700 832.7 700 833 700.3 833.2 700.9 833.4 701.2 833.7 701.4 833.6 701.8 833.7 702.2 834 702 834.1 702.2 834.6 702 834.6 701.7 834.3 701.3 834.2 700.8 834.6 700.6 834.3 700.3 834.1 700 834.1 699.5 833.9 699.3 834 699.5 834.4 699.8 834.4 700 834.6 699.8 834.7 700.5 835.3 700.3 835.4 699.9 835.2 699.6 835.2 699.3 834.9 699 834.8 698.7 834.7 698.6 835.3 699.1 835.4 699.1 835.7 699 835.9 698.6 835.8 698.5 835.6 698 835.4 697.9 835.2 697.7 835.2 697.3 834.7 697.6 834.3 697.6 834.1 697.2 833.6 697.2 833.4 697.7 833.2 697.6 833 698.1 832.9 698 832.6 698.6 832.2 699.2 832 699.6 832.4 699.6 832.8 699.9 832.7 699.4 832.1 699.5 831.8 698.9 831.6 698.5 831.3 698.6 831.1 699 831.3 699.1 830.8 698.4 830.6 698.5 830.3 698.7 830.4 699 830.2 699.3 830.2 699.5 829.9 699.2 829.6 699.6 829.6 700.1 829.8 Z"
           ></path>
 
@@ -3005,7 +2930,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 695.1 829.4 695.8 829.4 696 829.6 696.2 829.4 696.4 829.5 696.6 829.8 696.4 829.9 696 829.8 695.6 829.6 694.8 829.5 694.9 829.3 695.1 829.4 Z"
           ></path>
 
@@ -3013,7 +2938,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             className="Falkland Islands"
             name="Falkland Islands"
             id="FK"
-            arg="US_FK"
+            arg="FK"
             d="M 688.3 828.3 687.8 828.2 687.9 828 688.3 828.3 Z"
           ></path>
 
@@ -3127,7 +3052,28 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
             d="M 635.6 390.5 635.5 390.8 635.3 390.8 634.9 390.6 634.7 390.4 635 390 635.5 390.4 635.6 390.5 Z"
           ></path>
 
+
+
+
           {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+          {/* ================================      shtatebis dasasruli    ================================= */}
+
+
+          <path
+            d="M677.3 487l1.5-2.8 0.5-2.9 1-2.7-2.1-3.8-0.3-4.4 3.1-5.5 1.9 0.7 4.1 1.5 5.9 5.4 0.8 2.6-3.4 5.9-1.8 4.7-2.2 2.5-2.7 0.4-0.8-1.8-1.3-0.2-1.7 1.7-2.5-1.3z"
+            id="GF"
+            arg="GF"
+            name="French Guiana"
+            // es aris safrangetis  sakutreba
+          ></path>
+
+
 
           <path
             d="M643.7 413.8l-0.2-0.2-0.4-0.2-0.1-0.2 0-0.6 0.1-0.2 0.7-1.1 0.3 0.2 0 0.7-0.1 0.8-0.1 0.4-0.2 0.4z"
@@ -4282,9 +4228,9 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           ></path>
         </g>
 
-        <circle cx="997.9" cy="189.1" id="0"></circle>
+        {/* <circle cx="997.9" cy="189.1" id="0"></circle>
         <circle cx="673.5" cy="724.1" id="1"></circle>
-        <circle cx="1798.2" cy="719.3" id="2"></circle>
+        <circle cx="1798.2" cy="719.3" id="2"></circle> */}
       </svg>
     </div>
   );

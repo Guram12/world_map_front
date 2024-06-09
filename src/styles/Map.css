@@ -125,15 +125,21 @@
   }
 }
 
+.continent-dark {
+  opacity: 0.5; /* Adjust the opacity to make it darker */
+  transition: opacity 0.3s ease;
+}
+
+
 .selected-country-scale {
-  transform: scale(1.06) !important; /* Adjust the scale factor as needed */
+  transform: scale(1.01) !important; 
   transform-origin: center;
   transition: transform 0.3s ease;
   fill: aqua;
 }
 
 .continent-scale {
-  transform: scale(1.05); /* Adjust the scale factor as needed */
+  /* transform: scale(1.15);  */
   transform-origin: bottom;
   transition: transform 0.3s ease;
 }
