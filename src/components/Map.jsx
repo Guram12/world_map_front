@@ -24,8 +24,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .duration(750)
       .call(zoomRef.current.transform, d3.zoomIdentity);
     handle_Set_Selected_Country(null);
-    setHoveredContinent(null);
-    setHoveredCountry(null)
+
   };
 
   // ========================    function for setting selected images on its country   ============================             
@@ -88,7 +87,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
 
-    const zoom = d3.zoom().scaleExtent([1, 50]).on("zoom", (event) => {
+    const zoom = d3.zoom().scaleExtent([0.5, 50]).on("zoom", (event) => {
       svg.selectAll("g").attr("transform", event.transform);
     });
 
@@ -153,17 +152,23 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     const consumerWebsiteUrl = countryData[arg]?.customer_website; // Ensure this is defined and valid
   
     // Open the consumer website in a new tab first
-    if (consumerWebsiteUrl) {
-      window.open(consumerWebsiteUrl, "_blank", "noopener,noreferrer");
-    } else {
-      console.warn(`No consumer website URL for country: ${arg}`);
-    }
+    // if (consumerWebsiteUrl) {
+    //   window.open(consumerWebsiteUrl, "_blank", "noopener,noreferrer");
   
-    // Use a timeout to open the second tab shortly after the first one
-    setTimeout(() => {
+    //   // Open the CountryMap component in a new tab after a delay
+    //   setTimeout(() => {
+    //     window.open(countryMapUrl, "_blank", "noopener,noreferrer");
+    //   }, 3000); // Delay of 500ms
+    // } else {
+    //   console.warn(`No consumer website URL for country: ${arg}`);
+    //   // Open the CountryMap component in a new tab immediately if no consumer website
       window.open(countryMapUrl, "_blank", "noopener,noreferrer");
-    }, 500); // Delay of 500ms
+    // }
+    handle_Set_Selected_Country(arg)
+
   };
+  
+
   
 useEffect(() => {
   const applyAnimation = () => {
