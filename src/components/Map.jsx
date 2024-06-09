@@ -151,22 +151,20 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
     const consumerWebsiteUrl = countryData[arg]?.customer_website; // Ensure this is defined and valid
-
-    // Open the consumer website in a new tab
+  
+    // Open the consumer website in a new tab first
     if (consumerWebsiteUrl) {
       window.open(consumerWebsiteUrl, "_blank", "noopener,noreferrer");
     } else {
       console.warn(`No consumer website URL for country: ${arg}`);
     }
-
-    // Open the CountryMap component in a new tab
-    window.open(countryMapUrl, "_blank", "noopener,noreferrer");
+  
+    // Use a timeout to open the second tab shortly after the first one
+    setTimeout(() => {
+      window.open(countryMapUrl, "_blank", "noopener,noreferrer");
+    }, 500); // Delay of 500ms
   };
-
-  useEffect(() => {
-    console.log("countrydata", countryData);
-  }, [countryData]);
-
+  
 useEffect(() => {
   const applyAnimation = () => {
     if (svgRef.current) {
