@@ -42,11 +42,6 @@ function CountryMap({ countryData, selectedCountry }) {
   }, [country, isLoaded]);
 
 
-  function openDropdown(element) {
-    element.classList.toggle('open');
-    document.getElementsByTagName('body')[0].classList.toggle('open');
-  };
-
   if (!isLoaded) {
     return <div>Loading map...</div>;
   }
