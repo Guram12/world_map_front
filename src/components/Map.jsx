@@ -13,7 +13,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const tooltipRef = useRef(null);
 
   const [language, setLanguage] = useState("en"); // State for selected language
-  const [hoveredContinent, setHoveredContinent] = useState(null); // State for hovered continent
+  const [selectedContinent, setSelectedContinent] = useState(null);
   const [hoveredCountry, setHoveredCountry] = useState(null); // State for hovered country
 
   // ========================    function for reset zoom button    ============================             
@@ -24,7 +24,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .duration(750)
       .call(zoomRef.current.transform, d3.zoomIdentity);
     handle_Set_Selected_Country(null);
-
+    setSelectedContinent(null)
   };
 
   // ========================    function for setting selected images on its country   ============================             
@@ -83,8 +83,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   // ========================    function for zooming in and out ============================  
 
 
-
-
   useEffect(() => {
     if (!svgRef.current) return;
 
@@ -103,48 +101,50 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         const arg = d3.select(this).attr("arg");
         const countryName = LanguageJson[arg];
 
-        const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
-        setHoveredContinent(continent);
-        setHoveredCountry(arg);
-
-        if (continent) {
-          svg.selectAll("path")
-            .classed("continent-scale", false)
-            .classed("continent-dark", true)
-            .filter(function () {
-              return continentMapping[continent].includes(d3.select(this).attr("arg"));
-            })
-            .classed("continent-dark", false)
-            .classed("continent-scale", true);
-
-          // Bring the hovered continent to the front
-          svg.selectAll("path").filter(function () {
-            return continentMapping[continent].includes(d3.select(this).attr("arg"));
-          }).each(function () {
-            this.parentNode.appendChild(this);
-          });
-        }
-
-        d3.select(this).classed("selected-country-scale", true);
-
-        // Bring the hovered country to the front
-        this.parentNode.appendChild(this);
-
         if (countryName) {
           tooltip.style("visibility", "visible").html(`<strong>${countryName[language]}</strong>`);
+        }
+
+        if (selectedContinent) {
+          const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
+          if (continent === selectedContinent) {
+            d3.select(this).classed("selected-country-hover", true);
+            this.parentNode.appendChild(this);
+          }
         }
       })
       .on("mousemove", function (event) {
         tooltip.style("top", `${event.pageY + 15}px`).style("left", `${event.pageX + 15}px`);
       })
       .on("mouseout", function () {
-        svg.selectAll("path").classed("selected-country-scale", false);
         tooltip.style("visibility", "hidden");
+        if (selectedContinent) {
+          d3.select(this).classed("selected-country-hover", false);
+        }
       })
-      .on("click", function () {
+      .on("click", function (event) {
         const arg = d3.select(this).attr("arg");
-        handle_Set_Selected_Country(arg);
-        handleCountryClick(arg);
+        const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
+
+        if (continent && continent !== selectedContinent) {
+          setSelectedContinent(continent);
+          svg.selectAll("path")
+            .classed("continent-scale continent-hover", false)
+            .classed("continent-dark", true)
+            .filter(function () {
+              return continentMapping[continent].includes(d3.select(this).attr("arg"));
+            })
+            .classed("continent-dark", false)
+            .classed("continent-scale continent-hover", true);
+
+          svg.selectAll("path").filter(function () {
+            return continentMapping[continent].includes(d3.select(this).attr("arg"));
+          }).each(function () {
+            this.parentNode.appendChild(this);
+          });
+        } else {
+          handleCountryClick(arg);
+        }
       });
 
     createPatterns();
@@ -153,12 +153,11 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       svg.selectAll("path").on("mouseover", null).on("mousemove", null).on("mouseout", null).on("click", null);
       svg.call(zoom.on("zoom", null));
     };
-  }, [createPatterns, language, continentMapping]);
-
+  }, [createPatterns, language, selectedContinent]);
+// ===========================================================================================================
 
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
-    const consumerWebsiteUrl = countryData[arg]?.customer_website;
     window.open(countryMapUrl, "_blank", "noopener,noreferrer");
     handle_Set_Selected_Country(arg)
 
@@ -213,11 +212,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   return (
     <div className="map_container">
-      <video autoPlay muted loop id="background-video">
-        <source src={ocean} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <button onClick={resetZoom} className="reset-button">
+      <button onClick={() => resetZoom} className="reset-button">
         Reset Zoom
       </button>
       <select className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
