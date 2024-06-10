@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import LanguageJson from "./language.json";
 import { continentMapping } from "./ContinentCountries";
-import ocean from "../assets/ocean.mp4"
+
 
 
 
@@ -12,19 +12,21 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const zoomRef = useRef(null);
   const tooltipRef = useRef(null);
 
-  const [language, setLanguage] = useState("en"); // State for selected language
+  const [language, setLanguage] = useState("en");
   const [selectedContinent, setSelectedContinent] = useState(null);
-  const [hoveredCountry, setHoveredCountry] = useState(null); // State for hovered country
 
   // ========================    function for reset zoom button    ============================             
+
+
+
   const resetZoom = () => {
     const svg = d3.select(svgRef.current);
-    svg
-      .transition()
-      .duration(750)
-      .call(zoomRef.current.transform, d3.zoomIdentity);
+    svg.selectAll("path").classed("continent-scale continent-hover continent-dark", false);
+    // Apply the zoom transformation immediately
+    svg.call(zoomRef.current.transform, d3.zoomIdentity);
+    // Update state after applying zoom transformation
     handle_Set_Selected_Country(null);
-    setSelectedContinent(null)
+    setSelectedContinent(null);
   };
 
   // ========================    function for setting selected images on its country   ============================             
@@ -109,7 +111,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
           if (continent === selectedContinent) {
             d3.select(this).classed("selected-country-hover", true);
-            this.parentNode.appendChild(this);
+            this.parentNode.appendChild(this); // Bring hovered country to front
           }
         }
       })
@@ -154,7 +156,8 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       svg.call(zoom.on("zoom", null));
     };
   }, [createPatterns, language, selectedContinent]);
-// ===========================================================================================================
+
+  // ===========================================================================================================
 
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
@@ -212,9 +215,8 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   return (
     <div className="map_container">
-      <button onClick={() => resetZoom} className="reset-button">
-        Reset Zoom
-      </button>
+      <button onClick={resetZoom} className="reset-button">Reset Zoom</button>
+
       <select className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
         <option value="en">English</option>
         <option value="ru">Russian</option>
@@ -3046,12 +3048,8 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           <path
             d="M677.3 487l1.5-2.8 0.5-2.9 1-2.7-2.1-3.8-0.3-4.4 3.1-5.5 1.9 0.7 4.1 1.5 5.9 5.4 0.8 2.6-3.4 5.9-1.8 4.7-2.2 2.5-2.7 0.4-0.8-1.8-1.3-0.2-1.7 1.7-2.5-1.3z"
             id="GF"
-            arg="GF"
-            name="French Guiana"
-          // es aris safrangetis  sakutreba
-          ></path>
-
-
+            arg="GF" // es aris safrangetis  sakutreba
+            name="French Guiana"    ></path>
 
           <path
             d="M643.7 413.8l-0.2-0.2-0.4-0.2-0.1-0.2 0-0.6 0.1-0.2 0.7-1.1 0.3 0.2 0 0.7-0.1 0.8-0.1 0.4-0.2 0.4z"
