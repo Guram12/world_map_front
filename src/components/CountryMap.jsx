@@ -20,7 +20,7 @@ function CountryMap({ countryData, selectedCountry }) {
   });
 
   const BaseURLs = {
-    forvarded: "https://cc5a6931275f239dcca8797ef88f0ead.serveo.net/",
+    forvarded: "https://5fd37da813ebed83edcfc55b9b15e27d.serveo.net/",
     local: "http://localhost:8000/",
   };
 
