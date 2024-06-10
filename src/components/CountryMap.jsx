@@ -63,12 +63,13 @@ function CountryMap({ countryData, selectedCountry }) {
           {isMinimized ? "Expand" : "Minimize"}
         </button> */}
         <div className="burger-icon">
-          <label className="burger" for="burger">
+          <label className="burger" htmlFor="burger">
             <input className="line"
              type="checkbox"
               id="burger"  
               onClick={() => setIsMinimized(!isMinimized)}
               checked={!isMinimized}
+              readOnly
               />
           </label>
         </div>
