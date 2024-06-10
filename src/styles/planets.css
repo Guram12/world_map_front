@@ -10,6 +10,64 @@
   margin: 0;
   overflow: hidden;
 }
+.same_class {
+  width: 100%;
+  /* height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 130px;
+}
+.column {
+  position: relative;
+}
+.planet_img {
+  font-size: 30px;
+  width: 100px;
+  height: 60px;
+  cursor: pointer;
+}
+.textt {
+  font-size: 30px;
+  fill: #f1f5f8;
+  letter-spacing: 7px;
+}
+.link_about {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background-image: url("../asset/planet2.png");
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.links {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: white;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  cursor: pointer;
+  /* border: 3px solid green; */
+}
+.moon_earth_container {
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: 3px solid red; */
+}
+
 .logo-container {
   width: 150px;
   height: 150px;
@@ -19,14 +77,7 @@
   width: 100%;
   height: 100%;
 }
-.same_class {
-  width: 100%;
-  /* height: 100vh; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 130px;
-}
+
 .background_canvas {
   position: absolute;
   top: 0;
@@ -56,21 +107,6 @@
   /* border: 3px solid green; */
 }
 
-.links {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  color: white;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  background-size: cover;
-  cursor: pointer;
-  /* border: 3px solid green; */
-}
 .link_contact {
   background-position: center;
   background-repeat: no-repeat;
@@ -90,12 +126,7 @@
   box-shadow: rgba(73, 86, 156, 0.56) 0px 22px 70px 4px;
   transition: 1s;
 }
-.link_about {
-  background-image: url("../asset/planet2.png");
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
+
 .main_planets_container {
   position: relative;
   width: 100%;
@@ -114,41 +145,19 @@
   position: relative;
   z-index: 1;
 }
-.planet_img {
-  font-size: 30px;
-  width: 100px;
-  height: 60px;
-  cursor: pointer;
-}
+
 .links {
   position: relative;
   z-index: 1;
 }
-.link_about {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-.moon_earth_container {
-  position: relative;
-  z-index: 1;
-}
+
 .earth_bck_styles,
 .moon_bck_styles {
   position: relative;
   display: inline-block;
   /* border: 3px solid green; */
 }
-.moon_earth_container {
-  width: 50%;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  position: relative;
-  /* border: 3px solid red; */
-}
+
 .earth_bck_styles {
   position: absolute;
   display: flex;
@@ -158,6 +167,10 @@
   /* border: 3px solid red; */
 }
 .moon {
+  animation: orbit 40s linear infinite;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   width: 190px;
   height: 190px;
   display: flex;
@@ -171,6 +184,7 @@
   position: relative;
 }
 .earth {
+  /* display: none; */
   position: absolute;
   z-index: 1111111111111;
   background-size: cover;
@@ -196,12 +210,8 @@
 .moon_bck_styles:hover ~ .earth_bck_styles .earth {
   box-shadow: rgba(73, 86, 156, 0.56) 0px 22px 70px 4px;
 }
-.moon {
-  animation: orbit 40s linear infinite;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
+/* .moon {
+} */
 
 @keyframes orbit {
   0% {
@@ -221,11 +231,6 @@
   opacity: 0;
 }
 
-.textt {
-  font-size: 30px;
-  fill: #f1f5f8;
-  letter-spacing: 7px;
-}
 .link_about {
   background-image: url("../asset/planet2.png");
   text-align: center;
@@ -258,6 +263,121 @@
     transform: scale(20);
   }
 }
-.column {
-  position: relative;
+
+@media (min-width: 600px) and (max-width: 950px) {
+  .same_class {
+    gap: 40px;
+    /* border: 4px solid green; */
+  }
+
+  .planet_img {
+    height: 35px;
+    /* border: 2px solid yellow; */
+  }
+  .textt {
+    font-size: 30px;
+    fill: #f1f5f8;
+    letter-spacing: 4px;
+  }
+  .links {
+    width: 100px;
+    height: 100px;
+    /* border: 3px solid green; */
+  }
+  .arc-text {
+    width: 100px;
+    height: 100px;
+  }
+  .earth {
+    width: 200px;
+    height: 200px;
+    background-image: url("../asset/earth1.png");
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition: transform 2s ease, opacity 2s ease;
+    /* border: 1px solid red; */
+  }
+  .moon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../asset/moon1.png");
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  @keyframes orbit {
+    0% {
+      transform: rotateZ(0deg) translateX(150px) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateZ(360deg) translateX(150px) rotateZ(-360deg);
+    }
+  }
+  .logo-container {
+    width: 50px;
+    height: 50px;
+  }
+  .link {
+    width: 100px;
+    height: 100px;
+    /* border: 3px solid green; */
+  }
+}
+@media (min-width: 950px) and (max-width: 1024px) {
+  .same_class {
+    gap: 35px;
+    /* border: 4px solid green; */
+  }
+  .textt {
+    font-size: 35px;
+    fill: #f1f5f8;
+    letter-spacing: 5px;
+  }
+  .links {
+    width: 150px;
+    height: 150px;
+    /* border: 3px solid green; */
+  }
+  .arc-text {
+    width: 150px;
+    height: 150px;
+  }
+  .earth {
+    width: 250px;
+    height: 250px;
+    background-image: url("../asset/earth1.png");
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition: transform 2s ease, opacity 2s ease;
+    /* border: 1px solid red; */
+  }
+  .moon {
+    width: 80px;
+    height: 80px;
+  }
+  @keyframes orbit {
+    0% {
+      transform: rotateZ(0deg) translateX(180px) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateZ(360deg) translateX(180px) rotateZ(-360deg);
+    }
+  }
+  .logo-container {
+    width: 70px;
+    height: 70px;
+  }
+  .link {
+    font-size: 20px;
+    width: 150px;
+    height: 150px;
+    /* border: 3px solid green; */
+  }
 }
