@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import LanguageJson from "./language.json";
 import { continentMapping } from "./ContinentCountries";
-
+import ocean from "../assets/ocean.mp4"
 
 
 
@@ -13,7 +13,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
   const tooltipRef = useRef(null);
 
   const [language, setLanguage] = useState("en"); // State for selected language
-  const [hoveredContinent, setHoveredContinent] = useState(null); // State for hovered continent
+  const [selectedContinent, setSelectedContinent] = useState(null);
   const [hoveredCountry, setHoveredCountry] = useState(null); // State for hovered country
 
   // ========================    function for reset zoom button    ============================             
@@ -24,14 +24,14 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       .duration(750)
       .call(zoomRef.current.transform, d3.zoomIdentity);
     handle_Set_Selected_Country(null);
-
+    setSelectedContinent(null)
   };
 
   // ========================    function for setting selected images on its country   ============================             
   const createPatterns = () => {
     const svg = svgRef.current;
     if (!svg) return;
-  
+
     let defs = svg.querySelector("defs");
     if (!defs) {
       defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -42,15 +42,15 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         defs.removeChild(defs.firstChild);
       }
     }
-  
+
     svg.querySelectorAll("path[arg]").forEach((countryPath, index) => {
       const arg = countryPath.getAttribute("arg");
       const imageUrl = countryData[arg]?.image_url;
       if (imageUrl) {
         const bbox = countryPath.getBBox();
-  
+
         const patternId = `pattern-${arg}-${index}`;
-  
+
         const pattern = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "pattern"
@@ -61,7 +61,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         pattern.setAttribute("height", bbox.height);
         pattern.setAttribute("x", bbox.x);
         pattern.setAttribute("y", bbox.y);
-  
+
         const image = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "image"
@@ -70,17 +70,19 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         image.setAttribute("width", bbox.width);
         image.setAttribute("height", bbox.height);
         image.setAttribute("preserveAspectRatio", "xMidYMid slice");
-  
+
         pattern.appendChild(image);
         defs.appendChild(pattern);
-  
+
         countryPath.setAttribute("fill", `url(#${patternId})`);
       }
     });
   };
-  
+
   // ===========================================================================================
   // ========================    function for zooming in and out ============================  
+
+
   useEffect(() => {
     if (!svgRef.current) return;
 
@@ -99,41 +101,50 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         const arg = d3.select(this).attr("arg");
         const countryName = LanguageJson[arg];
 
-        const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
-        setHoveredContinent(continent);
-        setHoveredCountry(arg);
-
-        if (continent) {
-          svg.selectAll("path")
-            .classed("continent-scale", false)
-            .classed("continent-dark", true)
-            .filter(function () {
-              return continentMapping[continent].includes(d3.select(this).attr("arg"));
-            })
-            .classed("continent-dark", false)
-            .classed("continent-scale", true);
-        }
-
-        d3.select(this).classed("selected-country-scale", true);
-
-        // Bring the hovered country to the front
-        this.parentNode.appendChild(this);
-
         if (countryName) {
           tooltip.style("visibility", "visible").html(`<strong>${countryName[language]}</strong>`);
+        }
+
+        if (selectedContinent) {
+          const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
+          if (continent === selectedContinent) {
+            d3.select(this).classed("selected-country-hover", true);
+            this.parentNode.appendChild(this);
+          }
         }
       })
       .on("mousemove", function (event) {
         tooltip.style("top", `${event.pageY + 15}px`).style("left", `${event.pageX + 15}px`);
       })
       .on("mouseout", function () {
-        svg.selectAll("path").classed("selected-country-scale", false);
         tooltip.style("visibility", "hidden");
+        if (selectedContinent) {
+          d3.select(this).classed("selected-country-hover", false);
+        }
       })
-      .on("click", function () {
+      .on("click", function (event) {
         const arg = d3.select(this).attr("arg");
-        handle_Set_Selected_Country(arg);
-        handleCountryClick(arg);
+        const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
+
+        if (continent && continent !== selectedContinent) {
+          setSelectedContinent(continent);
+          svg.selectAll("path")
+            .classed("continent-scale continent-hover", false)
+            .classed("continent-dark", true)
+            .filter(function () {
+              return continentMapping[continent].includes(d3.select(this).attr("arg"));
+            })
+            .classed("continent-dark", false)
+            .classed("continent-scale continent-hover", true);
+
+          svg.selectAll("path").filter(function () {
+            return continentMapping[continent].includes(d3.select(this).attr("arg"));
+          }).each(function () {
+            this.parentNode.appendChild(this);
+          });
+        } else {
+          handleCountryClick(arg);
+        }
       });
 
     createPatterns();
@@ -142,69 +153,53 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       svg.selectAll("path").on("mouseover", null).on("mousemove", null).on("mouseout", null).on("click", null);
       svg.call(zoom.on("zoom", null));
     };
-  }, [createPatterns, language, continentMapping]);
-
-
-
+  }, [createPatterns, language, selectedContinent]);
+// ===========================================================================================================
 
   const handleCountryClick = (arg) => {
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
-    const consumerWebsiteUrl = countryData[arg]?.customer_website; // Ensure this is defined and valid
-  
-    // Open the consumer website in a new tab first
-    // if (consumerWebsiteUrl) {
-    //   window.open(consumerWebsiteUrl, "_blank", "noopener,noreferrer");
-  
-    //   // Open the CountryMap component in a new tab after a delay
-    //   setTimeout(() => {
-    //     window.open(countryMapUrl, "_blank", "noopener,noreferrer");
-    //   }, 3000); // Delay of 500ms
-    // } else {
-    //   console.warn(`No consumer website URL for country: ${arg}`);
-    //   // Open the CountryMap component in a new tab immediately if no consumer website
-      window.open(countryMapUrl, "_blank", "noopener,noreferrer");
-    // }
+    window.open(countryMapUrl, "_blank", "noopener,noreferrer");
     handle_Set_Selected_Country(arg)
 
   };
   
 
-  
-useEffect(() => {
-  const applyAnimation = () => {
-    if (svgRef.current) {
-      const svg = svgRef.current;
-      const paths = svg.querySelectorAll("path");
-      const totalDuration = 2; // Total duration in seconds
-      const elementCount = paths.length;
-      const delay = totalDuration / elementCount;
 
-      paths.forEach((path, index) => {
-        path.style.animationDelay = `${index * delay}s`;
-        path.classList.add("path-element");
+  useEffect(() => {
+    const applyAnimation = () => {
+      if (svgRef.current) {
+        const svg = svgRef.current;
+        const paths = svg.querySelectorAll("path");
+        const totalDuration = 2; // Total duration in seconds
+        const elementCount = paths.length;
+        const delay = totalDuration / elementCount;
 
-        // Remove the animation class after the animation ends
-        path.addEventListener("animationend", () => {
-          path.classList.remove("path-element");
+        paths.forEach((path, index) => {
+          path.style.animationDelay = `${index * delay}s`;
+          path.classList.add("path-element");
+
+          // Remove the animation class after the animation ends
+          path.addEventListener("animationend", () => {
+            path.classList.remove("path-element");
+          });
         });
-      });
 
-      // Remove and re-add paths to force reflow/repaint
-      paths.forEach((path) => {
-        const parent = path.parentNode;
-        if (parent === svg) {
-          parent.removeChild(path);
-          parent.appendChild(path);
-        } else {
-          console.warn(`Path element is not a direct child of the SVG element: ${path}`);
-        }
-      });
-    }
-  };
+        // Remove and re-add paths to force reflow/repaint
+        paths.forEach((path) => {
+          const parent = path.parentNode;
+          if (parent === svg) {
+            parent.removeChild(path);
+            parent.appendChild(path);
+          } else {
+            console.warn(`Path element is not a direct child of the SVG element: ${path}`);
+          }
+        });
+      }
+    };
 
-  // Delay the animation application to ensure all elements are rendered
-  setTimeout(applyAnimation, 0);
-}, [countryData]);
+    // Delay the animation application to ensure all elements are rendered
+    setTimeout(applyAnimation, 0);
+  }, [countryData]);
 
   if (loading) {
     return (
@@ -217,7 +212,7 @@ useEffect(() => {
 
   return (
     <div className="map_container">
-      <button onClick={resetZoom} className="reset-button">
+      <button onClick={() => resetZoom} className="reset-button">
         Reset Zoom
       </button>
       <select className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
@@ -3053,7 +3048,7 @@ useEffect(() => {
             id="GF"
             arg="GF"
             name="French Guiana"
-            // es aris safrangetis  sakutreba
+          // es aris safrangetis  sakutreba
           ></path>
 
 

@@ -227,15 +227,10 @@ export const continentMapping = {
     "TV", // Tuvalu
     "VU"  // Vanuatu
   ],
+  "AQ" :[
+    "AQ"
+  ]
 };
-
-
-
-
-
-
-
-
 
 
 
