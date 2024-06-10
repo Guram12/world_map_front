@@ -6,12 +6,23 @@
   justify-content: center;
   align-items: center;
   overflow-y: hidden;
-  background: hsla(224, 90%, 47%, 1);
-  background: linear-gradient(315deg, hsla(224, 90%, 47%, 1) 12%, hsla(210, 5%, 8%, 1) 100%);
-  background: -moz-linear-gradient(315deg, hsla(224, 90%, 47%, 1) 12%, hsla(210, 5%, 8%, 1) 100%);
-  background: -webkit-linear-gradient(315deg, hsla(224, 90%, 47%, 1) 12%, hsla(210, 5%, 8%, 1) 100%);
+  background-color: #121212;
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#0C45E2", endColorstr="#141516", GradientType=1);
 }
+
+
+#background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  /* Ensure the video is behind other content */
+}
+
 
 #main_svg {
   width: 100%;
@@ -19,7 +30,9 @@
   overflow: hidden;
 }
 
-.select, .reset-button, .back_button {
+.select,
+.reset-button,
+.back_button {
   position: absolute;
   padding: 10px 20px;
   background-color: #007bff;
@@ -58,7 +71,8 @@
   position: relative;
 }
 
-.d1, .d2 {
+.d1,
+.d2 {
   border: 5px solid #6c757d;
   border-radius: 50px;
 }
@@ -84,6 +98,7 @@
   0% {
     transform: rotate(0);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -93,6 +108,7 @@
   0% {
     transform: rotate(0);
   }
+
   100% {
     transform: rotate(-360deg);
   }
@@ -103,11 +119,14 @@
     stroke-dasharray: 5, 5;
     stroke-dashoffset: 0;
   }
+
   100% {
     stroke-dasharray: 5, 5;
     stroke-dashoffset: 10;
   }
 }
+
+
 
 .path-element {
   opacity: 0;
@@ -119,6 +138,7 @@
     opacity: 0;
     transform: translateY(100px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -127,20 +147,21 @@
 
 .continent-dark {
   /* display: none; */
-  opacity: 0.5; /* Adjust the opacity to make it darker */
+  opacity: 0.5;
+  /* Adjust the opacity to make it darker */
   transition: opacity 0.3s ease;
 }
 
 
 .selected-country-scale {
-  transform: scale(1.26) !important; 
+  transform: scale(1.26) !important;
   transform-origin: center;
   transition: transform 0.3s ease;
   fill: aqua;
 }
 
 .continent-scale {
-  transform: scale(1.25); 
+  transform: scale(1.25);
   transform-origin: bottom;
   transition: transform 0.3s ease;
 }
