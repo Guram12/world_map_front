@@ -11,9 +11,8 @@ const libraries = ["core", "places"];
 function CountryMap({ countryData, selectedCountry }) {
   const { country } = useParams(); // Retrieve country parameter from URL
   const [businessLocations, setBusinessLocations] = useState([]);
-  const [image_url, setImage_url] = useState({});
-  const [loading, setLoading] = useState(true);
   const [imageLoading, setImageLoading] = useState(true); // Separate state for image loading
+  const [isMinimized, setIsMinimized] = useState(false); // State for minimizing container
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: js_api_key,
@@ -25,27 +24,11 @@ function CountryMap({ countryData, selectedCountry }) {
     local: "http://localhost:8000/",
   };
 
-  useEffect(() => {
-    const fetchCountryImages = async () => {
-      try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
-        setImage_url(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching country images:", error);
-      }
-    };
-    fetchCountryImages();
-  }, []);
-
-  useEffect(() => {
-    console.log("Country data image from map", image_url[country]?.customer_website);
-  }, [country, image_url]);
 
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`);
+        const response = await axios.get(`${BaseURLs.local}api/fetch-locations/?iso_code=${country}`);
         const { locations } = response.data;
         setBusinessLocations(locations);
       } catch (error) {
@@ -57,6 +40,12 @@ function CountryMap({ countryData, selectedCountry }) {
       fetchBusinessLocations();
     }
   }, [country, isLoaded]);
+
+
+  function openDropdown(element) {
+    element.classList.toggle('open');
+    document.getElementsByTagName('body')[0].classList.toggle('open');
+  };
 
   if (!isLoaded) {
     return <div>Loading map...</div>;
@@ -74,34 +63,52 @@ function CountryMap({ countryData, selectedCountry }) {
 
   return (
     <div>
-      <div className="consumer_container">
-        {imageLoading && (
-          <div className="loading">
-            <div className="d1"></div>
-            <div className="d2"></div>
-          </div>
+      <div className={`consumer_container ${isMinimized ? "minimized" : ""}`}>
+        {/* <button className="minimize-btn" onClick={() => setIsMinimized(!isMinimized)}>
+          {isMinimized ? "Expand" : "Minimize"}
+        </button> */}
+        <div className="burger-icon">
+          <label className="burger" for="burger">
+            <input className="line"
+             type="checkbox"
+              id="burger"  
+              onClick={() => setIsMinimized(!isMinimized)}
+              checked={!isMinimized}
+              />
+          </label>
+        </div>
+
+        {!isMinimized && (
+          <>
+            {imageLoading && (
+              <div className="loading" style={{ maxHeight: "200px" }}>
+                <div className="d1"></div>
+                <div className="d2"></div>
+              </div>
+            )}
+            <img
+              src={countryData[country]?.image_url}
+              alt="consumer website icon"
+              className="consumer_logo"
+              onLoad={() => setImageLoading(false)}
+              onError={() => setImageLoading(false)}
+              style={{ display: imageLoading ? 'none' : 'block' }} // Hide the image until it's fully loaded
+            />
+            <button
+              className="btn"
+              onClick={() => {
+                const websiteUrl = countryData[country]?.customer_website;
+                if (websiteUrl) {
+                  window.open(websiteUrl, "_blank", "noopener,noreferrer");
+                } else {
+                  console.warn("No customer website URL available");
+                }
+              }}
+            >
+              Open Website
+            </button>
+          </>
         )}
-        <img
-          src={countryData[country]?.image_url}
-          alt="consumer website icon"
-          className="consumer_logo"
-          onLoad={() => setImageLoading(false)}
-          onError={() => setImageLoading(false)}
-          style={{ display: imageLoading ? 'none' : 'block' }} // Hide the image until it's fully loaded
-        />
-        <button
-          className="btn"
-          onClick={() => {
-            const websiteUrl = image_url[country]?.customer_website;
-            if (websiteUrl) {
-              window.open(websiteUrl, "_blank", "noopener,noreferrer");
-            } else {
-              console.warn("No customer website URL available");
-            }
-          }}
-        >
-          Open Website
-        </button>
       </div>
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100vh" }}

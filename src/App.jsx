@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
+        const response = await axios.get(`${BaseURLs.local}api/countries/`);
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
@@ -61,6 +61,12 @@ function App() {
     };
     fetchCountryImages();
   }, []);
+
+
+
+  useEffect(() => {
+    console.log("selected country in ap ", selectedCountry)
+  }, [selectedCountry])
 
   if (isMobileDevice && !isLandscape) {
     return (
