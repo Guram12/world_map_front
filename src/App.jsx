@@ -21,7 +21,7 @@ function App() {
 
 
   const BaseURLs = {
-    forvarded: "https://wild-jobs-hide.loca.lt/",
+    forvarded: "https://5fd37da813ebed83edcfc55b9b15e27d.serveo.net/",
     local: "http://localhost:8000/",
   };
 
@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
+        const response = await axios.get(`${BaseURLs.local}api/countries/`);
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
@@ -61,6 +61,12 @@ function App() {
     };
     fetchCountryImages();
   }, []);
+
+
+
+  useEffect(() => {
+    console.log("selected country in ap ", selectedCountry)
+  }, [selectedCountry])
 
   if (isMobileDevice && !isLandscape) {
     return (
