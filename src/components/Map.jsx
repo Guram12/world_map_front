@@ -17,17 +17,23 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   // ========================    function for reset zoom button    ============================             
 
+  const resetcountry = () => {
+    const svg = d3.select(svgRef.current);
+    svg.selectAll("path").classed("continent-scale continent-hover continent-dark", false);
+    handle_Set_Selected_Country(null);
+    setSelectedContinent(null);
+  }
 
 
   const resetZoom = () => {
     const svg = d3.select(svgRef.current);
-    svg.selectAll("path").classed("continent-scale continent-hover continent-dark", false);
-    // Apply the zoom transformation immediately
-    svg.call(zoomRef.current.transform, d3.zoomIdentity);
-    // Update state after applying zoom transformation
-    handle_Set_Selected_Country(null);
-    setSelectedContinent(null);
+    svg.transition().duration(750).call(zoomRef.current.transform, d3.zoomIdentity);
+    setTimeout(resetcountry, 750); 
   };
+
+
+
+
 
   // ========================    function for setting selected images on its country   ============================             
   const createPatterns = () => {
@@ -165,7 +171,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     handle_Set_Selected_Country(arg)
 
   };
-  
+
 
 
   useEffect(() => {
@@ -215,7 +221,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   return (
     <div className="map_container">
-      <button onClick={resetZoom} className="reset-button">Reset Zoom</button>
+      <button onClick={resetZoom} className="reset-button">Reset</button>
 
       <select className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
         <option value="en">English</option>
