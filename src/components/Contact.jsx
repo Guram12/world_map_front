@@ -2,12 +2,14 @@ import React from "react";
 import "../styles/Contact.css";
 import Logo from "../asset/logoo.svg";
 import Cancel from "../asset/cancel.png";
+// import Cancel from "../asset/delete.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
 import Inst from "../asset/instagram.png";
 import Face from "../asset/facebook.png";
 import Linke from "../asset/linkedin.png";
+// import Bck_video from "../asset/bck_video.mp4";
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Contact = () => {
     document.querySelector(".title").style.display = "none";
     document.querySelector(".column_cont").style.display = "none";
     document.querySelector(".social_links").style.display = "none";
+    // document.querySelector(".background_video").style.display = "none";
     document.querySelector(".close_icon").style.display = "none";
     const logo = document.querySelector(".logo_image_contact");
     logo.classList.add("grow-logo-cont");
@@ -37,6 +40,9 @@ const Contact = () => {
   });
   return (
     <div className="contact_container">
+      {/* <video autoPlay loop muted className="background_video">
+        <source src={Bck_video} type="video/mp4" />
+      </video> */}
       <motion.div
         onClick={handleLogoClickContact}
         className="close_icon"
@@ -116,23 +122,6 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
-      {/* <motion.div
-        variants={fadeIn("up", 0.3)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.3 }}
-        className="social_links"
-      >
-        <a href="">
-          <img src={Inst} alt=""></img>
-        </a>
-        <a href="">
-          <img src={Face} alt=""></img>
-        </a>
-        <a href="">
-          <img src={Linke} alt=""></img>
-        </a>
-      </motion.div> */}
     </div>
   );
 };

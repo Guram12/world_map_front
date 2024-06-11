@@ -7,7 +7,7 @@
   justify-content: center;
 }
 .logo_image_contact {
-  /* border: 1px solid red; */
+  /* border: 10px solid red; */
   display: flex;
   align-items: center;
 }
@@ -16,11 +16,12 @@
   height: 470px;
 }
 .column_cont {
+  width: 750px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 90px;
+  gap: 70px;
   /* border: 2px solid blue; */
 }
 .txxt {
@@ -28,7 +29,8 @@
   flex-direction: column;
   align-items: start;
   gap: 15px;
-  max-height: 500px;
+  max-height: 550px;
+  border-radius: 20px;
   overflow-y: auto;
   padding: 10px;
   border: 1px solid #ddd;
@@ -48,7 +50,7 @@
   /* border: 1px solid red; */
   display: flex;
   justify-content: center;
-  gap: 120px;
+  gap: 100px;
 }
 .paragraph_contact p {
   font-size: 20px;
