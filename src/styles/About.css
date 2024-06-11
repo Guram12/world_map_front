@@ -3,17 +3,14 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  /* padding-top: 5%; */
-  /* border: 5px solid green; */
-  /* position: relative; */
 }
 .close_icon {
-  /* position: absolute; */
-  margin-top: 10px;
-  padding-right: 10%;
-  /* margin-bottom: 5%; */
+  position: absolute;
+  z-index: 11111111;
+  top: 5%;
+  right: 8%;
   width: 100%;
   display: flex;
   justify-content: end;
@@ -29,19 +26,12 @@
   letter-spacing: 5px;
 }
 .title_and_paragraph {
-  /* height: 100%; */
-  /* height: 1000vh; */
   display: flex;
   flex-direction: column;
   /* border: 1px solid red; */
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
   gap: 180px;
-  /* position: relative; */
-  /* padding-left: 10%;
-  padding-right: 10%; */
-  /* margin-top: 10%; */
 }
 .pr_log {
   display: flex;
@@ -60,11 +50,10 @@
 .paragraph {
   display: flex;
   flex-direction: column;
-  /* gap: 15px; */
-  max-height: 400px; /* Adjust height as needed */
+  max-height: 600px;
   overflow-y: auto;
   padding: 10px;
-  border: 1px solid #ddd; /* Optional: for visual indication of the scrollable area */
+  border: 1px solid #ddd;
   background-color: #f9f9f9;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -87,7 +76,6 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   /* border: 1px solid red; */
 }
 .logo_image img {

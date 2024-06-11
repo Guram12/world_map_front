@@ -34,18 +34,17 @@ const About = () => {
 
   return (
     <div className="about_container">
-      {/* <motion.div
+      <motion.div
         onClick={handleLogoClick}
         className="close_icon"
-        variants={fadeIn("down", 0.3)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.3 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
         <img src={Cancel} alt="/"></img>
-      </motion.div> */}
+      </motion.div>
       <div className="title_and_paragraph">
-        <motion.div
+        {/* <motion.div
           onClick={handleLogoClick}
           className="close_icon"
           variants={fadeIn("down", 0.3)}
@@ -54,7 +53,7 @@ const About = () => {
           viewport={{ once: false, amount: 0.3 }}
         >
           <img src={Cancel} alt="/"></img>
-        </motion.div>
+        </motion.div> */}
         <div className="pr_log">
           <div className="title_pr">
             <motion.div
