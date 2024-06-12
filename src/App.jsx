@@ -69,7 +69,7 @@ function App() {
   if (isMobileDevice && !isLandscape) {
     return (
       <div className="rotate_cont">
-        <img className="rotate_image" src={Rotate} />
+        <img className="rotate_image" src={Rotate} alt="Rotate your device" />
         <h1>Please rotate your device...</h1>
       </div>
     );
@@ -92,7 +92,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/country-map/:country"
             element={
