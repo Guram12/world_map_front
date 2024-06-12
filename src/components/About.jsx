@@ -65,7 +65,8 @@ const About = () => {
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: false, amount: 0.3 }}
-              className="paragraph"
+              // id="responsive"
+              className="paragraph "
             >
               <motion.p variants={textVariant("left", 0.1)}>
                 This setup will move the Contact Us element to the center of the
