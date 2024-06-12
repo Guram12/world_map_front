@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CountryMap from "./components/CountryMap";
 import axios from "axios";
 import Planets from "./components/planets";
+import Rotate from "./asset/rotate.png";
 
 function App() {
   const [countryData, setCountryData] = useState({});
@@ -18,7 +19,6 @@ function App() {
   const handle_Set_Selected_Country = (country) => {
     setSelectedCountry(country);
   };
-
 
   const BaseURLs = {
     forvarded: "https://5fd37da813ebed83edcfc55b9b15e27d.serveo.net/",
@@ -62,30 +62,15 @@ function App() {
     fetchCountryImages();
   }, []);
 
-
-
   useEffect(() => {
-    console.log("selected country in ap ", selectedCountry)
-  }, [selectedCountry])
+    console.log("selected country in ap ", selectedCountry);
+  }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          textAlign: "center",
-        }}
-      >
-        <div>
-          <h1>Please Rotate Your Device</h1>
-          <p>
-            This site is best viewed in landscape mode. Please rotate your
-            device to continue.
-          </p>
-        </div>
+      <div className="rotate_cont">
+        <img className="rotate_image" src={Rotate} />
+        <h1>Please rotate your device...</h1>
       </div>
     );
   }
@@ -108,14 +93,14 @@ function App() {
             }
           />
 
-          
           <Route
             path="/country-map/:country"
             element={
               <CountryMap
                 selectedCountry={selectedCountry}
                 countryData={countryData}
-              />}
+              />
+            }
           />
         </Routes>
       </Router>

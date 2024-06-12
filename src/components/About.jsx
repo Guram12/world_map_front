@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
 import { useNavigate } from "react-router-dom";
 import Cancel from "../asset/cancel.png";
+// import Cancel from "../asset/delete.png";
+// import Bck_video from "../asset/bck_video.mp4";
 
 const About = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const About = () => {
   const handleLogoClick = () => {
     document.querySelector(".title").style.display = "none";
     document.querySelector(".paragraph").style.display = "none";
+    // document.querySelector(".background_video").style.display = "none";
     document.querySelector(".close_icon").style.display = "none";
     const logo = document.querySelector(".logo_image");
     logo.classList.add("grow-logo");
@@ -34,6 +37,9 @@ const About = () => {
 
   return (
     <div className="about_container">
+      {/* <video autoPlay loop muted className="background_video">
+        <source src={Bck_video} type="video/mp4" />
+      </video> */}
       <motion.div
         onClick={handleLogoClick}
         className="close_icon"
@@ -44,24 +50,13 @@ const About = () => {
         <img src={Cancel} alt="/"></img>
       </motion.div>
       <div className="title_and_paragraph">
-        {/* <motion.div
-          onClick={handleLogoClick}
-          className="close_icon"
-          variants={fadeIn("down", 0.3)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.3 }}
-        >
-          <img src={Cancel} alt="/"></img>
-        </motion.div> */}
         <div className="pr_log">
           <div className="title_pr">
             <motion.div
               className="top_side"
-              variants={fadeIn("down", 0.3)}
-              initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: false, amount: 0.3 }}
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
               <h1 className="title">About Us</h1>
             </motion.div>
