@@ -82,7 +82,6 @@ function App() {
   }
 
   if (!isLandscape) {
-    // Do not render anything if the device is in portrait mode
     return (
       <div className="rotate_cont">
         <img className="rotate_image" src={Rotate} alt="Rotate your device" />
