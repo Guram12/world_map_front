@@ -4,6 +4,13 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
 import countryBounds from "./country_bounds.json"; // Import the JSON data
 import axios from "axios";
+import facebook_icon from "../assets/fb.png"
+import instagram_icon from "../assets/inst.png"
+import linkedin_icon from "../assets/linkedin.png"
+import x_icon from "../assets/x.png"
+
+
+
 
 const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
 const libraries = ["core", "places"];
@@ -42,6 +49,33 @@ function CountryMap({ countryData, selectedCountry }) {
   }, [country, isLoaded]);
 
 
+  useEffect(() => {
+    console.log("------------>>>>", countryData)
+  })
+
+  // ====================================  functions for opening customer  social link ===============================
+  
+  const handle_fb_click = () => {
+    window.open(countryData[country]?.costumer_fb_link, "_blank", "noopener,noreferrer")
+  }
+
+  const handle_x_xlick = () => {
+    window.open(countryData[country]?.costumer_x_link, "_blank", "noopener,noreferrer")
+
+  }
+  const handle_linkedin_click = () => {
+    window.open(countryData[country]?.costumer_linkedin_link, "_blank", "noopener,noreferrer")
+
+  }
+  const handle_inst_click = () => {
+    window.open(countryData[country]?.costumer_inst_link, "_blank", "noopener,noreferrer")
+  }
+
+
+
+  // =================================================================================================================
+
+
   if (!isLoaded) {
     return <div>Loading map...</div>;
   }
@@ -65,12 +99,12 @@ function CountryMap({ countryData, selectedCountry }) {
         <div className="burger-icon">
           <label className="burger" htmlFor="burger">
             <input className="line"
-             type="checkbox"
-              id="burger"  
+              type="checkbox"
+              id="burger"
               onClick={() => setIsMinimized(!isMinimized)}
               checked={!isMinimized}
               readOnly
-              />
+            />
           </label>
         </div>
 
@@ -103,6 +137,22 @@ function CountryMap({ countryData, selectedCountry }) {
             >
               Open Website
             </button>
+            {!imageLoading && (
+              <div className="costomer_social_links_container" >
+                {countryData[country]?.costumer_fb_link !== null && (
+                  <img src={facebook_icon} alt="facebook icon" onClick={handle_fb_click} className="costomer_social_links" />
+                )}
+                {countryData[country]?.costumer_x_link !== null && (
+                  <img src={x_icon} alt="facebook icon" onClick={handle_x_xlick} className="costomer_social_links" />
+                )}
+                {countryData[country]?.costumer_linkedin_link !== null && (
+                  <img src={linkedin_icon} alt="facebook icon" onClick={handle_linkedin_click} className="costomer_social_links" />
+                )}
+                {countryData[country]?.costumer_inst_link !== null && (
+                  <img src={instagram_icon} alt="facebook icon" onClick={handle_inst_click} className="costomer_social_links" />
+                )}
+              </div>
+            )}
           </>
         )}
       </div>
