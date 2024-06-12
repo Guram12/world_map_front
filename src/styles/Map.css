@@ -145,7 +145,7 @@
   transform: scale(1.26) !important;
   transform-origin: center;
   transition: transform 0.3s ease;
-  stroke: #495470;
+  stroke: #19b43b;
   stroke-width: 1;
   stroke-dasharray: 50, 50, 50, 50; /* Adjust these values based on your path length */
   animation: animate 2s linear infinite;
