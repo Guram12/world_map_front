@@ -31,24 +31,27 @@ function App() {
     return /Mobi|Android|iPad|iPhone|Tablet|iPod/i.test(navigator.userAgent);
   };
 
+  const updateOrientation = () => {
+    const landscape = window.innerWidth > window.innerHeight;
+    setIsLandscape(landscape);
+
+    if (!landscape) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling when showing the rotate message
+    } else {
+      document.body.style.overflow = "auto"; // Allow scrolling when the site is displayed
+    }
+  };
+
   useEffect(() => {
     setIsMobileDevice(isMobile());
+    updateOrientation();
 
-    const handleResize = () => {
-      setIsLandscape(window.innerWidth > window.innerHeight);
-    };
-
-    if (isMobile()) {
-      setIsLandscape(window.innerWidth > window.innerHeight);
-      window.addEventListener("resize", handleResize);
-      window.addEventListener("orientationchange", handleResize);
-    }
+    window.addEventListener("resize", updateOrientation);
+    window.addEventListener("orientationchange", updateOrientation);
 
     return () => {
-      if (isMobile()) {
-        window.removeEventListener("resize", handleResize);
-        window.removeEventListener("orientationchange", handleResize);
-      }
+      window.removeEventListener("resize", updateOrientation);
+      window.removeEventListener("orientationchange", updateOrientation);
     };
   }, []);
 
@@ -70,6 +73,16 @@ function App() {
   }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
+    return (
+      <div className="rotate_cont">
+        <img className="rotate_image" src={Rotate} alt="Rotate your device" />
+        <h1>Please rotate your device...</h1>
+      </div>
+    );
+  }
+
+  if (!isLandscape) {
+    // Do not render anything if the device is in portrait mode
     return (
       <div className="rotate_cont">
         <img className="rotate_image" src={Rotate} alt="Rotate your device" />

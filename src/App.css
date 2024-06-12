@@ -1,11 +1,19 @@
+/* App.css */
 .rotate_cont {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color: black;
+  z-index: 1000;
+  text-align: center;
 }
+
 @keyframes rotateImage {
   0% {
     transform: rotate(0deg);
@@ -22,15 +30,6 @@
   100% {
     opacity: 1;
   }
-}
-
-.rotate_cont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  animation: fadeInRotate 1s ease-in-out infinite;
 }
 
 .rotate_image {
