@@ -13,7 +13,9 @@ function App() {
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [isLandscape, setIsLandscape] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(
+    window.innerWidth > window.innerHeight
+  );
   const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const handle_Set_Selected_Country = (country) => {
