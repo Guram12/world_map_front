@@ -138,7 +138,7 @@
     display: flex;
     align-items: center;
     gap: 35px;
-    border: 1px solid green;
+    /* border: 1px solid green; */
   }
   .logo_image img {
     width: 100px;
@@ -197,7 +197,6 @@
     display: flex;
     margin: 0;
     width: auto;
-    /* width: 100%; */
     /* border: 1px solid green; */
   }
   .logo_image img {
