@@ -26,25 +26,26 @@ function App() {
   };
 
   const isMobile = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
+    return /Mobi|Android|iPad|iPhone|Tablet|iPod/i.test(navigator.userAgent);
   };
 
   useEffect(() => {
     setIsMobileDevice(isMobile());
 
     const handleResize = () => {
-      if (isMobile()) {
-        setIsLandscape(window.innerWidth > window.innerHeight);
-      }
+      setIsLandscape(window.innerWidth > window.innerHeight);
     };
+
     if (isMobile()) {
       setIsLandscape(window.innerWidth > window.innerHeight);
       window.addEventListener("resize", handleResize);
+      window.addEventListener("orientationchange", handleResize);
     }
 
     return () => {
       if (isMobile()) {
         window.removeEventListener("resize", handleResize);
+        window.removeEventListener("orientationchange", handleResize);
       }
     };
   }, []);
@@ -63,13 +64,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("selected country in ap ", selectedCountry);
+    console.log("selected country in app", selectedCountry);
   }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
     return (
       <div className="rotate_cont">
-        <img className="rotate_image" src={Rotate} />
+        <img className="rotate_image" src={Rotate} alt="Rotate your device" />
         <h1>Please rotate your device...</h1>
       </div>
     );
@@ -92,7 +93,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/country-map/:country"
             element={
