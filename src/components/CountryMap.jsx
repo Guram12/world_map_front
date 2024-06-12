@@ -27,7 +27,7 @@ function CountryMap({ countryData, selectedCountry }) {
   });
 
   const BaseURLs = {
-    forvarded: "http://18.192.240.161:8000/",
+    forvarded: "https://dd53f2660fc932794fd48c40bdffa03a.serveo.net/",
     local: "http://localhost:8000/",
   };
 
