@@ -26,25 +26,26 @@ function App() {
   };
 
   const isMobile = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
+    return /Mobi|Android|iPad|iPhone|Tablet|iPod/i.test(navigator.userAgent);
   };
 
   useEffect(() => {
     setIsMobileDevice(isMobile());
 
     const handleResize = () => {
-      if (isMobile()) {
-        setIsLandscape(window.innerWidth > window.innerHeight);
-      }
+      setIsLandscape(window.innerWidth > window.innerHeight);
     };
+
     if (isMobile()) {
       setIsLandscape(window.innerWidth > window.innerHeight);
       window.addEventListener("resize", handleResize);
+      window.addEventListener("orientationchange", handleResize);
     }
 
     return () => {
       if (isMobile()) {
         window.removeEventListener("resize", handleResize);
+        window.removeEventListener("orientationchange", handleResize);
       }
     };
   }, []);
@@ -63,7 +64,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("selected country in ap ", selectedCountry);
+    console.log("selected country in app", selectedCountry);
   }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
