@@ -27,7 +27,7 @@ function CountryMap({ countryData, selectedCountry }) {
   });
 
   const BaseURLs = {
-    forvarded: "https://5fd37da813ebed83edcfc55b9b15e27d.serveo.net/",
+    forvarded: "http://18.192.240.161:8000/",
     local: "http://localhost:8000/",
   };
 
@@ -35,7 +35,7 @@ function CountryMap({ countryData, selectedCountry }) {
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/fetch-locations/?iso_code=${country}`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`);
         const { locations } = response.data;
         setBusinessLocations(locations);
       } catch (error) {
