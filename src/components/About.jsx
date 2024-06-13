@@ -4,17 +4,18 @@ import "../styles/About.css";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
 import { useNavigate } from "react-router-dom";
-import Cancel from "../asset/cancel.png";
-// import Cancel from "../asset/delete.png";
+// import Cancel from "../asset/cancel.png";
+import Starfield from "./Starfield";
+import Cancel from "../asset/delete.png";
 // import Bck_video from "../asset/bck_video.mp4";
 
 const About = () => {
   const navigate = useNavigate();
 
-  const handleLogoClick = () => {
+  const handleCloseButtClick = () => {
+    console.log("click");
     document.querySelector(".title").style.display = "none";
     document.querySelector(".paragraph").style.display = "none";
-    // document.querySelector(".background_video").style.display = "none";
     document.querySelector(".close_icon").style.display = "none";
     const logo = document.querySelector(".logo_image");
     logo.classList.add("grow-logo");
@@ -37,9 +38,7 @@ const About = () => {
 
   return (
     <div className="about_container">
-      {/* <video autoPlay loop muted className="background_video">
-        <source src={Bck_video} type="video/mp4" />
-      </video> */}
+      <Starfield />
       <div className="flex_container">
         <div className="abouttext_paragraph">
           <motion.div
@@ -133,26 +132,30 @@ const About = () => {
             </div>
           </motion.div>
         </div>
-        <div className="closebutt_logo">
+        <motion.div
+          className="closebutt_logo"
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <motion.div
-            onClick={handleLogoClick}
             className="close_icon"
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            // initial={{ y: -100, opacity: 0 }}
+            // animate={{ y: 0, opacity: 1 }}
+            // transition={{ duration: 0.5 }}
           >
-            <img src={Cancel} alt="/"></img>
+            <img onClick={handleCloseButtClick} src={Cancel} alt="delete"></img>
           </motion.div>
           <motion.div
-            variants={fadeIn("left", 0.3)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: false, amount: 0.3 }}
+            // variants={fadeIn("left", 0.3)}
+            // initial="hidden"
+            // whileInView={"show"}
+            // viewport={{ once: false, amount: 0.3 }}
             className="logo_image"
           >
             <img src={Logo} alt=""></img>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
