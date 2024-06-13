@@ -141,9 +141,9 @@
     /* border: 1px solid red; */
     gap: 20px;
   }
-  .contact_social_cont {
-    /* border: 1px solid red; */
-  }
+  /* .contact_social_cont {
+    border: 1px solid red;
+  } */
   .close_icon_cont img {
     width: 20px;
     height: 20px;
@@ -263,10 +263,10 @@
   } */
 }
 @media (min-width: 2000px) {
-  .contact_container {
-    /* padding-bottom: 10%; */
-    /* border: 1px solid red; */
-  }
+  /* .contact_container {
+    padding-bottom: 10%;
+    border: 1px solid red;
+  } */
   .flex_container_contact {
     padding-left: 9%;
     padding-right: 7%;
