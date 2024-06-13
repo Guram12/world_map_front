@@ -35,7 +35,7 @@ function CountryMap({ countryData, selectedCountry }) {
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/fetch-locations/?iso_code=${country}`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`);
         const { locations } = response.data;
         setBusinessLocations(locations);
       } catch (error) {

@@ -13,7 +13,9 @@ function App() {
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [isLandscape, setIsLandscape] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(
+    window.innerWidth > window.innerHeight
+  );
   const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const handle_Set_Selected_Country = (country) => {
@@ -21,38 +23,42 @@ function App() {
   };
 
   const BaseURLs = {
-    forvarded: "https://5fd37da813ebed83edcfc55b9b15e27d.serveo.net/",
+    forvarded: "https://dd53f2660fc932794fd48c40bdffa03a.serveo.net/",
     local: "http://localhost:8000/",
   };
 
   const isMobile = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
+    return /Mobi|Android|iPad|iPhone|Tablet|iPod/i.test(navigator.userAgent);
+  };
+
+  const updateOrientation = () => {
+    const landscape = window.innerWidth > window.innerHeight;
+    setIsLandscape(landscape);
+
+    if (!landscape) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling when showing the rotate message
+    } else {
+      document.body.style.overflow = "auto"; // Allow scrolling when the site is displayed
+    }
   };
 
   useEffect(() => {
     setIsMobileDevice(isMobile());
+    updateOrientation();
 
-    const handleResize = () => {
-      if (isMobile()) {
-        setIsLandscape(window.innerWidth > window.innerHeight);
-      }
-    };
-    if (isMobile()) {
-      setIsLandscape(window.innerWidth > window.innerHeight);
-      window.addEventListener("resize", handleResize);
-    }
+    window.addEventListener("resize", updateOrientation);
+    window.addEventListener("orientationchange", updateOrientation);
 
     return () => {
-      if (isMobile()) {
-        window.removeEventListener("resize", handleResize);
-      }
+      window.removeEventListener("resize", updateOrientation);
+      window.removeEventListener("orientationchange", updateOrientation);
     };
   }, []);
 
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.local}api/countries/`);
+        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
@@ -63,13 +69,22 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("selected country in ap ", selectedCountry);
+    console.log("selected country in app", selectedCountry);
   }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
     return (
       <div className="rotate_cont">
-        <img className="rotate_image" src={Rotate} />
+        <img className="rotate_image" src={Rotate} alt="Rotate your device" />
+        <h1>Please rotate your device...</h1>
+      </div>
+    );
+  }
+
+  if (!isLandscape) {
+    return (
+      <div className="rotate_cont">
+        <img className="rotate_image" src={Rotate} alt="Rotate your device" />
         <h1>Please rotate your device...</h1>
       </div>
     );
@@ -92,7 +107,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/country-map/:country"
             element={

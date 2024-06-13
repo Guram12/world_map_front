@@ -30,9 +30,9 @@
   cursor: pointer;
 }
 .textt {
-  font-size: 30px;
+  font-size: 28px;
   fill: #f1f5f8;
-  letter-spacing: 7px;
+  letter-spacing: 5px;
 }
 .link_about {
   position: relative;
