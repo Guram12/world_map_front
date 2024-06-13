@@ -139,7 +139,7 @@
     width: auto;
     align-items: start;
     /* border: 1px solid red; */
-    gap: 25px;
+    gap: 20px;
   }
   .contact_social_cont {
     /* border: 1px solid red; */
@@ -167,7 +167,7 @@
     height: 150px;
   }
   .text_contact {
-    max-height: 200px;
+    max-height: 190px;
     width: 100%;
     border-radius: 10px;
     padding: 5px;
