@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../asset/logoo.svg";
 import { motion } from "framer-motion";
-import Starfield from "./Starfield"; // Adjust the import path accordingly
+import Starfield from "./Starfield";
 
 export default function Planets() {
   const navigate = useNavigate();

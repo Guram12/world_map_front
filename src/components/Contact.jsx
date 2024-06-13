@@ -1,26 +1,25 @@
 import React from "react";
 import "../styles/Contact.css";
 import Logo from "../asset/logoo.svg";
-import Cancel from "../asset/cancel.png";
-// import Cancel from "../asset/delete.png";
+// import Cancel from "../asset/cancel.png";
+import Cancel from "../asset/delete.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
 import Inst from "../asset/instagram.png";
 import Face from "../asset/facebook.png";
 import Linke from "../asset/linkedin.png";
+import Starfield from "./Starfield";
 // import Bck_video from "../asset/bck_video.mp4";
 
 const Contact = () => {
   const navigate = useNavigate();
 
   const handleLogoClickContact = () => {
-    document.querySelector(".title").style.display = "none";
-    document.querySelector(".column_cont").style.display = "none";
-    document.querySelector(".social_links").style.display = "none";
-    // document.querySelector(".background_video").style.display = "none";
-    document.querySelector(".close_icon").style.display = "none";
-    const logo = document.querySelector(".logo_image_contact");
+    document.querySelector(".contacttext_paragraph").style.display = "none";
+    document.querySelector(".close_icon_cont").style.display = "none";
+    // document.querySelector(".close_icon").style.display = "none";
+    const logo = document.querySelector(".logo_image_cont");
     logo.classList.add("grow-logo-cont");
     setTimeout(() => {
       navigate("/");
@@ -40,46 +39,43 @@ const Contact = () => {
   });
   return (
     <div className="contact_container">
-      {/* <video autoPlay loop muted className="background_video">
-        <source src={Bck_video} type="video/mp4" />
-      </video> */}
-      <motion.div
-        onClick={handleLogoClickContact}
-        className="close_icon"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <img src={Cancel} alt="/"></img>
-      </motion.div>
-      {/* <div className="title_and_paragraph_contact"> */}
-      <motion.div
-        variants={fadeIn("left", 0.3)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.3 }}
-        className="paragraph_contact"
-      >
-        <motion.div
-          variants={fadeIn("right", 0.3)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.3 }}
-          className="logo_image_contact"
-        >
-          <img className="logo_img_cont" src={Logo} alt=""></img>
-        </motion.div>
-        <div className="column_cont">
-          <motion.h1
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="title"
+      <Starfield />
+      <div className="flex_container_contact">
+        <div className="contacttext_paragraph">
+          <div className="contact_social_cont">
+            <motion.div
+              className="title_contact_cont"
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className="title_contact">Contact Us</h1>
+            </motion.div>
+            <motion.div
+              className="social_links"
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <a href="">
+                <img src={Inst} alt=""></img>
+              </a>
+              <a href="">
+                <img src={Face} alt=""></img>
+              </a>
+              <a href="">
+                <img src={Linke} alt=""></img>
+              </a>
+            </motion.div>
+          </div>
+          <motion.div
+            className="text_contact"
+            variants={fadeIn("right", 0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.3 }}
           >
-            Contact Us
-          </motion.h1>
-          <div className="txxt">
-            <motion.p variants={textVariant("right", 0.1)}>
+            <motion.p variants={textVariant("left", 0.1)}>
               This setup ensures that each text block animates down from the top
               sequentially, with a one-second delay between each. The title will
               appear last, after all other elements. This setup ensures that
@@ -88,17 +84,17 @@ const Contact = () => {
               all other elements.
             </motion.p>
             <motion.div className="contact_info">
-              <motion.p variants={textVariant("right", 0.2)}>
+              <motion.p variants={textVariant("left", 0.2)}>
                 . Email:<span>robakidzenino89@mail.com</span>
               </motion.p>
-              <motion.p variants={textVariant("right", 0.3)}>
+              <motion.p variants={textVariant("left", 0.3)}>
                 . Phone:<span>577424310</span>
               </motion.p>
-              <motion.p variants={textVariant("right", 0.4)}>
+              <motion.p variants={textVariant("left", 0.4)}>
                 . Address:<span>Mtatsminda, Vedzini #9</span>
               </motion.p>
             </motion.div>
-            <motion.p variants={textVariant("right", 0.5)}>
+            <motion.p variants={textVariant("left", 0.5)}>
               This setup ensures that each text block animates down from the top
               sequentially, with a one-second delay between each. The title will
               appear last, after all other elements. This setup ensures that
@@ -106,22 +102,33 @@ const Contact = () => {
               one-second delay between each. The title will appear last, after
               all other elements.
             </motion.p>
-          </div>
-          <div className="social_links">
-            <a href="">
-              <img src={Inst} alt=""></img>
-            </a>
-            <a href="">
-              <img src={Face} alt=""></img>
-            </a>
-            <a href="">
-              <img src={Linke} alt=""></img>
-            </a>
-          </div>
+          </motion.div>
         </div>
-      </motion.div>
+        <motion.div
+          className="closebutt_logo_cont"
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div className="close_icon_cont">
+            <img
+              onClick={handleLogoClickContact}
+              src={Cancel}
+              alt="delete"
+            ></img>
+          </motion.div>
+          <motion.div
+            // variants={fadeIn("left", 0.1)}
+            // initial="hidden"
+            // whileInView="show"
+            // viewport={{ once: false, amount: 0.3 }}
+            className="logo_image_cont"
+          >
+            <img src={Logo} alt=""></img>
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
-    // </div>
   );
 };
 export default Contact;
