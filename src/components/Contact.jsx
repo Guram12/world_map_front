@@ -38,6 +38,8 @@ const Contact = () => {
     },
   });
   return (
+
+    
     <div className="contact_container">
       <Starfield />
       <div className="flex_container_contact">
