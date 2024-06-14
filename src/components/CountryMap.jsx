@@ -27,7 +27,7 @@ function CountryMap({ countryData, selectedCountry }) {
   });
 
   const BaseURLs = {
-    forvarded: "https://dd53f2660fc932794fd48c40bdffa03a.serveo.net/",
+    aws_server: "https://api.1inone.com/",
     local: "http://localhost:8000/",
   };
 
@@ -35,7 +35,7 @@ function CountryMap({ countryData, selectedCountry }) {
   useEffect(() => {
     const fetchBusinessLocations = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/fetch-locations/?iso_code=${country}`);
+        const response = await axios.get(`${BaseURLs.aws_server}api/fetch-locations/?iso_code=${country}`);
         const { locations } = response.data;
         setBusinessLocations(locations);
       } catch (error) {
