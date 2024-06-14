@@ -11,6 +11,7 @@
 .flex_container {
   display: flex;
   gap: 100px;
+  z-index: 99999999999999;
 }
 .abouttext_paragraph {
   width: 100%;
