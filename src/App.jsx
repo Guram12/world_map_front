@@ -23,7 +23,7 @@ function App() {
   };
 
   const BaseURLs = {
-    forvarded: "https://dd53f2660fc932794fd48c40bdffa03a.serveo.net/",
+    aws_server: "https://api.1inone.com/",
     local: "http://localhost:8000/",
   };
 
@@ -58,7 +58,7 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.forvarded}api/countries/`);
+        const response = await axios.get(`${BaseURLs.aws_server}api/countries/`);
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
