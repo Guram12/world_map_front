@@ -12,6 +12,7 @@
 .flex_container_contact {
   display: flex;
   gap: 150px;
+  z-index: 99999999999999;
   /* border: 1px solid red; */
 }
 .contacttext_paragraph {
