@@ -8,6 +8,10 @@ import Starfield from "./Starfield";
 export default function Planets() {
   const navigate = useNavigate();
 
+  // setTimeout(() => {
+  //   navigate("/map");
+  // }, 15000);
+
   const handleEarthClick = () => {
     document.querySelector(".moon").style.display = "none";
     document.querySelector(".links").style.display = "none";
@@ -79,7 +83,9 @@ export default function Planets() {
               </text>
             </svg>
           </div>
-          <div className="links link_about" onClick={handleAboutClick}></div>
+          <div className="links link_about" onClick={handleAboutClick}>
+            <img src={Logo} alt="logo" />
+          </div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -92,9 +98,7 @@ export default function Planets() {
           </div>
           <div className="moon_bck_styles">
             <div className="moon">
-              <div className="logo-container">
-                <img className="logo" src={Logo} alt=""></img>
-              </div>
+              <div className="logo-container"></div>
             </div>
           </div>
         </motion.div>
