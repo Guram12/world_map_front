@@ -49,9 +49,6 @@ function CountryMap({ countryData, selectedCountry }) {
   }, [country, isLoaded]);
 
 
-  useEffect(() => {
-    console.log("------------>>>>", countryData)
-  })
 
   // ====================================  functions for opening customer  social link ===============================
   
