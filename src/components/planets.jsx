@@ -1,5 +1,5 @@
 import "../styles/planets.css";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../asset/logoo.svg";
 import { motion } from "framer-motion";
@@ -84,7 +84,7 @@ export default function Planets() {
             </svg>
           </div>
           <div className="links link_about" onClick={handleAboutClick}>
-            <img src={Logo} alt="logo" />
+            <img className="logo_about" src={Logo} alt="logo" />
           </div>
         </motion.div>
         <motion.div

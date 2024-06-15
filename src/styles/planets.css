@@ -41,14 +41,20 @@
   position: relative;
   transition: transform 2s ease, opacity 2s ease;
   /* border: 1px solid red; */
-  position: relative;
   z-index: 1;
   text-align: center;
-
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  /* animation: rotate 30s linear infinite; */
 }
+
+/* @keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
 .links {
   display: flex;
   align-items: center;
@@ -121,10 +127,17 @@
   position: relative;
   z-index: 11111;
   background-image: url("../asset/planet1.png");
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  /* animation: rotate 30s linear infinite; */
 }
+
+/* @keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
 .links:hover {
   box-shadow: rgba(73, 86, 156, 0.56) 0px 22px 70px 4px;
   transition: 1s;
