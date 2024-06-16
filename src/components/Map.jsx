@@ -3,36 +3,35 @@ import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import LanguageJson from "./language.json";
 import { continentMapping } from "./ContinentCountries";
+import WindowComponent from "./WindowComponent";
 
-function Map({ countryData, loading, handle_Set_Selected_Country }) {
+
+function Map({ countryData, loading, handle_Set_Selected_Country, selectedCountry }) {
   const svgRef = useRef(null);
-  const zoomRef = useRef(null);
-  const tooltipRef = useRef(null);
+  const gRef = useRef(null);  // Reference to the g element
 
+  const tooltipRef = useRef(null);
   const [language, setLanguage] = useState("en");
   const [selectedContinent, setSelectedContinent] = useState(null);
+  const [showWindow, setShowWindow] = useState(false);
 
-  // ========================    function for reset zoom button    ============================
 
-  const resetcountry = () => {
+  const resetCountry = () => {
     const svg = d3.select(svgRef.current);
-    svg
-      .selectAll("path")
-      .classed("continent-scale continent-hover continent-dark", false);
+    svg.selectAll("path").attr("class", null); // Remove all classes from paths
     handle_Set_Selected_Country(null);
     setSelectedContinent(null);
   };
 
   const resetZoom = () => {
+    
     const svg = d3.select(svgRef.current);
-    svg
-      .transition()
-      .duration(750)
-      .call(zoomRef.current.transform, d3.zoomIdentity);
-    setTimeout(resetcountry, 750);
+    const g = d3.select(gRef.current);
+    svg.transition().duration(750).call(d3.zoom().transform, d3.zoomIdentity);
+    g.transition().duration(750).attr("transform", "translate(0,0) scale(1)");
+    setTimeout(resetCountry, 750)
+    setShowWindow(false)
   };
-
-  // ========================    function for setting selected images on its country   ============================
   const createPatterns = () => {
     const svg = svgRef.current;
     if (!svg) return;
@@ -42,7 +41,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
       svg.prepend(defs);
     } else {
-      // Clear existing patterns
       while (defs.firstChild) {
         defs.removeChild(defs.firstChild);
       }
@@ -56,10 +54,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
         const patternId = `pattern-${arg}-${index}`;
 
-        const pattern = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "pattern"
-        );
+        const pattern = document.createElementNS("http://www.w3.org/2000/svg", "pattern");
         pattern.setAttribute("id", patternId);
         pattern.setAttribute("patternUnits", "userSpaceOnUse");
         pattern.setAttribute("width", bbox.width);
@@ -67,10 +62,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         pattern.setAttribute("x", bbox.x);
         pattern.setAttribute("y", bbox.y);
 
-        const image = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "image"
-        );
+        const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
         image.setAttribute("href", imageUrl);
         image.setAttribute("width", bbox.width);
         image.setAttribute("height", bbox.height);
@@ -83,9 +75,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       }
     });
   };
-
-  // ===========================================================================================
-  // ========================    function for zooming in and out ============================
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -101,7 +90,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       });
 
     svg.call(zoom);
-    zoomRef.current = zoom;
 
     svg
       .selectAll("path")
@@ -121,7 +109,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           );
           if (continent === selectedContinent) {
             d3.select(this).classed("selected-country-hover", true);
-            this.parentNode.appendChild(this); // Bring hovered country to front
+            this.parentNode.appendChild(this);
           }
         }
       })
@@ -131,7 +119,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         const mouseX = event.pageX;
         const mouseY = event.pageY;
 
-        // tooltip.style("top", `${event.pageY + 15}px`).style("left", `${event.pageX + 15}px`);
         if (mouseX + tooltipWidth + 20 > screenWidth) {
           tooltip.style("left", `${mouseX - tooltipWidth - 15}px`);
         } else {
@@ -153,34 +140,45 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
         if (continent && continent !== selectedContinent) {
           setSelectedContinent(continent);
-          svg
-            .selectAll("path")
-            .classed("continent-scale continent-hover", false)
-            .classed("continent-dark", true)
+          const continentClass = `continent-${continent.toLowerCase()}`;
+
+          svg.selectAll("path")
+            .attr("class", null)
+            .classed("continent-dark", true);
+
+          svg.selectAll("path")
             .filter(function () {
               return continentMapping[continent].includes(
                 d3.select(this).attr("arg")
               );
             })
             .classed("continent-dark", false)
-            .classed("continent-scale continent-hover", true);
+            .classed(continentClass, true)
+            .classed("continent-selected", true);
 
-          svg
-            .selectAll("path")
-            .filter(function () {
-              return continentMapping[continent].includes(
-                d3.select(this).attr("arg")
-              );
-            })
-            .each(function () {
-              this.parentNode.appendChild(this);
-            });
+          // Ensure the selected continent is on top after a delay to allow smooth transition
+          setTimeout(() => {
+            svg.selectAll("path.continent-selected")
+              .each(function () {
+                this.parentNode.appendChild(this); // Move to the end of the parent element
+              });
+          }, 750); // 100ms delay
         } else {
           handleCountryClick(arg);
         }
       });
 
     createPatterns();
+
+    // Add event listener for SVG click
+    const handleSvgClick = (event) => {
+      if (event.target.tagName !== "path" && selectedContinent) {
+        resetCountry();
+        setShowWindow(false)
+      }
+    };
+
+    svg.on("click", handleSvgClick);
 
     return () => {
       svg
@@ -190,14 +188,14 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         .on("mouseout", null)
         .on("click", null);
       svg.call(zoom.on("zoom", null));
+      svg.on("click", null);
     };
   }, [createPatterns, language, selectedContinent]);
 
-  // ===========================================================================================================
-
   const handleCountryClick = (arg) => {
+    setShowWindow(true)
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
-    window.open(countryMapUrl, "_blank", "noopener,noreferrer");
+    // window.open(countryMapUrl, "_blank", "noopener,noreferrer");
     handle_Set_Selected_Country(arg);
   };
 
@@ -206,7 +204,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       if (svgRef.current) {
         const svg = svgRef.current;
         const paths = svg.querySelectorAll("path");
-        const totalDuration = 2; // Total duration in seconds
+        const totalDuration = 2;
         const elementCount = paths.length;
         const delay = totalDuration / elementCount;
 
@@ -214,13 +212,11 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           path.style.animationDelay = `${index * delay}s`;
           path.classList.add("path-element");
 
-          // Remove the animation class after the animation ends
           path.addEventListener("animationend", () => {
             path.classList.remove("path-element");
           });
         });
 
-        // Remove and re-add paths to force reflow/repaint
         paths.forEach((path) => {
           const parent = path.parentNode;
           if (parent === svg) {
@@ -235,7 +231,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       }
     };
 
-    // Delay the animation application to ensure all elements are rendered
     setTimeout(applyAnimation, 0);
   }, [countryData]);
 
@@ -250,15 +245,14 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   return (
     <div className="map_container">
-      <button onClick={resetZoom} className="reset-button">
-        Reset
-      </button>
-
-      <select
-        className="select"
-        onChange={(e) => setLanguage(e.target.value)}
-        value={language}
-      >
+      {showWindow && (
+        <WindowComponent
+          selectedCountry={selectedCountry}
+          countryData={countryData}
+        />
+      )}
+      <button onClick={resetZoom} className="reset-button">Reset</button>
+      <select className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
         <option value="en">English</option>
         <option value="ru">Russian</option>
         <option value="ge">Georgian</option>
@@ -276,8 +270,9 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         version="1.2"
         viewBox="0 0 2000 1057"
         xmlns="http://www.w3.org/2000/svg"
+        
       >
-        <g>
+        <g ref={gRef} >
           <path
             d="M1383 261.6l1.5 1.8-2.9 0.8-2.4 1.1-5.9 0.8-5.3 1.3-2.4 2.8 1.9 2.7 1.4 3.2-2 2.7 0.8 2.5-0.9 2.3-5.2-0.2 3.1 4.2-3.1 1.7-1.4 3.8 1.1 3.9-1.8 1.8-2.1-0.6-4 0.9-0.2 1.7-4.1 0-2.3 3.7 0.8 5.4-6.6 2.7-3.9-0.6-0.9 1.4-3.4-0.8-5.3 1-9.6-3.3 3.9-5.8-1.1-4.1-4.3-1.1-1.2-4.1-2.7-5.1 1.6-3.5-2.5-1 0.5-4.7 0.6-8 5.9 2.5 3.9-0.9 0.4-2.9 4-0.9 2.6-2-0.2-5.1 4.2-1.3 0.3-2.2 2.9 1.7 1.6 0.2 3 0 4.3 1.4 1.8 0.7 3.4-2 2.1 1.2 0.9-2.9 3.2 0.1 0.6-0.9-0.2-2.6 1.7-2.2 3.3 1.4-0.1 2 1.7 0.3 0.9 5.4 2.7 2.1 1.5-1.4 2.2-0.6 2.5-2.9 3.8 0.5 5.4 0z"
             id="AF"
@@ -4246,7 +4241,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 }
 
 export default Map;
--77.84672156197033, 166.6635952737421;
 {
   /* <path
 d="M395 488L394 487 393 486 391 488 383 488 393 489 394 489 395 488ZM786 485L785 485 785 485 786 485ZM211 484L210 485 218 487 222 487 211 484ZM428 484L424 484 432 484 428 484ZM375 486L379 484 374 485 373 486 375 486ZM799 483L800 483 798 483 799 483ZM797 483L798 483 797 483 797 483ZM421 484L421 484 419 483 412 483 410 484 410 486 405 489 410 489 422 488 423 488 422 487 423 487 423 486 421 486 422 485 418 485 421 484ZM229 481L229 481 228 481 229 481ZM226 481L226 481 224 481 226 481ZM229 481L228 481 227 481 229 481ZM804 481L803 481 800 482 801 482 800 482 800 482 806 481 804 481ZM231 481L231 481 230 481 231 481ZM231 481L231 481 230 481 228 480 228 481 231 481ZM230 481L229 480 229 480 230 481ZM227 480L226 480 228 480 227 480ZM225 480L223 480 227 481 225 480ZM231 480L231 480 230 480 231 480ZM226 480L225 480 227 480 226 480ZM224 480L222 480 223 480 224 480ZM226 480L226 479 226 479 226 480ZM228 480L228 479 227 479 228 480ZM230 480L229 479 228 479 230 480ZM228 479L228 479 227 479 228 479ZM811 478L811 478 811 478 811 478ZM228 479L228 478 227 478 226 478 228 479ZM226 478L226 477 225 477 226 478ZM228 477L227 477 227 477 228 477ZM232 477L231 477 231 477 232 477ZM248 474L248 474 247 474 248 474ZM249 474L248 474 251 474 249 474ZM257 474L258 474 255 474 257 474ZM276 474L277 474 276 474 276 474ZM460 474L460 473 458 474 461 475 460 474ZM277 473L275 473 277 473 277 473ZM264 472L263 472 265 473 266 474 267 474 272 473 264 472ZM825 472L827 471 825 472 825 472ZM349 472L349 471 348 471 349 472ZM255 471L254 471 260 473 263 473 261 472 259 472 255 471ZM357 471L357 471 356 471 357 471ZM296 471L297 471 295 471 296 471ZM325 470L324 471 325 470 325 470ZM355 470L353 470 352 470 353 471 352 471 356 472 355 470ZM317 470L317 470 316 470 317 470ZM308 470L309 470 308 470 308 470ZM305 469L303 470 306 470 305 469ZM313 470L315 469 313 470 313 470ZM322 471L322 469 321 469 322 471ZM317 470L317 469 317 469 317 470ZM380 469L380 469 380 469 380 469ZM346 469L344 469 344 469 346 470 345 470 347 471 348 470 348 469 346 469ZM365 469L365 469 364 469 365 469ZM381 469L381 468 381 468 381 469ZM633 469L634 468 634 468 633 469ZM636 468L636 468 636 468 636 468ZM305 468L304 468 305 468 303 468 302 468 302 468 302 468 298 468 307 469 312 469 310 469 311 468 311 468 309 468 310 468 309 468 308 468 308 468 306 468 307 468 306 468 306 468 305 468ZM500 466L500 465 499 465 500 466ZM379 465L378 465 378 465 379 465ZM483 465L484 465 483 464 483 465ZM494 465L492 464 493 465 495 465 494 465ZM352 464L347 465 351 465 352 464ZM503 464L503 464 503 464 503 464ZM378 464L378 464 377 464 378 464ZM505 464L506 464 504 464 505 464ZM487 464L487 464 486 464 487 464ZM493 464L494 464 492 464 493 464ZM826 464L826 464 826 464 826 464ZM643 464L643 463 643 464 643 464ZM495 463L495 463 495 463 495 463ZM525 463L524 463 526 463 525 463ZM531 463L532 463 530 463 531 463ZM376 463L376 462 375 463 376 463ZM348 462L347 463 349 463 348 462ZM576 462L576 462 576 462 576 462ZM353 462L354 462 352 462 353 462ZM374 462L374 461 372 460 374 462ZM816 460L816 460 816 460 816 460ZM815 460L815 460 814 460 815 460ZM356 460L352 461 354 461 355 463 356 463 354 464 358 465 359 466 354 466 354 466 356 466 353 466 354 467 352 466 352 467 351 467 351 467 354 468 355 468 354 467 356 468 357 467 360 468 358 468 361 468 356 469 358 470 364 469 365 468 365 467 363 464 357 461 356 460ZM314 460L314 460 314 459 314 460ZM370 460L370 460 369 459 370 460ZM375 459L375 459 374 459 375 459ZM360 457L360 456 359 456 360 457ZM598 456L597 456 598 456 598 456ZM622 455L622 455 622 455 622 455ZM840 456L841 456 841 455 840 456ZM621 455L621 455 621 455 621 455ZM621 455L621 455 621 455 621 455ZM604 455L604 455 603 455 604 455ZM601 454L600 454 600 454 601 454ZM678 455L679 454 678 454 677 454 678 455ZM679 454L680 454 679 454 679 454ZM359 454L358 454 358 454 359 454ZM358 456L358 455 357 454 358 454 356 456 357 457 358 456ZM706 454L707 453 706 454 706 454ZM839 454L840 454 840 453 839 454ZM677 454L677 453 677 453 677 454ZM706 453L706 453 706 453 706 453ZM703 453L703 453 702 453 703 453ZM839 453L840 453 840 452 839 453ZM710 452L710 452 710 452 710 452ZM702 453L703 452 701 452 702 453ZM359 453L359 452 359 452 359 453ZM710 452L711 452 711 452 710 452ZM711 452L711 452 711 452 711 452ZM711 452L712 452 711 452 711 452ZM711 451L712 451 711 451 711 451ZM694 451L694 451 694 451 694 451ZM360 451L360 451 360 451 360 451ZM712 451L713 450 711 451 712 451ZM718 450L717 449 718 450 718 450ZM373 450L373 449 372 449 373 450ZM364 448L364 449 364 449 364 448ZM377 448L377 447 376 448 377 448ZM364 447L364 447 362 448 363 449 365 448 364 447ZM377 447L378 447 377 447 377 447ZM366 447L366 447 365 446 365 448 366 447ZM375 446L374 447 374 446 374 447 375 447 377 447 375 446ZM375 446L375 446 376 446 375 446ZM368 446L368 445 368 445 368 446ZM378 445L379 445 378 445 378 445ZM365 444L365 444 364 444 365 444ZM767 503L791 495 780 495 781 494 778 494 774 494 777 493 773 492 774 492 774 491 771 490 775 490 773 490 774 489 774 489 775 489 774 489 776 488 774 488 777 488 773 488 778 487 776 487 781 486 781 485 783 485 792 484 797 484 795 484 797 483 794 483 796 482 795 482 796 481 797 480 796 480 798 480 798 479 799 479 800 479 800 478 802 478 805 476 808 475 808 475 810 474 812 475 813 473 816 473 816 473 822 471 824 472 827 471 831 469 832 469 831 469 833 468 835 468 836 466 836 466 835 467 833 465 831 464 832 464 826 464 826 464 825 464 825 463 822 463 819 460 816 461 814 460 814 460 815 459 814 458 812 460 807 460 808 458 804 458 804 458 805 457 804 457 801 458 802 457 802 457 799 456 802 455 802 455 799 455 798 454 796 455 783 452 785 450 785 449 784 449 782 452 781 452 773 452 767 455 764 454 765 453 764 453 760 454 755 453 744 455 743 453 739 453 739 452 738 451 732 452 731 453 726 454 725 453 715 452 711 452 706 454 705 453 703 454 691 453 685 454 685 452 683 454 681 454 677 455 672 455 670 456 669 455 668 456 669 456 659 459 657 460 646 463 645 463 645 464 641 465 640 466 640 467 638 468 634 469 631 468 633 467 632 467 637 464 638 464 637 464 637 464 636 465 634 464 636 462 638 462 639 462 639 461 640 461 640 460 642 459 643 457 621 456 617 454 619 453 616 452 612 451 605 453 604 454 604 455 601 455 601 454 599 455 601 456 599 456 597 457 596 456 597 456 596 455 595 456 595 456 583 459 580 460 579 462 577 463 577 461 576 463 574 462 576 461 576 461 573 462 572 461 573 461 569 459 567 459 567 460 566 461 562 462 545 464 535 463 531 463 527 463 525 463 523 465 521 465 516 463 517 463 516 464 514 463 512 464 505 465 498 467 497 467 497 466 497 466 495 467 495 466 487 466 487 466 488 465 487 464 484 466 485 467 483 467 481 466 479 465 478 465 479 466 477 467 476 467 476 466 475 466 477 468 476 469 473 470 471 470 472 470 468 471 467 472 468 472 467 473 468 473 473 473 467 475 465 477 466 477 447 479 438 482 435 484 441 486 451 485 446 486 450 487 450 488 429 490 426 491 409 492 403 493 401 493 401 492 399 492 371 489 367 488 360 487 365 487 366 486 363 486 358 485 358 486 349 484 359 485 361 484 352 482 354 482 352 482 365 483 367 482 362 482 354 479 354 478 357 478 360 479 370 480 371 479 380 477 381 476 378 476 380 476 378 475 380 475 379 474 381 475 382 475 381 474 382 473 381 473 383 472 381 472 380 471 381 471 379 471 382 471 383 471 383 470 382 470 381 470 380 470 379 469 380 469 379 468 380 468 376 468 379 467 377 467 378 466 377 465 375 465 376 464 374 464 375 463 373 462 373 461 370 461 370 460 369 459 370 459 368 459 370 458 367 459 369 460 366 459 366 458 365 458 366 458 364 458 364 457 364 457 364 456 363 456 365 455 364 454 366 454 365 454 365 452 368 454 368 453 367 453 368 452 370 453 370 452 371 453 372 452 369 452 367 452 369 451 368 450 367 450 371 447 372 448 372 447 373 448 373 446 375 445 377 445 376 445 375 444 372 445 371 446 368 446 368 447 367 448 366 448 366 448 366 449 365 448 365 449 363 449 363 450 364 450 363 451 363 452 361 452 360 454 361 454 359 455 359 456 362 456 361 457 362 458 361 458 362 459 361 459 363 460 360 461 364 464 365 465 366 466 368 468 369 469 365 471 352 473 352 472 348 472 347 471 343 471 344 472 342 471 343 472 342 473 334 472 334 471 333 471 331 471 328 471 327 470 325 470 325 469 326 471 324 471 301 471 298 470 298 470 300 471 308 472 301 472 302 473 305 473 307 474 309 474 309 475 310 475 308 475 312 476 292 476 290 476 291 475 289 474 286 473 287 474 287 474 288 475 286 475 284 475 285 474 284 474 283 473 281 473 280 473 281 474 276 474 275 474 274 474 269 475 247 475 244 474 228 478 231 479 229 479 224 478 223 479 228 479 232 480 231 480 234 480 232 480 233 481 232 481 234 481 234 481 231 481 232 481 231 481 231 481 230 482 230 482 230 482 228 482 230 482 229 482 223 481 221 481 221 481 219 481 215 481 215 481 211 481 213 482 214 482 215 483 224 483 222 484 243 487 248 488 247 490 234 489 232 490 238 490 238 491 238 491 246 492 246 493 250 495 258 496 277 497 276 497 262 497 260 497 249 497 207 495 231 503 767 503ZM379 444L377 444 380 444 379 444ZM377 444L378 444 376 444 377 444ZM368 443L367 443 368 443 368 443ZM363 444L364 443 363 443 363 444ZM366 443L366 443 365 443 366 443ZM367 442L366 442 369 442 367 442ZM369 442L369 442 368 442 369 442ZM369 442L369 442 369 442 369 442ZM370 442L370 441 370 441 370 442ZM373 440L371 440 370 441 373 440ZM377 438L376 438 378 438 377 438ZM380 438L379 438 379 438 380 438ZM400 437L400 437 400 437 400 437ZM399 437L399 437 399 437 399 437ZM398 436L397 437 399 437 398 436Z"
