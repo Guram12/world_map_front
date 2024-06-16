@@ -1,0 +1,83 @@
+.image_window {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 150px;
+  height: auto;
+  background-color: white;
+  border: 1px solid #202020;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: #121212;
+}
+
+.image_window img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+
+
+
+/* 
+
+.open_map {
+  position: relative;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 6em;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: black;
+  background-color: white;
+  border: 1px solid grey;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.open_map:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.open_map:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.open_map::after {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 70px;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.open_map::after {
+  background-color: #fff;
+}
+
+.open_map:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+} */
+
+

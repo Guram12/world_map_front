@@ -3,39 +3,35 @@ import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import LanguageJson from "./language.json";
 import { continentMapping } from "./ContinentCountries";
+import WindowComponent from "./WindowComponent";
 
 
-
-
-function Map({ countryData, loading, handle_Set_Selected_Country }) {
+function Map({ countryData, loading, handle_Set_Selected_Country, selectedCountry }) {
   const svgRef = useRef(null);
-  const zoomRef = useRef(null);
-  const tooltipRef = useRef(null);
+  const gRef = useRef(null);  // Reference to the g element
 
+  const tooltipRef = useRef(null);
   const [language, setLanguage] = useState("en");
   const [selectedContinent, setSelectedContinent] = useState(null);
+  const [showWindow, setShowWindow] = useState(false);
 
-  // ========================    function for reset zoom button    ============================             
 
-  const resetcountry = () => {
+  const resetCountry = () => {
     const svg = d3.select(svgRef.current);
-    svg.selectAll("path").classed("continent-scale continent-hover continent-dark", false);
+    svg.selectAll("path").attr("class", null); // Remove all classes from paths
     handle_Set_Selected_Country(null);
     setSelectedContinent(null);
-  }
-
-
-  const resetZoom = () => {
-    const svg = d3.select(svgRef.current);
-    svg.transition().duration(750).call(zoomRef.current.transform, d3.zoomIdentity);
-    setTimeout(resetcountry, 750);
   };
 
-
-
-
-
-  // ========================    function for setting selected images on its country   ============================             
+  const resetZoom = () => {
+    
+    const svg = d3.select(svgRef.current);
+    const g = d3.select(gRef.current);
+    svg.transition().duration(750).call(d3.zoom().transform, d3.zoomIdentity);
+    g.transition().duration(750).attr("transform", "translate(0,0) scale(1)");
+    setTimeout(resetCountry, 750)
+    setShowWindow(false)
+  };
   const createPatterns = () => {
     const svg = svgRef.current;
     if (!svg) return;
@@ -45,7 +41,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
       svg.prepend(defs);
     } else {
-      // Clear existing patterns
       while (defs.firstChild) {
         defs.removeChild(defs.firstChild);
       }
@@ -59,10 +54,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
         const patternId = `pattern-${arg}-${index}`;
 
-        const pattern = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "pattern"
-        );
+        const pattern = document.createElementNS("http://www.w3.org/2000/svg", "pattern");
         pattern.setAttribute("id", patternId);
         pattern.setAttribute("patternUnits", "userSpaceOnUse");
         pattern.setAttribute("width", bbox.width);
@@ -70,10 +62,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         pattern.setAttribute("x", bbox.x);
         pattern.setAttribute("y", bbox.y);
 
-        const image = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "image"
-        );
+        const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
         image.setAttribute("href", imageUrl);
         image.setAttribute("width", bbox.width);
         image.setAttribute("height", bbox.height);
@@ -87,10 +76,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     });
   };
 
-  // ===========================================================================================
-  // ========================    function for zooming in and out ============================  
-
-
   useEffect(() => {
     if (!svgRef.current) return;
 
@@ -102,7 +87,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
     });
 
     svg.call(zoom);
-    zoomRef.current = zoom;
 
     svg.selectAll("path")
       .on("mouseover", function (event) {
@@ -117,7 +101,7 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           const continent = Object.keys(continentMapping).find(cont => continentMapping[cont].includes(arg));
           if (continent === selectedContinent) {
             d3.select(this).classed("selected-country-hover", true);
-            this.parentNode.appendChild(this); // Bring hovered country to front
+            this.parentNode.appendChild(this);
           }
         }
       })
@@ -127,7 +111,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         const mouseX = event.pageX;
         const mouseY = event.pageY;
 
-        // tooltip.style("top", `${event.pageY + 15}px`).style("left", `${event.pageX + 15}px`);
         if (mouseX + tooltipWidth + 20 > screenWidth) {
           tooltip.style("left", `${mouseX - tooltipWidth - 15}px`);
         } else {
@@ -147,20 +130,27 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
         if (continent && continent !== selectedContinent) {
           setSelectedContinent(continent);
+          const continentClass = `continent-${continent.toLowerCase()}`;
+
           svg.selectAll("path")
-            .classed("continent-scale continent-hover", false)
-            .classed("continent-dark", true)
+            .attr("class", null)
+            .classed("continent-dark", true);
+
+          svg.selectAll("path")
             .filter(function () {
               return continentMapping[continent].includes(d3.select(this).attr("arg"));
             })
             .classed("continent-dark", false)
-            .classed("continent-scale continent-hover", true);
+            .classed(continentClass, true)
+            .classed("continent-selected", true);
 
-          svg.selectAll("path").filter(function () {
-            return continentMapping[continent].includes(d3.select(this).attr("arg"));
-          }).each(function () {
-            this.parentNode.appendChild(this);
-          });
+          // Ensure the selected continent is on top after a delay to allow smooth transition
+          setTimeout(() => {
+            svg.selectAll("path.continent-selected")
+              .each(function () {
+                this.parentNode.appendChild(this); // Move to the end of the parent element
+              });
+          }, 750); // 100ms delay
         } else {
           handleCountryClick(arg);
         }
@@ -168,29 +158,36 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
     createPatterns();
 
+    // Add event listener for SVG click
+    const handleSvgClick = (event) => {
+      if (event.target.tagName !== "path" && selectedContinent) {
+        resetCountry();
+        setShowWindow(false)
+      }
+    };
+
+    svg.on("click", handleSvgClick);
+
     return () => {
       svg.selectAll("path").on("mouseover", null).on("mousemove", null).on("mouseout", null).on("click", null);
       svg.call(zoom.on("zoom", null));
+      svg.on("click", null);
     };
   }, [createPatterns, language, selectedContinent]);
 
-  // ===========================================================================================================
-
   const handleCountryClick = (arg) => {
+    setShowWindow(true)
     const countryMapUrl = `${window.location.origin}/country-map/${arg}`;
-    window.open(countryMapUrl, "_blank", "noopener,noreferrer");
-    handle_Set_Selected_Country(arg)
-
+    // window.open(countryMapUrl, "_blank", "noopener,noreferrer");
+    handle_Set_Selected_Country(arg);
   };
-
-
 
   useEffect(() => {
     const applyAnimation = () => {
       if (svgRef.current) {
         const svg = svgRef.current;
         const paths = svg.querySelectorAll("path");
-        const totalDuration = 2; // Total duration in seconds
+        const totalDuration = 2;
         const elementCount = paths.length;
         const delay = totalDuration / elementCount;
 
@@ -198,13 +195,11 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
           path.style.animationDelay = `${index * delay}s`;
           path.classList.add("path-element");
 
-          // Remove the animation class after the animation ends
           path.addEventListener("animationend", () => {
             path.classList.remove("path-element");
           });
         });
 
-        // Remove and re-add paths to force reflow/repaint
         paths.forEach((path) => {
           const parent = path.parentNode;
           if (parent === svg) {
@@ -217,7 +212,6 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
       }
     };
 
-    // Delay the animation application to ensure all elements are rendered
     setTimeout(applyAnimation, 0);
   }, [countryData]);
 
@@ -232,8 +226,13 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
 
   return (
     <div className="map_container">
+      {showWindow && (
+        <WindowComponent
+          selectedCountry={selectedCountry}
+          countryData={countryData}
+        />
+      )}
       <button onClick={resetZoom} className="reset-button">Reset</button>
-
       <select className="select" onChange={(e) => setLanguage(e.target.value)} value={language}>
         <option value="en">English</option>
         <option value="ru">Russian</option>
@@ -252,8 +251,9 @@ function Map({ countryData, loading, handle_Set_Selected_Country }) {
         version="1.2"
         viewBox="0 0 2000 1057"
         xmlns="http://www.w3.org/2000/svg"
+        
       >
-        <g>
+        <g ref={gRef} >
           <path
             d="M1383 261.6l1.5 1.8-2.9 0.8-2.4 1.1-5.9 0.8-5.3 1.3-2.4 2.8 1.9 2.7 1.4 3.2-2 2.7 0.8 2.5-0.9 2.3-5.2-0.2 3.1 4.2-3.1 1.7-1.4 3.8 1.1 3.9-1.8 1.8-2.1-0.6-4 0.9-0.2 1.7-4.1 0-2.3 3.7 0.8 5.4-6.6 2.7-3.9-0.6-0.9 1.4-3.4-0.8-5.3 1-9.6-3.3 3.9-5.8-1.1-4.1-4.3-1.1-1.2-4.1-2.7-5.1 1.6-3.5-2.5-1 0.5-4.7 0.6-8 5.9 2.5 3.9-0.9 0.4-2.9 4-0.9 2.6-2-0.2-5.1 4.2-1.3 0.3-2.2 2.9 1.7 1.6 0.2 3 0 4.3 1.4 1.8 0.7 3.4-2 2.1 1.2 0.9-2.9 3.2 0.1 0.6-0.9-0.2-2.6 1.7-2.2 3.3 1.4-0.1 2 1.7 0.3 0.9 5.4 2.7 2.1 1.5-1.4 2.2-0.6 2.5-2.9 3.8 0.5 5.4 0z"
             id="AF"
