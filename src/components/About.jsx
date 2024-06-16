@@ -1,12 +1,14 @@
 import React from "react";
-import Logo from "../asset/logoo.svg";
+// import Logo from "../asset/logoo.svg";
 import "../styles/About.css";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
 import { useNavigate } from "react-router-dom";
-// import Cancel from "../asset/cancel.png";
-import Starfield from "./Starfield";
-import Cancel from "../asset/delete.png";
+import Cancel from "../asset/cancel.png";
+// import Starfield from "./Starfield";
+// import Cancel from "../asset/delete.png";
+import BckVideo from "../assets/bck_video.mp4";
+// import BckVideo from "../assets/bck_video1.mp4";
 // import Bck_video from "../asset/bck_video.mp4";
 
 const About = () => {
@@ -38,7 +40,10 @@ const About = () => {
 
   return (
     <div className="about_container">
-      <Starfield />
+      <video autoPlay loop muted className="background-video">
+        <source src={BckVideo} type="video/mp4" />
+      </video>
+      {/* <Starfield /> */}
       <div className="flex_container">
         <div className="abouttext_paragraph">
           <motion.div
@@ -153,7 +158,7 @@ const About = () => {
             // viewport={{ once: false, amount: 0.3 }}
             className="logo_image"
           >
-            <img src={Logo} alt=""></img>
+            {/* <img className="about_logo_styles" src={Logo} alt=""></img> */}
           </motion.div>
         </motion.div>
       </div>
