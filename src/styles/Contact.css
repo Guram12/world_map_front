@@ -7,7 +7,7 @@
   justify-content: center;
   padding-bottom: 5%;
   /* position: relative; */
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); */
 }
 .flex_container_contact {
   display: flex;
@@ -234,7 +234,7 @@
   }
   .logo_image_cont img {
     width: 250;
-    height: 300px;
+    height: 250px;
   }
   .text_contact {
     max-height: 500px;
