@@ -2,12 +2,27 @@ import "../styles/planets.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../asset/logoo.svg";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "./Starfield";
+import Gflag from "../asset/georgiaflag.png";
+// import Lang from "../asset/lang.png";
+import Lang1 from "../asset/lang1.png";
+import Russ from "../asset/russ.png";
+import EnglishFlag from "../asset/english.png";
 
 export default function Planets() {
   const navigate = useNavigate();
+  const [showLanguageCont, setShowLanguageCont] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("Georgia");
 
+  const handleLangImgClick = () => {
+    setShowLanguageCont(!showLanguageCont);
+  };
+
+  const handleLanguageSelect = (language) => {
+    setSelectedLanguage(language);
+    setShowLanguageCont(false);
+  };
   // setTimeout(() => {
   //   navigate("/map");
   // }, 15000);
@@ -17,6 +32,7 @@ export default function Planets() {
     document.querySelector(".links").style.display = "none";
     document.querySelector(".link").style.display = "none";
     document.querySelector(".none").style.display = "none";
+    document.querySelector(".select_language").style.display = "none";
     document.querySelector(".planet_img").style.display = "none";
     const earth = document.querySelector(".earth");
     earth.classList.add("grow-earth");
@@ -31,7 +47,8 @@ export default function Planets() {
     document.querySelector(".earth").style.display = "none";
     document.querySelector(".textt").style.display = "none";
     document.querySelector(".txt").style.display = "none";
-    // document.querySelector(".planet_img").style.display = "none";
+    document.querySelector(".select_language").style.display = "none";
+
     const contact = document.querySelector(".link_contact");
     contact.classList.add("grow-contact");
     setTimeout(() => {
@@ -44,7 +61,9 @@ export default function Planets() {
     document.querySelector(".earth").style.display = "none";
     document.querySelector(".textt").style.display = "none";
     document.querySelector(".txt").style.display = "none";
-    // document.querySelector(".planet_img").style.display = "none";
+    document.querySelector(".select_language").style.display = "none";
+
+    document.querySelector(".logo_about").style.display = "none";
     const about = document.querySelector(".link_about");
     about.classList.add("grow-about");
     setTimeout(() => {
@@ -54,6 +73,57 @@ export default function Planets() {
 
   return (
     <div className="main_planets_container">
+      <div className="select_language">
+        <div className="lang_input" onClick={handleLangImgClick}>
+          <p>{selectedLanguage}</p>
+          <img className="lang_img" src={Lang1} alt="" />
+        </div>
+        <AnimatePresence>
+          {showLanguageCont && (
+            <motion.div
+              className="language_cont"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <motion.div
+                className="Georgia flex"
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -20, opacity: 0 }}
+                transition={{ delay: 0.1 }}
+                onClick={() => handleLanguageSelect("Georgia")}
+              >
+                <p>Georgia</p>
+                <img className="flag" src={Gflag} alt="" />
+              </motion.div>
+              <motion.div
+                className="English flex"
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -20, opacity: 0 }}
+                transition={{ delay: 0.2 }}
+                onClick={() => handleLanguageSelect("English")}
+              >
+                <p>English</p>
+                <img className="flag" src={EnglishFlag} alt="" />
+              </motion.div>
+              <motion.div
+                className="Russian flex"
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -20, opacity: 0 }}
+                transition={{ delay: 0.3 }}
+                onClick={() => handleLanguageSelect("Russian")}
+              >
+                <p>Russian</p>
+                <img className="flag" src={Russ} alt="" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       <Starfield />
       <div className="same_class">
         <motion.div
@@ -98,7 +168,7 @@ export default function Planets() {
           </div>
           <div className="moon_bck_styles">
             <div className="moon">
-              <div className="logo-container"></div>
+              {/* <div className="logo-container"></div> */}
             </div>
           </div>
         </motion.div>
