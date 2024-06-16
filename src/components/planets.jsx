@@ -10,19 +10,14 @@ import Lang1 from "../asset/lang1.png";
 import Russ from "../asset/russ.png";
 import EnglishFlag from "../asset/english.png";
 
-export default function Planets() {
+export default function Planets({ handle_set_language, language }) {
   const navigate = useNavigate();
   const [showLanguageCont, setShowLanguageCont] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("Georgia");
 
   const handleLangImgClick = () => {
     setShowLanguageCont(!showLanguageCont);
   };
 
-  const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language);
-    setShowLanguageCont(false);
-  };
   // setTimeout(() => {
   //   navigate("/map");
   // }, 15000);
@@ -48,7 +43,6 @@ export default function Planets() {
     document.querySelector(".textt").style.display = "none";
     document.querySelector(".txt").style.display = "none";
     document.querySelector(".select_language").style.display = "none";
-
     const contact = document.querySelector(".link_contact");
     contact.classList.add("grow-contact");
     setTimeout(() => {
@@ -75,7 +69,7 @@ export default function Planets() {
     <div className="main_planets_container">
       <div className="select_language">
         <div className="lang_input" onClick={handleLangImgClick}>
-          <p>{selectedLanguage}</p>
+          <p>{language}</p>
           <img className="lang_img" src={Lang1} alt="" />
         </div>
         <AnimatePresence>
@@ -93,7 +87,7 @@ export default function Planets() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
                 transition={{ delay: 0.1 }}
-                onClick={() => handleLanguageSelect("Georgia")}
+                onClick={() => handle_set_language("ge")}
               >
                 <p>Georgia</p>
                 <img className="flag" src={Gflag} alt="" />
@@ -104,7 +98,7 @@ export default function Planets() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
                 transition={{ delay: 0.2 }}
-                onClick={() => handleLanguageSelect("English")}
+                onClick={() => handle_set_language("en")}
               >
                 <p>English</p>
                 <img className="flag" src={EnglishFlag} alt="" />
@@ -115,7 +109,7 @@ export default function Planets() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
                 transition={{ delay: 0.3 }}
-                onClick={() => handleLanguageSelect("Russian")}
+                onClick={() => handle_set_language("ru")}
               >
                 <p>Russian</p>
                 <img className="flag" src={Russ} alt="" />
