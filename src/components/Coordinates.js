@@ -260,5 +260,58 @@ export const countryCoordinates =
     MF: {lat: 18.07549, lng:-63.05276}, // saint-martin  (south)+
     SX: {lat: 18.0711 , lng: -63.0809}, ///saint-martin (north) +
     //   US STATES 
- US: { lat: 37.09024, lng: -95.712891 }, // United States
+    US: { lat: 37.09024, lng: -95.712891 }, // United States
+    US_AL: { lat: 32.806671, lng: -86.791130 }, // Alabama
+    US_AK: { lat: 61.370716, lng: -152.404419 }, // Alaska
+    US_AZ: { lat: 33.729759, lng: -111.431221 }, // Arizona
+    US_AR: { lat: 34.969704, lng: -92.373123 }, // Arkansas
+    US_CA: { lat: 36.116203, lng: -119.681564 }, // California
+    US_CO: { lat: 39.059811, lng: -105.311104 }, // Colorado
+    US_CT: { lat: 41.597782, lng: -72.755371 }, // Connecticut
+    US_DE: { lat: 39.318523, lng: -75.507141 }, // Delaware
+    US_FL: { lat: 27.766279, lng: -81.686783 }, // Florida
+    US_GA: { lat: 33.040619, lng: -83.643074 }, // Georgia
+    US_HI: { lat: 21.094318, lng: -157.498337 }, // Hawaii
+    US_ID: { lat: 44.240459, lng: -114.478828 }, // Idaho
+    US_IL: { lat: 40.349457, lng: -88.986137 }, // Illinois
+    US_IN: { lat: 39.849426, lng: -86.258278 }, // Indiana
+    US_IA: { lat: 42.011539, lng: -93.210526 }, // Iowa
+    US_KS: { lat: 38.526600, lng: -96.726486 }, // Kansas
+    US_KY: { lat: 37.668140, lng: -84.670067 }, // Kentucky
+    US_LA: { lat: 31.169546, lng: -91.867805 }, // Louisiana
+    US_ME: { lat: 44.693947, lng: -69.381927 }, // Maine
+    US_MD: { lat: 39.063946, lng: -76.802101 }, // Maryland
+    US_MA: { lat: 42.230171, lng: -71.530106 }, // Massachusetts
+    US_MI: { lat: 43.326618, lng: -84.536095 }, // Michigan
+    US_MN: { lat: 45.694454, lng: -93.900192 }, // Minnesota
+    US_MS: { lat: 32.741646, lng: -89.678696 }, // Mississippi
+    US_MO: { lat: 38.456085, lng: -92.288368 }, // Missouri
+    US_MT: { lat: 46.921925, lng: -110.454353 }, // Montana
+    US_NE: { lat: 41.125370, lng: -98.268082 }, // Nebraska
+    US_NV: { lat: 38.313515, lng: -117.055374 }, // Nevada
+    US_NH: { lat: 43.452492, lng: -71.563896 }, // New Hampshire
+    US_NJ: { lat: 40.298904, lng: -74.521011 }, // New Jersey
+    US_NM: { lat: 34.840515, lng: -106.248482 }, // New Mexico
+    US_NY: { lat: 42.165726, lng: -74.948051 }, // New York
+    US_NC: { lat: 35.630066, lng: -79.806419 }, // North Carolina
+    US_ND: { lat: 47.528912, lng: -99.784012 }, // North Dakota
+    US_OH: { lat: 40.388783, lng: -82.764915 }, // Ohio
+    US_OK: { lat: 35.565342, lng: -96.928917 }, // Oklahoma
+    US_OR: { lat: 44.572021, lng: -122.070938 }, // Oregon
+    US_PA: { lat: 40.590752, lng: -77.209755 }, // Pennsylvania
+    US_RI: { lat: 41.680893, lng: -71.511780 }, // Rhode Island
+    US_SC: { lat: 33.856892, lng: -80.945007 }, // South Carolina
+    US_SD: { lat: 44.299782, lng: -99.438828 }, // South Dakota
+    US_TN: { lat: 35.747845, lng: -86.692345 }, // Tennessee
+    US_TX: { lat: 31.054487, lng: -97.563461 }, // Texas
+    US_UT: { lat: 40.150032, lng: -111.862434 }, // Utah
+    US_VT: { lat: 44.045876, lng: -72.710686 }, // Vermont
+    US_VA: { lat: 37.769337, lng: -78.169968 }, // Virginia
+    US_WA: { lat: 47.400902, lng: -121.490494 }, // Washington
+    US_WV: { lat: 38.491226, lng: -80.954456 }, // West Virginia
+    US_WI: { lat: 44.268543, lng: -89.616508 }, // Wisconsin
+    US_WY: { lat: 42.755966, lng: -107.302490 }, // Wyoming
+
+
+
   }
