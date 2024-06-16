@@ -130,21 +130,18 @@
   }
 }
 
-.continent-dark {
-  /* display: none; */
-  opacity: 0.5;
-  /* Adjust the opacity to make it darker */
-  transition: opacity 0.3s ease;
-}
+
+
 /* =======================   hovered  country style   ============================  */
 
 .selected-country-hover {
-  transform: scale(1.26) !important;
-  transform-origin: center;
-  transition: transform 0.3s ease;
+  /* transform: scale(1.26) !important; */
+  /* transform-origin: center;
+  transition: transform 0.3s ease; */
   stroke: #19b43b;
   stroke-width: 1;
-  stroke-dasharray: 50, 50, 50, 50; /* Adjust these values based on your path length */
+  stroke-dasharray: 50, 50, 50, 50;
+  /* Adjust these values based on your path length */
   animation: animate 2s linear infinite;
 }
 
@@ -152,18 +149,110 @@
   0% {
     stroke-dashoffset: 0;
   }
+
   100% {
-    stroke-dashoffset: -300; /* Adjust this value to control the speed */
+    stroke-dashoffset: -300;
+    /* Adjust this value to control the speed */
   }
 }
 
 /* =======================   selected continent style   ============================  */
+
+
+@keyframes close-continent {
+  from {
+    transform: scale(2);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.continent-closing {
+  animation: close-continent 0.75s forwards;
+}
+
+.continent-closing {
+  animation: close-continent 0.75s forwards;
+}
+
+
 .continent-scale {
-  transform: scale(1.25);
+  transform: scale(1.15);
   transform-origin: center;
   transition: transform 0.3s ease;
 }
 
+
+.continent-af {
+  transition: transform 0.75s ease;
+  transform: translate(-1100px, -450px) scale(2);
+
+  opacity: 1;
+
+}
+
+
+.continent-eu {
+  transition: transform 0.75s ease;
+  transform: translate(-1000px, 100px) scale(2);
+
+  opacity: 1;
+
+}
+
+.continent-na {
+  transition: transform 0.75s ease;
+  transform: translate(-200px, 100px) scale(2);
+
+  opacity: 1;
+
+}
+
+.continent-sa {
+  transition: transform 0.75s ease;
+  transform: translate(-200px, -760px) scale(2);
+
+  opacity: 1;
+
+}
+
+.continent-as {
+  transition: transform 0.75s ease;
+  transform: translate(-1800px, -100px) scale(2);
+
+  opacity: 1;
+
+}
+
+.continent-oc {
+  transition: transform 0.75s ease;
+  transform: translate(-2330px, -1000px) scale(2);
+  opacity: 1;
+
+}
+
+.continent-aq {
+  transition: transform 0.75s ease;
+  transform: translate(45px, -600px) scale(1);
+  opacity: 1;
+
+}
+
+.continent-dark {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.continent-selected {
+  z-index: 99999999999;
+  opacity: 1 !important;
+  position: relative;
+  transition: transform 0.75s ease, opacity 0.3s ease;
+
+}
 /* ================================================================================  */
 
 .tooltip {
