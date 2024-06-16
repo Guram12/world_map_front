@@ -8,8 +8,10 @@ import CountryMap from "./components/CountryMap";
 import axios from "axios";
 import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
+import LanguageJson from "./components/language.json";
 
 function App() {
+  const [language, setLanguage] = useState("en");
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -17,6 +19,10 @@ function App() {
     window.innerWidth > window.innerHeight
   );
   const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  const handle_set_language = (lang) => {
+    setLanguage(lang);
+  };
 
   const handle_Set_Selected_Country = (country) => {
     setSelectedCountry(country);
@@ -58,7 +64,9 @@ function App() {
   useEffect(() => {
     const fetchCountryImages = async () => {
       try {
-        const response = await axios.get(`${BaseURLs.aws_server}api/countries/`);
+        const response = await axios.get(
+          `${BaseURLs.aws_server}api/countries/`
+        );
         setCountryData(response.data);
         setLoading(false);
       } catch (error) {
@@ -94,13 +102,22 @@ function App() {
     <div id="main_app_container">
       <Router>
         <Routes>
-          <Route path="/" element={<Planets />} />
+          <Route
+            path="/"
+            element={
+              <Planets
+                handle_set_language={handle_set_language}
+                language={language}
+              />
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route
             path="/map"
             element={
               <Map
+                language={language}
                 countryData={countryData}
                 loading={loading}
                 handle_Set_Selected_Country={handle_Set_Selected_Country}
