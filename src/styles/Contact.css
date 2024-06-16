@@ -109,8 +109,9 @@
   height: 50px;
 }
 .grow-logo-cont {
-  animation: grow 2s forwards;
+  animation: grow 1s ease-in-out forwards;
   opacity: 1;
+  transform-origin: 50% 65%;
 }
 
 @keyframes grow {
