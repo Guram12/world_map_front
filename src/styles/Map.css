@@ -269,3 +269,11 @@
   background: lightsteelblue;
   border-radius: 8px;
 }
+
+/* Adjust media query for larger devices */
+@media (max-width: 1024px) {
+  .tooltip {
+    display: none !important;
+  }
+}
+

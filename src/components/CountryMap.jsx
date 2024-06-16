@@ -2,7 +2,7 @@ import "../styles/CountryMap.css";
 import React, { useEffect, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
-import countryBounds from "./country_bounds.json"; // Import the JSON data
+import countryBounds from "./country_bounds.json";
 import axios from "axios";
 import facebook_icon from "../assets/fb.png"
 import instagram_icon from "../assets/inst.png"
@@ -98,9 +98,6 @@ function CountryMap({ countryData, selectedCountry }) {
     <div>
       {show_customer_window && (
         <div className={`consumer_container ${isMinimized ? "minimized" : ""}`}>
-          {/* <button className="minimize-btn" onClick={() => setIsMinimized(!isMinimized)}>
-          {isMinimized ? "Expand" : "Minimize"}
-        </button> */}
           <div className="burger-icon">
             <label className="burger" htmlFor="burger">
               <input className="line"

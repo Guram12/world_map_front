@@ -1,5 +1,5 @@
 .image_window {
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
   width: 150px;
@@ -13,9 +13,11 @@
   padding: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   border-radius: 20px;
   background-color: #121212;
+  
 }
 
 .image_window img {
@@ -24,60 +26,30 @@
 }
 
 
-
-
-
-/* 
-
-.open_map {
-  position: relative;
-  font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 5px;
-  display: inline-block;
-  border-radius: 6em;
-  transition: all 0.2s;
-  border: none;
-  font-family: inherit;
-  font-weight: 500;
-  color: black;
-  background-color: white;
-  border: 1px solid grey;
+.country_name{
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  text-wrap: wrap;
   margin-bottom: 10px;
-  cursor: pointer;
 }
 
-.open_map:hover {
+
+
+.open_map{
+  width: 80px;
+  height: 30px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.23s ease
+}
+
+.open_map:hover{
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  box-shadow: rgba(160, 160, 160, 0.05) 0px 6px 24px 0px, rgba(151, 151, 151, 0.08) 0px 0px 0px 1px;
 }
-
-.open_map:active {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.open_map::after {
-  content: "";
-  display: inline-block;
-  height: 50px;
-  width: 70px;
-  border-radius: 100px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.4s;
-}
-
-.open_map::after {
-  background-color: #fff;
-}
-
-.open_map:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
-} */
-
-
