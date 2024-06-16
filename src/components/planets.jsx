@@ -13,9 +13,25 @@ import EnglishFlag from "../asset/english.png";
 export default function Planets({ handle_set_language, language }) {
   const navigate = useNavigate();
   const [showLanguageCont, setShowLanguageCont] = useState(false);
+  const [languageName, setLanguageName] = useState("English");
 
   const handleLangImgClick = () => {
     setShowLanguageCont(!showLanguageCont);
+  };
+  const changeLanguage = (value) => {
+    handle_set_language(value);
+    setShowLanguageCont(false);
+  };
+
+  const handle_set_language_name = (event) => {
+    if (language) {
+      const names = { en: "English", ru: "Russian", ge: "Georgia" };
+      // console.log("names:", names);
+      // setLanguageName(names[language]);
+      return names[event];
+    } else {
+      return null;
+    }
   };
 
   // setTimeout(() => {
@@ -69,7 +85,7 @@ export default function Planets({ handle_set_language, language }) {
     <div className="main_planets_container">
       <div className="select_language">
         <div className="lang_input" onClick={handleLangImgClick}>
-          <p>{language}</p>
+          <p>{handle_set_language_name(language)}</p>
           <img className="lang_img" src={Lang1} alt="" />
         </div>
         <AnimatePresence>
@@ -82,34 +98,37 @@ export default function Planets({ handle_set_language, language }) {
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <motion.div
+                value="ge"
                 className="Georgia flex"
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
                 transition={{ delay: 0.1 }}
-                onClick={() => handle_set_language("ge")}
+                onClick={() => changeLanguage("ge")}
               >
                 <p>Georgia</p>
                 <img className="flag" src={Gflag} alt="" />
               </motion.div>
               <motion.div
+                value="en"
                 className="English flex"
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
                 transition={{ delay: 0.2 }}
-                onClick={() => handle_set_language("en")}
+                onClick={() => changeLanguage("en")}
               >
                 <p>English</p>
                 <img className="flag" src={EnglishFlag} alt="" />
               </motion.div>
               <motion.div
+                value="ru"
                 className="Russian flex"
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
                 transition={{ delay: 0.3 }}
-                onClick={() => handle_set_language("ru")}
+                onClick={() => changeLanguage("ru")}
               >
                 <p>Russian</p>
                 <img className="flag" src={Russ} alt="" />
