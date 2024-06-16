@@ -9,8 +9,8 @@ import { fadeIn } from "../Variants";
 import Inst from "../asset/instagram.png";
 import Face from "../asset/facebook.png";
 import Linke from "../asset/linkedin.png";
-import Starfield from "./Starfield";
-// import Bck_video from "../asset/bck_video.mp4";
+// import Starfield from "./Starfield";
+import BckVideo from "../assets/bck_video.mp4";
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -39,7 +39,9 @@ const Contact = () => {
   });
   return (
     <div className="contact_container">
-      <Starfield />
+      <video autoPlay loop muted className="background-video">
+        <source src={BckVideo} type="video/mp4" />
+      </video>
       <div className="flex_container_contact">
         <div className="contacttext_paragraph">
           <div className="contact_social_cont">
