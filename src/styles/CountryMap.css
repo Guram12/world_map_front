@@ -217,7 +217,7 @@
 @media (min-width: 568px) and (max-width: 950px) {
   .consumer_container {
     /* border: 1px solid red; */
-    top: 70px;
+    top: 65px;
     left: 5px;
     width: 200px;
     border-radius: 1cm;
