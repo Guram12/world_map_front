@@ -104,9 +104,9 @@
   cursor: pointer;
 }
 .textt {
-  font-size: 28px;
+  font-size: 25px;
   fill: #f1f5f8;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
 }
 .link_about {
   background-image: url("../asset/planet1.png");
@@ -435,9 +435,9 @@
     /* border: 4px solid green; */
   }
   .textt {
-    font-size: 35px;
+    font-size: 30px;
     fill: #f1f5f8;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
   }
   .links {
     width: 180px;
