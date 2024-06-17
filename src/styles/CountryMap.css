@@ -217,11 +217,11 @@
 @media (min-width: 568px) and (max-width: 950px) {
   .consumer_container {
     /* border: 1px solid red; */
-    top: 80px;
+    top: 50px;
     left: 5px;
-    width: 150px;
+    width: 190px;
     border-radius: 1cm;
-    gap: 10px;
+    gap: 5px;
     /* padding-top: 10px;  */
   }
   .consumer_container.minimized {
@@ -229,14 +229,16 @@
     /* border: 2px solid green;  */
   }
   .consumer_logo {
-    height: 100px;
+    width: 150px;
+    height: 120px;
     border-radius: 8%;
-    /* max-width: 150px; */
+
+    /* border: 3px solid red; */
   }
   .btn {
     font-size: 10px;
     padding: 1em 1em;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
   }
   .costomer_social_links_container {
     display: flex;
