@@ -8,6 +8,7 @@
   padding-bottom: 5%;
   /* position: relative; */
   /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); */
+  overflow: hidden;
 }
 .flex_container_contact {
   display: flex;
