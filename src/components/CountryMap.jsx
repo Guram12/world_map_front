@@ -24,7 +24,8 @@ function CountryMap({ countryData, selectedCountry }) {
 
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    // googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g",
     libraries,
   });
 
