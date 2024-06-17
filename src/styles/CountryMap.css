@@ -216,10 +216,10 @@
 }
 @media (min-width: 568px) and (max-width: 950px) {
   .consumer_container {
-    /* border: 1px solid red; */
-    top: 55px;
+    border: 1px solid red;
+    top: 80px;
     left: 5px;
-    width: 200px;
+    width: 150px;
     border-radius: 1cm;
     gap: 10px;
     /* padding-top: 10px;  */
@@ -229,22 +229,23 @@
     /* border: 2px solid green;  */
   }
   .consumer_logo {
-    height: 150px;
+    height: 100px;
     border-radius: 8%;
     /* max-width: 150px; */
   }
   .btn {
     font-size: 10px;
-    padding: 1em 1.5em;
+    padding: 1em 1em;
     margin-bottom: 7px;
   }
   .costomer_social_links_container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    max-width: 200px;
+    max-width: 150px;
     margin-bottom: 20px;
-    gap: 13px;
+    gap: 8px;
+    /* border: 1px solid red; */
   }
   .costomer_social_links {
     width: 20px;
