@@ -323,10 +323,12 @@
   transform: scale(10);
   opacity: 0;
 }
+
 .grow_link_about {
   transform: scale(10);
   opacity: 0;
 }
+
 .link_about img {
   width: 120px;
   height: 170px;
