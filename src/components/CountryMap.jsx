@@ -9,7 +9,6 @@ import linkedin_icon from "../assets/linkedin.png";
 import x_icon from "../assets/x.png";
 import { countryCoordinates } from "./Coordinates";
 
-const js_api_key = import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 
 const libraries = ["core", "places"];
@@ -21,9 +20,11 @@ function CountryMap({ countryData, selectedCountry }) {
   const [isMinimized, setIsMinimized] = useState(false); // State for minimizing container
   const [show_customer_window, setShow_customer_window] = useState(false);
   const [map, setMap] = useState(null); // State to store the map instance
+  
+
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: js_api_key,
+    googleMapsApiKey: import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
 
