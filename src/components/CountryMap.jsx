@@ -9,7 +9,9 @@ import linkedin_icon from "../assets/linkedin.png";
 import x_icon from "../assets/x.png";
 import { countryCoordinates } from "./Coordinates";
 
-const js_api_key = "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g";
+const js_api_key = import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+
 const libraries = ["core", "places"];
 
 function CountryMap({ countryData, selectedCountry }) {
@@ -152,6 +154,9 @@ function CountryMap({ countryData, selectedCountry }) {
         center={center}
         zoom={6} // You can adjust the initial zoom level as needed
         onLoad={(map) => setMap(map)} // Store the map instance
+        options={{
+          gestureHandling: "greedy", // Allow single-finger map movement on mobile
+        }}
       >
         {businessLocations.map((location, index) => (
           <Marker
