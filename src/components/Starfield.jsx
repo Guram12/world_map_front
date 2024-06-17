@@ -6,9 +6,11 @@ const Starfield = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return; // Ensure canvas is available
     const ctx = canvas.getContext("2d");
 
     const setCanvasSize = () => {
+      if (!canvas) return; // Ensure canvas is available
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
@@ -85,7 +87,9 @@ const Starfield = () => {
 
   const animate = () => {
     const canvas = canvasRef.current;
+    if (!canvas) return; // Ensure canvas is available
     const ctx = canvas.getContext("2d");
+    if (!ctx) return; // Ensure context is available
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     const starArray = starArrayRef.current;
