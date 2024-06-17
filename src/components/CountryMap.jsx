@@ -20,12 +20,9 @@ function CountryMap({ countryData, selectedCountry }) {
   const [isMinimized, setIsMinimized] = useState(false); // State for minimizing container
   const [show_customer_window, setShow_customer_window] = useState(false);
   const [map, setMap] = useState(null); // State to store the map instance
-  
-
 
   const { isLoaded } = useJsApiLoader({
-    // googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    googleMapsApiKey: "AIzaSyCICm03qJccHWppsFraIO4Kteuii3ft61g",
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY, // Use the environment variable
     libraries,
   });
 
