@@ -14,7 +14,8 @@
   flex-direction: column;
   gap: 15px;
   transition: height 0.3s ease, width 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .consumer_container.minimized {
@@ -39,8 +40,6 @@
   max-width: 220px;
 }
 
-
-
 /* =================================================   customer social links ========================================= */
 .costomer_social_links_container {
   display: flex;
@@ -51,24 +50,19 @@
   gap: 13px;
 }
 
-
 .costomer_social_links {
   width: 40px;
   cursor: pointer;
   transition: all 0.2s;
-
 }
-
 
 .costomer_social_links:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
-
-
-
-
 
 .btn {
   position: relative;
@@ -120,9 +114,6 @@
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
-
-
-
 
 .burger {
   width: 40px;
@@ -221,5 +212,46 @@
 
   100% {
     transform: translateY(0px) rotate(-45deg);
+  }
+}
+@media (min-width: 568px) and (max-width: 950px) {
+  .consumer_container {
+    border: 1px solid red;
+    top: 80px;
+    left: 5px;
+    width: 150px;
+    border-radius: 1cm;
+    gap: 10px;
+    /* padding-top: 10px;  */
+  }
+  .consumer_container.minimized {
+    /* width: 70px; */
+    /* border: 2px solid green;  */
+  }
+  .consumer_logo {
+    height: 100px;
+    border-radius: 8%;
+    /* max-width: 150px; */
+  }
+  .btn {
+    font-size: 10px;
+    padding: 1em 1em;
+    margin-bottom: 7px;
+  }
+  .costomer_social_links_container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 150px;
+    margin-bottom: 20px;
+    gap: 8px;
+    /* border: 1px solid red; */
+  }
+  .costomer_social_links {
+    width: 20px;
+  }
+  .burger {
+    width: 30px;
+    height: 30px;
   }
 }
