@@ -9,12 +9,17 @@ import axios from "axios";
 import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
 import LanguageJson from "./components/language.json";
+import minimize_icon from "./asset/minimise.png"
+import maximise_icon from "./asset/maximise.png"
 
 function App() {
   const [language, setLanguage] = useState("en");
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+
   const [isLandscape, setIsLandscape] = useState(
     window.innerWidth > window.innerHeight
   );
@@ -80,6 +85,36 @@ function App() {
     console.log("selected country in app", selectedCountry);
   }, [selectedCountry]);
 
+  const handleFullscreenToggle = () => {
+    const element = document.documentElement;
+    if (!isFullscreen) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+    setIsFullscreen(!isFullscreen);
+  };
+
+
+
+
+
   if (isMobileDevice && !isLandscape) {
     return (
       <div className="rotate_cont">
@@ -100,6 +135,13 @@ function App() {
 
   return (
     <div id="main_app_container">
+      <button id="fullscreen-button" onClick={handleFullscreenToggle}>
+        {isFullscreen ? (
+          <img src={minimize_icon} alt="Exit Full Screen" className="screen_button" />
+        ) : (
+          <img src={maximise_icon} alt="Full Screen" className="screen_button" />
+        )}
+      </button>
       <Router>
         <Routes>
           <Route
