@@ -1,7 +1,7 @@
 import "../styles/WindowComponent.css";
 
 
-export default function WindowComponent({ selectedCountry, countryData , country_name_props }) {
+export default function WindowComponent({ selectedCountry, countryData, country_name_props }) {
 
   const getCountryCode = (code) => {
     if (code.includes('_')) {
@@ -22,10 +22,12 @@ export default function WindowComponent({ selectedCountry, countryData , country
 
   return (
     <div className="image_window">
-      <img src={`https://flagsapi.com/${countryCode}/flat/64.png`} alt="flag image" style={{ width: "100px" }} />
+      {/* <img src={`https://flagsapi.com/${countryCode}/flat/64.png`} alt="flag image" style={{ width: "100px" }} /> */}
+      <img src={`https://countryflagsapi.netlify.app/flag/${countryCode}.svg`} alt="flag image" style={{ width: "100px" , marginBottom: "10px" }} />
+
+      {/* <img src="https://countryflagsapi.netlify.app/flag/country_code.svg"></img> */}
       {/* <img src={countryData[countryCode]?.image_url} alt="costumer image" /> */}
       <p className="country_name" >{country_name_props}</p>
-
       <button onClick={() => handle_Open_Map_Click(selectedCountry)} className="open_map"  > Go to map </button>
     </div>
   );
