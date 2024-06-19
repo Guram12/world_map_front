@@ -66,13 +66,13 @@ const Contact = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <a href="https://github.com/Guram12/world_map_front/pull/114">
+              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
                 <img src={Inst} alt=""></img>
               </a>
-              <a href="">
+              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
                 <img src={Face} alt=""></img>
               </a>
-              <a href="">
+              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
                 <img src={Linke} alt=""></img>
               </a>
             </motion.div>

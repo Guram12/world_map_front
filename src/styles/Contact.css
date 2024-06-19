@@ -100,8 +100,8 @@
 }
 .logo_image_cont img {
   transition: transform 2s ease, opacity 2s ease;
-  width: 280px;
-  height: 320px;
+  /* width: 280px; */
+  height: 300px;
 }
 
 .text_contact p {
@@ -177,12 +177,12 @@
     margin-top: 0;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 60px;
     /* border: 1px solid green; */
   }
   .logo_image_cont img {
-    width: 100px;
-    height: 150px;
+    /* width: 100px; */
+    height: 120px;
   }
   .text_contact {
     max-height: 190px;
@@ -220,7 +220,7 @@
   .flex_container_contact {
     padding-left: 8%;
     padding-right: 5%;
-    gap: 30px;
+    gap: 50px;
     /* border: 1px solid red; */
   }
   .close_icon_cont img {
@@ -241,15 +241,15 @@
     letter-spacing: 2px;
   }
   .closebutt_logo_cont {
-    gap: 70px;
+    gap: 90px;
     display: flex;
     margin: 0;
     width: auto;
     /* border: 1px solid green; */
   }
   .logo_image_cont img {
-    width: 250;
-    height: 250px;
+    /* width: 250px; */
+    height: 180px;
   }
   .text_contact {
     max-height: 500px;
@@ -317,8 +317,8 @@
     /* border: 1px solid green; */
   }
   .logo_image_cont img {
-    width: 400px;
-    height: 450px;
+    /* width: 400px; */
+    height: 350px;
   }
   .text_contact {
     height: 450px;
