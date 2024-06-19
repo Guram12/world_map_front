@@ -23,7 +23,7 @@ const Contact = () => {
     logo.classList.add("grow-logo-cont");
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 2000);
   };
 
   const textVariant = (direction, delay) => ({
