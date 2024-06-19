@@ -21,6 +21,17 @@
   transform: translate(-50%, -50%);
   z-index: -1;
 }
+.background-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.background-video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+.background-video::-webkit-media-controls-panel {
+  display: none !important;
+}
 .flex_container {
   position: absolute;
   display: flex;
