@@ -5,12 +5,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
 import { useNavigate } from "react-router-dom";
 // import Cancel from "../asset/cancel.png";
-// import Starfield from "./Starfield";
 import Cancel from "../asset/delete.png";
-import BackVideo from "./BackVideo";
-import BckVideo from "../assets/bck_video.mp4";
-// import BckVideo from "../assets/bck_video1.mp4";
-// import Bck_video from "../asset/bck_video.mp4";
 
 const About = () => {
   const navigate = useNavigate();
@@ -48,7 +43,7 @@ const About = () => {
 
   return (
     <div className="about_container">
-      <BackVideo src={BckVideo} />
+      {/* <BackVideo src={BckVideo} /> */}
       {/* <video
         autoPlay
         loop
