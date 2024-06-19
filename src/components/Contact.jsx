@@ -66,7 +66,7 @@ const Contact = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <a href="">
+              <a href="https://github.com/Guram12/world_map_front/pull/114">
                 <img src={Inst} alt=""></img>
               </a>
               <a href="">
