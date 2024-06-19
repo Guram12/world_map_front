@@ -13,13 +13,13 @@ import BckVideo from "../assets/bck_video.mp4";
 
 const About = () => {
   const navigate = useNavigate();
-  const [isIOS, setIsIOS] = useState(false);
+  // const [isIOS, setIsIOS] = useState(false);
 
-  useEffect(() => {
-    const isIOSDevice =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    setIsIOS(isIOSDevice);
-  }, []);
+  // useEffect(() => {
+  //   const isIOSDevice =
+  //     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  //   setIsIOS(isIOSDevice);
+  // }, []);
 
   const handleCloseButtClick = () => {
     console.log("click");
@@ -47,7 +47,14 @@ const About = () => {
 
   return (
     <div className="about_container">
-      <video autoPlay={!isIOS} loop muted className="background-video">
+      <video
+        autoPlay
+        loop
+        muted
+        controls={false}
+        playsInline
+        className="background-video"
+      >
         <source src={BckVideo} type="video/mp4" />
       </video>
       {/* <Starfield /> */}
