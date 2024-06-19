@@ -174,7 +174,7 @@
     margin-top: 0;
     display: flex;
     align-items: center;
-    gap: 35px;
+    gap: 45px;
     /* border: 1px solid green; */
   }
   /* .logo_image img {
@@ -200,8 +200,8 @@
     /* border: 2px solid red; */
   }
   .about_logo_styles {
-    width: 150px;
-    height: 200px;
+    width: 120px;
+    height: 160px;
     transition: transform 2s ease, opacity 2s ease;
   }
 }
