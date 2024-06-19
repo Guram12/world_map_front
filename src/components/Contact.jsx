@@ -39,7 +39,14 @@ const Contact = () => {
   });
   return (
     <div className="contact_container">
-      <video autoPlay loop muted className="background-video">
+      <video
+        autoPlay
+        loop
+        muted
+        controls={false}
+        playsInline
+        className="background-video"
+      >
         <source src={BckVideo} type="video/mp4" />
       </video>
       <div className="flex_container_contact">
