@@ -69,7 +69,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 100px;
+  gap: 150px;
   height: 100%;
   /* border: 1px solid green; */
 }
@@ -88,7 +88,7 @@
   /* border: 1px solid red; */
 }
 .about_logo_styles {
-  width: 300px;
+  /* width: 300px; */
   height: 350px;
   transition: transform 2s ease, opacity 2s ease;
 }
@@ -127,14 +127,14 @@
 .grow-logo {
   animation: grow 1s ease-in-out forwards;
   opacity: 1;
-  transform-origin: 50% 63%;
+  transform-origin: 50% 65%;
 }
 @keyframes grow {
   0% {
     transform: scale(1);
   }
   100% {
-    transform: scale(10);
+    transform: scale(20);
   }
 }
 
@@ -146,7 +146,7 @@
   .flex_container {
     padding-left: 5%;
     padding-right: 4%;
-    gap: 60px;
+    gap: 30px;
     /* border: 1px solid red; */
   }
   .close_icon img {
@@ -174,7 +174,7 @@
     margin-top: 0;
     display: flex;
     align-items: center;
-    gap: 45px;
+    gap: 55px;
     /* border: 1px solid green; */
   }
   /* .logo_image img {
@@ -200,9 +200,14 @@
     /* border: 2px solid red; */
   }
   .about_logo_styles {
-    width: 120px;
-    height: 160px;
+    /* width: 120px; */
+    height: 100px;
     transition: transform 2s ease, opacity 2s ease;
+  }
+  .grow-logo {
+    animation: grow 1s ease-in-out forwards;
+    opacity: 1;
+    transform-origin: 50% 60%;
   }
 }
 @media (min-width: 950px) and (max-width: 1400px) {
@@ -211,9 +216,9 @@
     /* border: 1px solid red; */
   }
   .flex_container {
-    padding-left: 6%;
-    padding-right: 3%;
-    gap: 0px;
+    padding-left: 8%;
+    padding-right: 5%;
+    gap: 50px;
     /* border: 1px solid red; */
     /* gap: 70px;  */
   }
@@ -236,15 +241,16 @@
     letter-spacing: 2px;
   }
   .closebutt_logo {
-    gap: 90px;
+    gap: 160px;
     display: flex;
-    margin: 0;
+    /* margin: 0; */
     width: auto;
     /* border: 1px solid green; */
   }
   .logo_image img {
-    width: 280;
-    height: 320px;
+    /* border: 2px solid red; */
+    /* width: 280; */
+    height: 180px;
   }
   .paragraph {
     max-height: 450px;

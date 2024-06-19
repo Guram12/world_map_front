@@ -335,7 +335,7 @@
 }
 
 .link_about img {
-  width: 120px;
+  /* width: 120px; */
   height: 170px;
 }
 .grow-contact {
@@ -430,7 +430,7 @@
     /* border: 3px solid green; */
   }
   .link_about img {
-    width: 60px;
+    /* width: 60px; */
     height: 90px;
   }
 }
@@ -486,7 +486,7 @@
     /* border: 3px solid green; */
   }
   .link_about img {
-    width: 140px;
+    /* width: 140px; */
     height: 160px;
   }
 }
@@ -548,7 +548,7 @@
     /* border: 1px solid red; */
   }
   .link_about img {
-    width: 180px;
+    /* width: 180px; */
     height: 220px;
   }
 }
