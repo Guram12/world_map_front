@@ -37,8 +37,19 @@
 .close_icon {
   z-index: 111111111111;
   /* border: 1px solid red; */
-
   cursor: pointer;
+}
+.close_icon:hover img {
+  animation: spin_357 0.3s linear;
+}
+@keyframes spin_357 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
 }
 .close_icon img {
   width: 40px;
@@ -77,8 +88,8 @@
   /* border: 1px solid red; */
 }
 .about_logo_styles {
-  width: 350px;
-  height: 400px;
+  width: 300px;
+  height: 350px;
   transition: transform 2s ease, opacity 2s ease;
 }
 .paragraph {
@@ -123,7 +134,7 @@
     transform: scale(1);
   }
   100% {
-    transform: scale(20);
+    transform: scale(10);
   }
 }
 

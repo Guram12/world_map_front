@@ -1,12 +1,15 @@
 .image_window {
   position: absolute;
-  top: 10px;
+  top: 75px;
   left: 10px;
   width: 150px;
   height: auto;
-  background-color: white;
+  /* background-color: white; */
   border: 1px solid #202020;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +19,7 @@
   align-items: center;
   flex-direction: column;
   border-radius: 20px;
-  background-color: #121212;
-  
+  background-color: #222;
 }
 
 .image_window img {
@@ -25,18 +27,16 @@
   max-height: 100%;
 }
 
-
-.country_name{
+.country_name {
   color: white;
   font-size: 16px;
   text-align: center;
   text-wrap: wrap;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
-
-
-.open_map{
+.open_map {
   width: 80px;
   height: 30px;
   background-color: white;
@@ -45,11 +45,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.23s ease
+  transition: transform 0.23s ease;
+  cursor: pointer;
 }
 
-.open_map:hover{
+.open_map:hover {
   transform: translateY(-3px);
 
-  box-shadow: rgba(160, 160, 160, 0.05) 0px 6px 24px 0px, rgba(151, 151, 151, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(160, 160, 160, 0.05) 0px 6px 24px 0px,
+    rgba(151, 151, 151, 0.08) 0px 0px 0px 1px;
 }

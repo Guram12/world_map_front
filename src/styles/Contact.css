@@ -32,13 +32,15 @@
   justify-content: space-between;
 }
 .social_links {
-  /* width: auto;
-  border: 2px solid red; */
+  /* width: auto; */
+  /* border: 2px solid red; */
   display: flex;
   gap: 50px;
 }
-/* .title_contact_cont {
-} */
+.social_links a:hover {
+  transform: scale(1.1) translateX(10px);
+  transition: 1s;
+}
 .title_contact {
   color: white;
   /* border: 1px solid green; */
@@ -78,6 +80,18 @@
   width: 40px;
   height: 40px;
 }
+.close_icon_cont:hover img {
+  animation: spin_357 0.3s linear;
+}
+@keyframes spin_357 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}
 .logo_image_cont {
   display: flex;
   align-items: center;
@@ -107,6 +121,7 @@
   text-decoration: none;
   width: 50px;
   height: 50px;
+  transition: transform 0.3s ease;
 }
 .grow-logo-cont {
   animation: grow 1s ease-in-out forwards;

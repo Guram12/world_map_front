@@ -23,7 +23,7 @@ const About = () => {
     logo.classList.add("grow-logo");
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 2000);
   };
 
   const textVariant = (direction, delay) => ({
