@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../asset/logoo.svg";
+import Logo from "../asset/logoo.png";
 import "../styles/About.css";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";

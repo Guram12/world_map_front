@@ -1,7 +1,7 @@
 import "../styles/planets.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../asset/logoo.svg";
+import Logo from "../asset/logoo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "./Starfield";
 import Gflag from "../asset/georgiaflag.png";
