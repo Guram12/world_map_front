@@ -21,7 +21,7 @@
   right: 5%;
   /* background-color: rgb(209, 207, 205); */
   gap: 10px;
-  /* border-radius: 1px solid black; */
+  /* border-radius: 1px solid rgb(175, 144, 30); */
   /* border: 2px solid red; */
 }
 .language_cont {
@@ -52,6 +52,11 @@
   gap: 15px;
   justify-content: center;
   /* padding: 10px; */
+}
+.lang_input:hover {
+  background-color: #505155;
+  transition: 1s;
+  border-radius: 10px;
 }
 .lang_input p {
   color: white;

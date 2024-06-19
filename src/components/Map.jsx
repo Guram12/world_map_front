@@ -1,5 +1,6 @@
 import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as d3 from "d3";
 import { continentMapping } from "./ContinentCountries";
 import WindowComponent from "./WindowComponent";
@@ -20,6 +21,14 @@ function Map({
   const [showWindow, setShowWindow] = useState(false);
   const [country_name_props, setCountry_name_props] = useState("");
   const [countryClicked, setCountryClicked] = useState(null); // Add this state
+  const navigate = useNavigate();
+  const handleClickButton = () => {
+    const button = document.querySelector(".button");
+    button.classList.add("closing");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000); // Ensure this matches the duration of the animation
+  };
 
   const resetCountry = () => {
     const svg = d3.select(svgRef.current);
@@ -292,6 +301,20 @@ function Map({
           ></path>
         </svg>
         Reset
+      </button>
+      <button onClick={handleClickButton} className="button">
+        <div className="button-box">
+          <span className="button-elem">
+            <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+            </svg>
+          </span>
+          <span className="button-elem">
+            <svg viewBox="0 0 46 40">
+              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+            </svg>
+          </span>
+        </div>
       </button>
 
       <div ref={tooltipRef} className="tooltip"></div>

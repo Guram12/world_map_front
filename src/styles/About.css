@@ -37,8 +37,19 @@
 .close_icon {
   z-index: 111111111111;
   /* border: 1px solid red; */
-
   cursor: pointer;
+}
+.close_icon:hover img {
+  animation: spin_357 0.3s linear;
+}
+@keyframes spin_357 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
 }
 .close_icon img {
   width: 40px;
