@@ -214,6 +214,16 @@
     transform: translateY(0px) rotate(-45deg);
   }
 }
+@media (hover: none) {
+  .burger:hover {
+    background: none;
+    border-radius: none;
+  }
+  .btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
 @media (min-width: 568px) and (max-width: 950px) {
   .consumer_container {
     /* border: 1px solid red; */
@@ -225,13 +235,11 @@
     /* padding-top: 10px;  */
   }
 
-
   /* .consumer_container.minimized {
     width: 70px;
     border: 2px solid green; 
   } */
 
-  
   .consumer_logo {
     width: 110px;
     height: 90px;

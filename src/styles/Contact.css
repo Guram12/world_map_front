@@ -158,7 +158,15 @@
     transform: scale(20);
   }
 }
-
+@media (hover: none) {
+  .close_icon_cont:hover img {
+    animation: none;
+  }
+  .social_links a:hover {
+    transform: none;
+    transition: none;
+  }
+}
 @media (min-width: 530px) and (max-width: 949px) {
   .contact_container {
     padding-bottom: 5%;

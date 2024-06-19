@@ -395,6 +395,13 @@
   }
 }
 
+@media (hover: none) {
+  .reset-button:hover {
+    background-color: none;
+    transition: none;
+  }
+}
+
 /* Adjust media query for larger devices */
 @media (max-width: 1024px) {
   .tooltip {

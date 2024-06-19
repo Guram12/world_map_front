@@ -364,7 +364,26 @@
     transform: scale(20);
   }
 }
-
+@media (hover: none) {
+  .earth:hover {
+    box-shadow: none;
+    transition: none;
+  }
+  .links:hover {
+    box-shadow: none;
+    transition: none;
+    border-radius: none;
+  }
+  .hover:hover {
+    box-shadow: none;
+    transition: none;
+  }
+  .lang_input:hover {
+    background-color: none;
+    transition: none;
+    border-radius: none;
+  }
+}
 @media (min-width: 568px) and (max-width: 950px) {
   .same_class {
     gap: 40px;
