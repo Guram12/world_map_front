@@ -5,10 +5,32 @@ const BackgroundVideo = ({ src }) => {
 
   useEffect(() => {
     const videoElement = videoRef.current;
+
+    const playVideo = () => {
+      if (videoElement) {
+        videoElement.play().catch((err) => {
+          console.log("Error attempting to play the video:", err);
+        });
+      }
+    };
+
     if (videoElement) {
-      videoElement.removeAttribute("controls"); // Ensure controls attribute is removed
-      videoElement.blur(); // Ensure the video does not focus on load
+      videoElement.removeAttribute("controls");
+      videoElement.muted = true;
+      videoElement.play().catch((err) => {
+        console.log("Error attempting to play the video:", err);
+      });
     }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        playVideo();
+      }
+    });
+
+    return () => {
+      document.removeEventListener("visibilitychange", playVideo);
+    };
   }, []);
 
   return (
@@ -19,7 +41,6 @@ const BackgroundVideo = ({ src }) => {
       muted
       playsInline
       className="background-video"
-      controls={false} // This should prevent the attribute from being added
     >
       <source src={src} type="video/mp4" />
     </video>
