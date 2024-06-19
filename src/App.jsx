@@ -10,11 +10,15 @@ import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
 import LanguageJson from "./components/language.json";
 
+
 function App() {
   const [language, setLanguage] = useState("en");
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+
   const [isLandscape, setIsLandscape] = useState(
     window.innerWidth > window.innerHeight
   );
@@ -79,6 +83,7 @@ function App() {
   useEffect(() => {
     console.log("selected country in app", selectedCountry);
   }, [selectedCountry]);
+
 
   if (isMobileDevice && !isLandscape) {
     return (

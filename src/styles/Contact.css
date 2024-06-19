@@ -8,6 +8,7 @@
   padding-bottom: 5%;
   /* position: relative; */
   /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); */
+  overflow: hidden;
 }
 .flex_container_contact {
   display: flex;
@@ -32,13 +33,15 @@
   justify-content: space-between;
 }
 .social_links {
-  /* width: auto;
-  border: 2px solid red; */
+  /* width: auto; */
+  /* border: 2px solid red; */
   display: flex;
   gap: 50px;
 }
-/* .title_contact_cont {
-} */
+.social_links a:hover {
+  transform: scale(1.1) translateX(10px);
+  transition: 1s;
+}
 .title_contact {
   color: white;
   /* border: 1px solid green; */
@@ -78,6 +81,18 @@
   width: 40px;
   height: 40px;
 }
+.close_icon_cont:hover img {
+  animation: spin_357 0.3s linear;
+}
+@keyframes spin_357 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}
 .logo_image_cont {
   display: flex;
   align-items: center;
@@ -86,8 +101,8 @@
 }
 .logo_image_cont img {
   transition: transform 2s ease, opacity 2s ease;
-  width: 280px;
-  height: 320px;
+  /* width: 280px; */
+  height: 300px;
 }
 
 .text_contact p {
@@ -107,6 +122,7 @@
   text-decoration: none;
   width: 50px;
   height: 50px;
+  transition: transform 0.3s ease;
 }
 .grow-logo-cont {
   animation: grow 1s ease-in-out forwards;
@@ -162,12 +178,12 @@
     margin-top: 0;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 60px;
     /* border: 1px solid green; */
   }
   .logo_image_cont img {
-    width: 100px;
-    height: 150px;
+    /* width: 100px; */
+    height: 120px;
   }
   .text_contact {
     max-height: 190px;
@@ -205,7 +221,7 @@
   .flex_container_contact {
     padding-left: 8%;
     padding-right: 5%;
-    gap: 30px;
+    gap: 50px;
     /* border: 1px solid red; */
   }
   .close_icon_cont img {
@@ -226,15 +242,15 @@
     letter-spacing: 2px;
   }
   .closebutt_logo_cont {
-    gap: 70px;
+    gap: 90px;
     display: flex;
     margin: 0;
     width: auto;
     /* border: 1px solid green; */
   }
   .logo_image_cont img {
-    width: 250;
-    height: 250px;
+    /* width: 250px; */
+    height: 180px;
   }
   .text_contact {
     max-height: 500px;
@@ -302,8 +318,8 @@
     /* border: 1px solid green; */
   }
   .logo_image_cont img {
-    width: 400px;
-    height: 450px;
+    /* width: 400px; */
+    height: 350px;
   }
   .text_contact {
     height: 450px;

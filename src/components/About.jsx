@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../asset/logoo.svg";
+import Logo from "../asset/logoo.png";
 import "../styles/About.css";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
@@ -7,12 +7,20 @@ import { useNavigate } from "react-router-dom";
 // import Cancel from "../asset/cancel.png";
 // import Starfield from "./Starfield";
 import Cancel from "../asset/delete.png";
+import BackVideo from "./BackVideo";
 import BckVideo from "../assets/bck_video.mp4";
 // import BckVideo from "../assets/bck_video1.mp4";
 // import Bck_video from "../asset/bck_video.mp4";
 
 const About = () => {
   const navigate = useNavigate();
+  // const [isIOS, setIsIOS] = useState(false);
+
+  // useEffect(() => {
+  //   const isIOSDevice =
+  //     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  //   setIsIOS(isIOSDevice);
+  // }, []);
 
   const handleCloseButtClick = () => {
     console.log("click");
@@ -23,7 +31,7 @@ const About = () => {
     logo.classList.add("grow-logo");
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 2000);
   };
 
   const textVariant = (direction, delay) => ({
@@ -40,9 +48,17 @@ const About = () => {
 
   return (
     <div className="about_container">
-      <video autoPlay loop muted className="background-video">
+      <BackVideo src={BckVideo} />
+      {/* <video
+        autoPlay
+        loop
+        muted
+        controls={false}
+        playsInline
+        className="background-video"
+      >
         <source src={BckVideo} type="video/mp4" />
-      </video>
+      </video> */}
       {/* <Starfield /> */}
       <div className="flex_container">
         <div className="abouttext_paragraph">

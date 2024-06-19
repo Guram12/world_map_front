@@ -21,7 +21,7 @@
   right: 5%;
   /* background-color: rgb(209, 207, 205); */
   gap: 10px;
-  /* border-radius: 1px solid black; */
+  /* border-radius: 1px solid rgb(175, 144, 30); */
   /* border: 2px solid red; */
 }
 .language_cont {
@@ -52,6 +52,11 @@
   gap: 15px;
   justify-content: center;
   /* padding: 10px; */
+}
+.lang_input:hover {
+  background-color: #505155;
+  transition: 1s;
+  border-radius: 10px;
 }
 .lang_input p {
   color: white;
@@ -330,7 +335,7 @@
 }
 
 .link_about img {
-  width: 120px;
+  /* width: 120px; */
   height: 170px;
 }
 .grow-contact {
@@ -425,7 +430,7 @@
     /* border: 3px solid green; */
   }
   .link_about img {
-    width: 60px;
+    /* width: 60px; */
     height: 90px;
   }
 }
@@ -481,7 +486,7 @@
     /* border: 3px solid green; */
   }
   .link_about img {
-    width: 140px;
+    /* width: 140px; */
     height: 160px;
   }
 }
@@ -543,7 +548,7 @@
     /* border: 1px solid red; */
   }
   .link_about img {
-    width: 180px;
+    /* width: 180px; */
     height: 220px;
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Contact.css";
-import Logo from "../asset/logoo.svg";
+import Logo from "../asset/logoo.png";
 // import Cancel from "../asset/cancel.png";
 import Cancel from "../asset/delete.png";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const Contact = () => {
     logo.classList.add("grow-logo-cont");
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 2000);
   };
 
   const textVariant = (direction, delay) => ({
@@ -39,7 +39,14 @@ const Contact = () => {
   });
   return (
     <div className="contact_container">
-      <video autoPlay loop muted className="background-video">
+      <video
+        autoPlay
+        loop
+        muted
+        controls={false}
+        playsInline
+        className="background-video"
+      >
         <source src={BckVideo} type="video/mp4" />
       </video>
       <div className="flex_container_contact">
@@ -59,13 +66,13 @@ const Contact = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <a href="">
+              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
                 <img src={Inst} alt=""></img>
               </a>
-              <a href="">
+              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
                 <img src={Face} alt=""></img>
               </a>
-              <a href="">
+              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
                 <img src={Linke} alt=""></img>
               </a>
             </motion.div>

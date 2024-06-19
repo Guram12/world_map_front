@@ -1,5 +1,6 @@
 import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as d3 from "d3";
 import { continentMapping } from "./ContinentCountries";
 import WindowComponent from "./WindowComponent";
@@ -18,8 +19,16 @@ function Map({
   const tooltipRef = useRef(null);
   const [selectedContinent, setSelectedContinent] = useState(null);
   const [showWindow, setShowWindow] = useState(false);
-  const [country_name_props, setCountry_name_props] = useState('');
+  const [country_name_props, setCountry_name_props] = useState("");
   const [countryClicked, setCountryClicked] = useState(null); // Add this state
+  const navigate = useNavigate();
+  const handleClickButton = () => {
+    const button = document.querySelector(".button");
+    button.classList.add("closing");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000); // Ensure this matches the duration of the animation
+  };
 
   const resetCountry = () => {
     const svg = d3.select(svgRef.current);
@@ -223,7 +232,6 @@ function Map({
     window.open(countryMapUrl, "_blank", "noopener,noreferrer");
   };
 
-
   useEffect(() => {
     const applyAnimation = () => {
       if (svgRef.current) {
@@ -277,8 +285,36 @@ function Map({
           country_name_props={country_name_props}
         />
       )}
-      <button onClick={resetZoom} className="reset-button">
+      <button type="button" onClick={resetZoom} className="reset-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-repeat"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"></path>
+          <path
+            fill-rule="evenodd"
+            d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+          ></path>
+        </svg>
         Reset
+      </button>
+      <button onClick={handleClickButton} className="button">
+        <div className="button-box">
+          <span className="button-elem">
+            <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+            </svg>
+          </span>
+          <span className="button-elem">
+            <svg viewBox="0 0 46 40">
+              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+            </svg>
+          </span>
+        </div>
       </button>
 
       <div ref={tooltipRef} className="tooltip"></div>
@@ -3121,7 +3157,7 @@ function Map({
             id="MV"
             arg="MV"
             name="Maldives"
-          // ----------- bounding koordinatebi ar aqvs
+            // ----------- bounding koordinatebi ar aqvs
           ></path>
 
           <path
@@ -3129,7 +3165,7 @@ function Map({
             id="MH"
             arg="MH"
             name="Marshall Islands"
-          // ----------- bounding koordinatebi ar aqvs
+            // ----------- bounding koordinatebi ar aqvs
           ></path>
 
           <path
