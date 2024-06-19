@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import Cancel from "../asset/cancel.png";
 // import Starfield from "./Starfield";
 import Cancel from "../asset/delete.png";
+import BackVideo from "./BackVideo";
 import BckVideo from "../assets/bck_video.mp4";
 // import BckVideo from "../assets/bck_video1.mp4";
 // import Bck_video from "../asset/bck_video.mp4";
@@ -47,7 +48,8 @@ const About = () => {
 
   return (
     <div className="about_container">
-      <video
+      <BackVideo src={BckVideo} />
+      {/* <video
         autoPlay
         loop
         muted
@@ -56,7 +58,7 @@ const About = () => {
         className="background-video"
       >
         <source src={BckVideo} type="video/mp4" />
-      </video>
+      </video> */}
       {/* <Starfield /> */}
       <div className="flex_container">
         <div className="abouttext_paragraph">
