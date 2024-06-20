@@ -21,6 +21,9 @@ function Map({
   const [showWindow, setShowWindow] = useState(false);
   const [country_name_props, setCountry_name_props] = useState("");
   const [countryClicked, setCountryClicked] = useState(null); // Add this state
+
+
+
   const navigate = useNavigate();
   const handleClickButton = () => {
     const button = document.querySelector(".button");
@@ -94,6 +97,11 @@ function Map({
       }
     });
   };
+
+
+
+  // ======================================================================================
+
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -211,6 +219,14 @@ function Map({
       svg.on("click", null);
     };
   }, [createPatterns, language, selectedContinent]);
+
+
+
+
+
+
+// ========================================================================
+
 
   const handleCountryClick = (arg) => {
     if (countryClicked === arg) {
