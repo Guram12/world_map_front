@@ -21,6 +21,9 @@ function Map({
   const [showWindow, setShowWindow] = useState(false);
   const [country_name_props, setCountry_name_props] = useState("");
   const [countryClicked, setCountryClicked] = useState(null); // Add this state
+
+
+
   const navigate = useNavigate();
   const handleClickButton = () => {
     const button = document.querySelector(".button");
@@ -95,6 +98,11 @@ function Map({
     });
   };
 
+
+
+  // ======================================================================================
+
+
   useEffect(() => {
     if (!svgRef.current) return;
 
@@ -104,6 +112,10 @@ function Map({
     const zoom = d3
       .zoom()
       .scaleExtent([0.5, 50])
+      .translateExtent([
+        [-100, -100], // Minimum translation limits (adjust as needed)
+        [window.innerWidth  + 300, window.innerHeight + 300], // Maximum translation limits (adjust as needed)
+      ])
       .on("zoom", (event) => {
         svg.selectAll("g").attr("transform", event.transform);
       });
@@ -177,12 +189,11 @@ function Map({
             .classed(continentClass, true)
             .classed("continent-selected", true);
 
-          // Ensure the selected continent is on top after a delay to allow smooth transition
           setTimeout(() => {
             svg.selectAll("path.continent-selected").each(function () {
-              this.parentNode.appendChild(this); // Move to the end of the parent element
+              this.parentNode.appendChild(this);
             });
-          }, 750); // 100ms delay
+          }, 750);
         } else {
           handleCountryClick(arg);
         }
@@ -190,7 +201,6 @@ function Map({
 
     createPatterns();
 
-    // Add event listener for SVG click
     const handleSvgClick = (event) => {
       if (event.target.tagName !== "path" && selectedContinent) {
         resetCountry();
@@ -211,6 +221,13 @@ function Map({
       svg.on("click", null);
     };
   }, [createPatterns, language, selectedContinent]);
+
+
+
+
+
+// ====================================================================================================================================
+
 
   const handleCountryClick = (arg) => {
     if (countryClicked === arg) {
