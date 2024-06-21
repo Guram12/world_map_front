@@ -274,8 +274,8 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  width: 190px;
-  height: 190px;
+  width: 150px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -293,8 +293,8 @@
   background-size: cover;
   background-position: center;
   border-radius: 50%;
-  width: 600px;
-  height: 600px;
+  width: 450px;
+  height: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,10 +318,10 @@
 
 @keyframes orbit {
   0% {
-    transform: rotateZ(0deg) translateX(420px) rotateZ(0deg);
+    transform: rotateZ(0deg) translateX(340px) rotateZ(0deg);
   }
   100% {
-    transform: rotateZ(360deg) translateX(420px) rotateZ(360deg);
+    transform: rotateZ(360deg) translateX(340px) rotateZ(360deg);
   }
 }
 .grow-earth {
