@@ -105,8 +105,8 @@ function Map({
       .zoom()
       .scaleExtent([minZoom, maxZoom])
       .translateExtent([
-        [-width / 8, -height / 8],
-        [svgBounds.width, svgBounds.height],
+        [-width / 5, -height / 5],
+        [svgBounds.width , svgBounds.height * 1.1 ],
       ])
       .on("zoom", (event) => {
         svg.selectAll("g").attr("transform", event.transform);
@@ -348,7 +348,7 @@ function Map({
         strokeLinejoin="round"
         strokeWidth=".3"
         version="1.2"
-        viewBox="0 0 2000 1057"
+        viewBox="0 -40 2000 1307"
         xmlns="http://www.w3.org/2000/svg"
       >
         <g ref={gRef}>
