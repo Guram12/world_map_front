@@ -175,7 +175,7 @@
 .grow-logo {
   animation: grow 1s ease-in-out forwards;
   opacity: 1;
-  transform-origin: 50% 65%;
+  transform-origin: 50% 60%;
 }
 @keyframes grow {
   0% {
