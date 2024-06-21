@@ -23,11 +23,7 @@ function Map({
   const navigate = useNavigate();
 
   const handleClickButton = () => {
-    const button = document.querySelector(".button");
-    button.classList.add("closing");
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+    navigate("/");
   };
 
   const resetCountry = () => {
