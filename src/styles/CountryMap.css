@@ -215,13 +215,15 @@
   }
 }
 @media (hover: none) {
-  .burger:hover {
-    background: none;
-    border-radius: none;
-  }
-  .btn:hover {
+  .costomer_social_links:hover,
+  .btn:hover,
+  .burger:hover,
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
     transform: none;
     box-shadow: none;
+    background: none;
   }
 }
 @media (min-width: 568px) and (max-width: 950px) {
