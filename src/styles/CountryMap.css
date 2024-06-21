@@ -180,7 +180,7 @@
 .burger:hover .line,
 .burger:hover::before,
 .burger:hover::after {
-  background: #e8e8e8;
+  background: #ffffff;
 }
 
 .burger:active {
@@ -215,15 +215,25 @@
   }
 }
 @media (hover: none) {
-  .costomer_social_links:hover,
+  /* .costomer_social_links:hover,
   .btn:hover,
   .burger:hover,
   .burger:hover .line,
   .burger:hover::before,
   .burger:hover::after {
-    /* transform: none; */
+    transform: none;
     box-shadow: none;
     background: none;
+  } */
+
+  .burger:hover {
+    background: none;
+    border-radius: 50%;
+  }
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    background: #000000;
   }
 }
 @media (min-width: 568px) and (max-width: 950px) {
