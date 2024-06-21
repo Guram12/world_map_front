@@ -227,7 +227,7 @@
     background: none;
   } */
 
-  .burger:hover {
+  /* .burger:hover {
     background: none;
     border-radius: 50%;
   }
@@ -237,11 +237,11 @@
     background: #000000;
   }
   .costomer_social_links:hover {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     transform: none;
     box-shadow: none;
     box-shadow: none;
-  }
+  } */
 }
 @media (min-width: 568px) and (max-width: 950px) {
   .consumer_container {
@@ -286,5 +286,37 @@
   .burger {
     width: 20px;
     height: 20px;
+  }
+  .burger:hover {
+    background: none;
+    border-radius: 50%;
+  }
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    background: #000000;
+  }
+  .costomer_social_links:hover {
+    /* border: 1px solid red; */
+    transform: none;
+    box-shadow: none;
+    box-shadow: none;
+  }
+}
+@media (min-width: 950px) and (max-width: 1450px) {
+  .burger:hover {
+    background: none;
+    border-radius: 50%;
+  }
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    background: #000000;
+  }
+  .costomer_social_links:hover {
+    /* border: 1px solid red; */
+    transform: none;
+    box-shadow: none;
+    box-shadow: none;
   }
 }

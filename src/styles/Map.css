@@ -380,7 +380,7 @@
   transform: translateX(-56px);
 }
 
-.button.closing {
+/* .button.closing {
   animation: closeAnimation 1s forwards;
 }
 
@@ -393,7 +393,7 @@
     transform: scale(0.5) translateX(-50px);
     opacity: 0;
   }
-}
+} */
 
 @media (hover: none) {
   .reset-button:hover {
@@ -416,7 +416,7 @@
     animation: none;
   }
   .reset-button:hover {
-    /* background-color: none; */
+    background-color: none;
   }
   .button:after {
     border: none;
@@ -428,6 +428,18 @@
 }
 
 /* Adjust media query for larger devices */
+@media (min-width: 568px) and (max-width: 950px) {
+  .reset-button:hover {
+    background-color: #222;
+    transition: none;
+  }
+}
+@media (min-width: 950px) and (max-width: 1450px) {
+  .reset-button:hover {
+    background-color: #222;
+    transition: none;
+  }
+}
 @media (max-width: 1024px) {
   .tooltip {
     display: none !important;
