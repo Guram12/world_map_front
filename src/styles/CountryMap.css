@@ -221,7 +221,7 @@
   .burger:hover .line,
   .burger:hover::before,
   .burger:hover::after {
-    transform: none;
+    /* transform: none; */
     box-shadow: none;
     background: none;
   }
