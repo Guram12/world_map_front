@@ -458,7 +458,7 @@
     /* #1b1b1b */
   }
   .flex:hover {
-    background-color: none;
+    background-color: #1b1b1b;
     color: none;
     /* transition: 1s; */
   }
