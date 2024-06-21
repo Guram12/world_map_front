@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../asset/logoo.png";
 import "../styles/About.css";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 import { fadeIn } from "../Variants";
 import { useNavigate } from "react-router-dom";
 // import Cancel from "../asset/cancel.png";
@@ -55,6 +56,10 @@ const About = () => {
         <source src={BckVideo} type="video/mp4" />
       </video> */}
       {/* <Starfield /> */}
+      <Helmet>
+        <title>About Us - 1inone</title>
+        <meta name="description" content="Learn more about 1inone and our mission." />
+      </Helmet>
       <div className="flex_container">
         <div className="abouttext_paragraph">
           <motion.div
@@ -156,9 +161,9 @@ const About = () => {
         >
           <motion.div
             className="close_icon"
-            // initial={{ y: -100, opacity: 0 }}
-            // animate={{ y: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
+          // initial={{ y: -100, opacity: 0 }}
+          // animate={{ y: 0, opacity: 1 }}
+          // transition={{ duration: 0.5 }}
           >
             <img onClick={handleCloseButtClick} src={Cancel} alt="delete"></img>
           </motion.div>

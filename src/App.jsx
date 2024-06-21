@@ -8,6 +8,7 @@ import CountryMap from "./components/CountryMap";
 import axios from "axios";
 import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
+import { Helmet } from "react-helmet";
 import LanguageJson from "./components/language.json";
 
 
@@ -116,27 +117,61 @@ function App() {
               />
             }
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/about"
+            element={
+              <>
+                <Helmet>
+                  <title>About Us - 1inone</title>
+                  <meta name="description" content="Learn more about 1inone and our mission." />
+                </Helmet>
+                <About />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Helmet>
+                  <title>Contact Us - 1inone</title>
+                  <meta name="description" content="Get in touch with 1inone." />
+                </Helmet>
+                <Contact />
+              </>
+            }
+          />
           <Route
             path="/map"
             element={
-              <Map
-                language={language}
-                countryData={countryData}
-                loading={loading}
-                handle_Set_Selected_Country={handle_Set_Selected_Country}
-                selectedCountry={selectedCountry}
-              />
+              <>
+                <Helmet>
+                  <title>Map - 1inone</title>
+                  <meta name="description" content="Explore the map to see our exclusive advertising partners." />
+                </Helmet>
+                <Map
+                  language={language}
+                  countryData={countryData}
+                  loading={loading}
+                  handle_Set_Selected_Country={handle_Set_Selected_Country}
+                  selectedCountry={selectedCountry}
+                />
+              </>
             }
           />
           <Route
             path="/country-map/:country"
             element={
-              <CountryMap
-                selectedCountry={selectedCountry}
-                countryData={countryData}
-              />
+              <>
+                <Helmet>
+                  <title>Country Map - 1inone</title>
+                  <meta name="description" content={`Explore our advertising partners in ${selectedCountry}`} />
+                </Helmet>
+                <CountryMap
+                  selectedCountry={selectedCountry}
+                  countryData={countryData}
+                />
+              </>
             }
           />
         </Routes>

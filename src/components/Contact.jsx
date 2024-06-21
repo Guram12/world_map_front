@@ -3,6 +3,7 @@ import "../styles/Contact.css";
 import Logo from "../asset/logoo.png";
 // import Cancel from "../asset/cancel.png";
 import Cancel from "../asset/delete.png";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
@@ -37,7 +38,12 @@ const Contact = () => {
   });
   return (
     <div className="contact_container">
+
       <div className="flex_container_contact">
+        <Helmet>
+          <title>Contact Us - 1inone</title>
+          <meta name="description" content="Get in touch with 1inone." />
+        </Helmet>
         <div className="contacttext_paragraph">
           <div className="contact_social_cont">
             <motion.div

@@ -1,6 +1,7 @@
 import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import * as d3 from "d3";
 import { continentMapping } from "./ContinentCountries";
 import WindowComponent from "./WindowComponent";
@@ -106,7 +107,7 @@ function Map({
       .scaleExtent([minZoom, maxZoom])
       .translateExtent([
         [-width / 5, -height / 5],
-        [svgBounds.width , svgBounds.height * 1.1 ],
+        [svgBounds.width, svgBounds.height * 1.1],
       ])
       .on("zoom", (event) => {
         svg.selectAll("g").attr("transform", event.transform);
@@ -298,6 +299,10 @@ function Map({
 
   return (
     <div className="map_container">
+      <Helmet>
+        <title>Map - 1inone</title>
+        <meta name="description" content="Explore the map to see our exclusive advertising partners." />
+      </Helmet>
       {showWindow && (
         <WindowComponent
           selectedCountry={selectedCountry}
@@ -3177,7 +3182,7 @@ function Map({
             id="MV"
             arg="MV"
             name="Maldives"
-            // ----------- bounding koordinatebi ar aqvs
+          // ----------- bounding koordinatebi ar aqvs
           ></path>
 
           <path
@@ -3185,7 +3190,7 @@ function Map({
             id="MH"
             arg="MH"
             name="Marshall Islands"
-            // ----------- bounding koordinatebi ar aqvs
+          // ----------- bounding koordinatebi ar aqvs
           ></path>
 
           <path
