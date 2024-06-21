@@ -57,6 +57,7 @@
 }
 
 .costomer_social_links:hover {
+  /* border: 1px solid red; */
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
@@ -234,6 +235,12 @@
   .burger:hover::before,
   .burger:hover::after {
     background: #000000;
+  }
+  .costomer_social_links:hover {
+    /* border: 1px solid red; */
+    transform: none;
+    box-shadow: none;
+    box-shadow: none;
   }
 }
 @media (min-width: 568px) and (max-width: 950px) {
