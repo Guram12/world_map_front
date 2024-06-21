@@ -266,7 +266,7 @@
 
 .continent-oc {
   transition: transform 0.75s ease;
-  transform: translate(-2330px, -1000px) scale(2);
+  transform: translate(-2330px, -800px) scale(2);
   opacity: 1;
 }
 
