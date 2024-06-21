@@ -54,14 +54,26 @@ const Contact = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
-                <img src={Inst} alt=""></img>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Inst} alt="Instagram"></img>
               </a>
-              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
-                <img src={Face} alt=""></img>
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Face} alt="Facebook"></img>
               </a>
-              <a href="https://www.youtube.com/watch?v=8F7BWlGJ9mM&list=RDGMEM8rCiNo9r3kt8XsHUaTEI2gVM8F7BWlGJ9mM&start_radio=1">
-                <img src={Linke} alt=""></img>
+              <a
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Linke} alt="LinkedIn"></img>
               </a>
             </motion.div>
           </div>

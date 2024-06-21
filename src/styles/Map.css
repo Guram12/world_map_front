@@ -433,11 +433,35 @@
     background-color: #222;
     transition: none;
   }
+  .button:hover:after,
+  .button:focus:after {
+    opacity: 0;
+    transform: none;
+    transition: none;
+  }
+  .button:after {
+    border: none;
+    transform: none;
+    transition: none;
+    opacity: 0;
+  }
 }
 @media (min-width: 950px) and (max-width: 1450px) {
   .reset-button:hover {
     background-color: #222;
     transition: none;
+  }
+  .button:hover:after,
+  .button:focus:after {
+    opacity: 0;
+    transform: none;
+    transition: none;
+  }
+  .button:after {
+    border: none;
+    transform: none;
+    transition: none;
+    opacity: 0;
   }
 }
 @media (max-width: 1024px) {
