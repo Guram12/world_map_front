@@ -400,6 +400,24 @@
     background-color: none;
     transition: none;
   }
+  .button:hover:before,
+  .button:focus:before {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .button:hover:after,
+  .button:focus:after {
+    opacity: 0;
+    transform: scale(1.3);
+    transition: none;
+  }
+  .selected-country-hover {
+    animation: none;
+  }
+  .reset-button:hover {
+    background-color: #222;
+  }
 }
 
 /* Adjust media query for larger devices */
