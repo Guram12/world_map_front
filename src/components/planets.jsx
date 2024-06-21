@@ -34,9 +34,9 @@ export default function Planets({ handle_set_language, language }) {
     }
   };
 
-  // setTimeout(() => {
-  //   navigate("/map");
-  // }, 15000);
+  setTimeout(() => {
+    navigate("/map");
+  }, 15000);
 
   const handleEarthClick = () => {
     document.querySelector(".moon").style.display = "none";
