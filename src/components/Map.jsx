@@ -98,7 +98,7 @@ function Map({
     const svg = d3.select(svgRef.current);
     const svgBounds = svgRef.current.getBBox();
     const { width, height } = svgRef.current.getBoundingClientRect();
-    const minZoom = 0.5;
+    const minZoom = 1;
     const maxZoom = 50;
 
     const zoom = d3
