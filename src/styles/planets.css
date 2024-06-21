@@ -72,6 +72,7 @@
   gap: 10px;
   padding: 5px 10px;
   color: white;
+  cursor: pointer;
   /* border: 1px solid red; */
 }
 .flex p {
@@ -274,8 +275,8 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  width: 190px;
-  height: 190px;
+  width: 150px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -293,8 +294,8 @@
   background-size: cover;
   background-position: center;
   border-radius: 50%;
-  width: 600px;
-  height: 600px;
+  width: 450px;
+  height: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -310,6 +311,7 @@
   box-shadow: rgba(73, 86, 156, 0.56) 0px 22px 70px 4px;
   transition: 1s;
 }
+
 .moon_bck_styles:hover ~ .earth_bck_styles .earth {
   box-shadow: rgba(73, 86, 156, 0.56) 0px 22px 70px 4px;
 }
@@ -318,10 +320,10 @@
 
 @keyframes orbit {
   0% {
-    transform: rotateZ(0deg) translateX(420px) rotateZ(0deg);
+    transform: rotateZ(0deg) translateX(340px) rotateZ(0deg);
   }
   100% {
-    transform: rotateZ(360deg) translateX(420px) rotateZ(360deg);
+    transform: rotateZ(360deg) translateX(340px) rotateZ(360deg);
   }
 }
 .grow-earth {
@@ -364,7 +366,26 @@
     transform: scale(20);
   }
 }
-
+/* @media (hover: none) {
+  .earth:hover {
+    box-shadow: none;
+    transition: none;
+  }
+  .links:hover {
+    box-shadow: none;
+    transition: none;
+    border-radius: none;
+  }
+  .hover:hover {
+    box-shadow: none;
+    transition: none;
+  }
+  .lang_input:hover {
+    background-color: none;
+    transition: none;
+    border-radius: none;
+  }
+} */
 @media (min-width: 568px) and (max-width: 950px) {
   .same_class {
     gap: 40px;
@@ -390,8 +411,8 @@
     height: 100px;
   }
   .earth {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background-image: url("../asset/earth1.png");
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -400,8 +421,8 @@
     /* border: 1px solid red; */
   }
   .moon {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -414,10 +435,10 @@
   }
   @keyframes orbit {
     0% {
-      transform: rotateZ(0deg) translateX(150px) rotateZ(0deg);
+      transform: rotateZ(0deg) translateX(110px) rotateZ(0deg);
     }
     100% {
-      transform: rotateZ(360deg) translateX(150px) rotateZ(-360deg);
+      transform: rotateZ(360deg) translateX(110px) rotateZ(-360deg);
     }
   }
   /* .logo-container {
@@ -432,6 +453,27 @@
   .link_about img {
     /* width: 60px; */
     height: 90px;
+  }
+  .lang_input:hover {
+    background-color: #1b1b1b;
+    /* #1b1b1b */
+  }
+  .flex:hover {
+    background-color: #1b1b1b;
+    color: none;
+    /* transition: 1s; */
+  }
+  .earth:hover {
+    box-shadow: none;
+  }
+  .links:hover {
+    box-shadow: none;
+  }
+  .hover:hover {
+    box-shadow: none;
+  }
+  .moon_bck_styles:hover ~ .earth_bck_styles .earth {
+    box-shadow: none;
   }
 }
 @media (min-width: 950px) and (max-width: 1450px) {
@@ -488,6 +530,27 @@
   .link_about img {
     /* width: 140px; */
     height: 160px;
+  }
+  .lang_input:hover {
+    background-color: none;
+    /* #1b1b1b */
+  }
+  .flex:hover {
+    background-color: none;
+    color: none;
+    /* transition: 1s; */
+  }
+  .earth:hover {
+    box-shadow: none;
+  }
+  .links:hover {
+    box-shadow: none;
+  }
+  .hover:hover {
+    box-shadow: none;
+  }
+  .moon_bck_styles:hover ~ .earth_bck_styles .earth {
+    box-shadow: none;
   }
 }
 @media (min-width: 1920px) {

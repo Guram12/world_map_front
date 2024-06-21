@@ -57,6 +57,7 @@
 }
 
 .costomer_social_links:hover {
+  /* border: 1px solid red; */
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
@@ -180,7 +181,7 @@
 .burger:hover .line,
 .burger:hover::before,
 .burger:hover::after {
-  background: #e8e8e8;
+  background: #ffffff;
 }
 
 .burger:active {
@@ -214,6 +215,34 @@
     transform: translateY(0px) rotate(-45deg);
   }
 }
+@media (hover: none) {
+  /* .costomer_social_links:hover,
+  .btn:hover,
+  .burger:hover,
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    transform: none;
+    box-shadow: none;
+    background: none;
+  } */
+
+  /* .burger:hover {
+    background: none;
+    border-radius: 50%;
+  }
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    background: #000000;
+  }
+  .costomer_social_links:hover {
+    border: 1px solid red;
+    transform: none;
+    box-shadow: none;
+    box-shadow: none;
+  } */
+}
 @media (min-width: 568px) and (max-width: 950px) {
   .consumer_container {
     /* border: 1px solid red; */
@@ -225,13 +254,11 @@
     /* padding-top: 10px;  */
   }
 
-
   /* .consumer_container.minimized {
     width: 70px;
     border: 2px solid green; 
   } */
 
-  
   .consumer_logo {
     width: 110px;
     height: 90px;
@@ -259,5 +286,37 @@
   .burger {
     width: 20px;
     height: 20px;
+  }
+  .burger:hover {
+    background: none;
+    border-radius: 50%;
+  }
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    background: #000000;
+  }
+  .costomer_social_links:hover {
+    /* border: 1px solid red; */
+    transform: none;
+    box-shadow: none;
+    box-shadow: none;
+  }
+}
+@media (min-width: 950px) and (max-width: 1450px) {
+  .burger:hover {
+    background: none;
+    border-radius: 50%;
+  }
+  .burger:hover .line,
+  .burger:hover::before,
+  .burger:hover::after {
+    background: #000000;
+  }
+  .costomer_social_links:hover {
+    /* border: 1px solid red; */
+    transform: none;
+    box-shadow: none;
+    box-shadow: none;
   }
 }

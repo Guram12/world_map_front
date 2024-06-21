@@ -15,19 +15,15 @@ function Map({
 }) {
   const svgRef = useRef(null);
   const gRef = useRef(null);
-
   const tooltipRef = useRef(null);
   const [selectedContinent, setSelectedContinent] = useState(null);
   const [showWindow, setShowWindow] = useState(false);
   const [country_name_props, setCountry_name_props] = useState("");
-  const [countryClicked, setCountryClicked] = useState(null); // Add this state
+  const [countryClicked, setCountryClicked] = useState(null);
   const navigate = useNavigate();
+
   const handleClickButton = () => {
-    const button = document.querySelector(".button");
-    button.classList.add("closing");
-    setTimeout(() => {
-      navigate("/");
-    }, 1000); // Ensure this matches the duration of the animation
+    navigate("/");
   };
 
   const resetCountry = () => {
@@ -45,6 +41,7 @@ function Map({
     setTimeout(resetCountry, 750);
     setShowWindow(false);
   };
+
   const createPatterns = () => {
     const svg = svgRef.current;
     if (!svg) return;
@@ -95,20 +92,38 @@ function Map({
     });
   };
 
+  const updateZoomBehavior = () => {
+    if (!svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const svgBounds = svgRef.current.getBBox();
+    const { width, height } = svgRef.current.getBoundingClientRect();
+    const minZoom = 0.5;
+    const maxZoom = 50;
+
+    const zoom = d3
+      .zoom()
+      .scaleExtent([minZoom, maxZoom])
+      .translateExtent([
+        [-width / 8, -height / 8],
+        [svgBounds.width, svgBounds.height],
+      ])
+      .on("zoom", (event) => {
+        svg.selectAll("g").attr("transform", event.transform);
+      });
+
+    svg.call(zoom);
+
+    return zoom;
+  };
+
   useEffect(() => {
     if (!svgRef.current) return;
 
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
 
-    const zoom = d3
-      .zoom()
-      .scaleExtent([0.5, 50])
-      .on("zoom", (event) => {
-        svg.selectAll("g").attr("transform", event.transform);
-      });
-
-    svg.call(zoom);
+    const zoom = updateZoomBehavior();
 
     svg
       .selectAll("path")
@@ -177,12 +192,11 @@ function Map({
             .classed(continentClass, true)
             .classed("continent-selected", true);
 
-          // Ensure the selected continent is on top after a delay to allow smooth transition
           setTimeout(() => {
             svg.selectAll("path.continent-selected").each(function () {
-              this.parentNode.appendChild(this); // Move to the end of the parent element
+              this.parentNode.appendChild(this);
             });
-          }, 750); // 100ms delay
+          }, 750);
         } else {
           handleCountryClick(arg);
         }
@@ -190,7 +204,6 @@ function Map({
 
     createPatterns();
 
-    // Add event listener for SVG click
     const handleSvgClick = (event) => {
       if (event.target.tagName !== "path" && selectedContinent) {
         resetCountry();
@@ -199,6 +212,12 @@ function Map({
     };
 
     svg.on("click", handleSvgClick);
+
+    const handleResize = () => {
+      svg.call(updateZoomBehavior().transform, d3.zoomIdentity);
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
       svg
@@ -209,12 +228,13 @@ function Map({
         .on("click", null);
       svg.call(zoom.on("zoom", null));
       svg.on("click", null);
+      window.removeEventListener("resize", handleResize);
     };
   }, [createPatterns, language, selectedContinent]);
 
   const handleCountryClick = (arg) => {
     if (countryClicked === arg) {
-      openGoogleMaps(arg); // Open Google Maps on second click
+      openGoogleMaps(arg);
     } else {
       setShowWindow(true);
       handle_Set_Selected_Country(arg);
@@ -223,7 +243,7 @@ function Map({
       setCountry_name_props(country_name_props);
       console.log("----------", country_name_props);
 
-      setCountryClicked(arg); // Set the country as clicked
+      setCountryClicked(arg);
     }
   };
 
@@ -291,12 +311,12 @@ function Map({
           width="16"
           height="16"
           fill="currentColor"
-          class="bi bi-arrow-repeat"
+          className="bi bi-arrow-repeat"
           viewBox="0 0 16 16"
         >
           <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"></path>
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
           ></path>
         </svg>
