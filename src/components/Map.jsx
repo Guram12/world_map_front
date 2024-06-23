@@ -1,7 +1,7 @@
 import "../styles/Map.css";
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 import * as d3 from "d3";
 import { continentMapping } from "./ContinentCountries";
 import WindowComponent from "./WindowComponent";

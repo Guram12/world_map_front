@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../asset/logoo.png";
 import "../styles/About.css";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 import { fadeIn } from "../Variants";
 import { useNavigate } from "react-router-dom";
 // import Cancel from "../asset/cancel.png";
