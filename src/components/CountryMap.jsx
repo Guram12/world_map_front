@@ -151,7 +151,7 @@ function CountryMap({ countryData, selectedCountry }) {
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100vh" }}
         center={center}
-        zoom={6} // You can adjust the initial zoom level as needed
+        zoom={5} // You can adjust the initial zoom level as needed
         onLoad={(map) => setMap(map)} // Store the map instance
         options={{
           gestureHandling: "greedy", // Allow single-finger map movement on mobile
