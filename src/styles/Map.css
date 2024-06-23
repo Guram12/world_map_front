@@ -379,22 +379,6 @@
   transition: 0.4s;
   transform: translateX(-56px);
 }
-
-/* .button.closing {
-  animation: closeAnimation 1s forwards;
-}
-
-@keyframes closeAnimation {
-  0% {
-    transform: scale(1) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.5) translateX(-50px);
-    opacity: 0;
-  }
-} */
-
 @media (hover: none) {
   .reset-button:hover {
     background-color: none;
@@ -427,7 +411,6 @@
   }
 }
 
-/* Adjust media query for larger devices */
 @media (min-width: 568px) and (max-width: 950px) {
   .reset-button:hover {
     background-color: #222;
