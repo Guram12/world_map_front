@@ -8,7 +8,7 @@ import CountryMap from "./components/CountryMap";
 import axios from "axios";
 import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 import LanguageJson from "./components/language.json";
 
 
