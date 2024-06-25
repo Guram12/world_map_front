@@ -238,8 +238,7 @@
 
 .continent-eu {
   transition: transform 0.75s ease;
-  transform: translate(-1000px, 100px) scale(2);
-
+  transform: translate(-2450px, 50px) scale(3.3);
   opacity: 1;
 }
 
@@ -266,7 +265,7 @@
 
 .continent-oc {
   transition: transform 0.75s ease;
-  transform: translate(-2330px, -800px) scale(2);
+  transform: translate(-4160px, -1450px) scale(3);
   opacity: 1;
 }
 

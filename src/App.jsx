@@ -17,8 +17,10 @@ function App() {
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // state for full screen 
+  const [isFullscreen, setIsFullscreen] = useState(false);
+ 
 
   const [isLandscape, setIsLandscape] = useState(
     window.innerWidth > window.innerHeight
