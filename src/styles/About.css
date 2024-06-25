@@ -19,9 +19,6 @@
   );
   background-size: 400% 400%;
   animation: gradientWave 15s ease infinite;
-  /* color: #fff; */
-  /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); */
-  /* border: 2px solid red; */
 }
 @keyframes gradientWave {
   0% {
@@ -34,8 +31,6 @@
     background-position: 0% 50%;
   }
 }
-
-/* GradientBackground.css */
 .gradient-background {
   width: 100%;
   height: 100vh;
@@ -55,18 +50,6 @@
     background-position: 0% 50%;
   }
 }
-/* 
-.background-video::-webkit-media-controls {
-  display: none !important;
-}
-
-.background-video::-webkit-media-controls-enclosure {
-  display: none !important;
-}
-
-.background-video::-webkit-media-controls-panel {
-  display: none !important;
-} */
 .flex_container {
   position: absolute;
   display: flex;
@@ -78,11 +61,9 @@
   display: flex;
   flex-direction: column;
   gap: 60px;
-  /* border: 1px solid red; */
 }
 .close_icon {
   z-index: 111111111111;
-  /* border: 1px solid red; */
   cursor: pointer;
 }
 .close_icon:hover img {
@@ -100,13 +81,9 @@
 .close_icon img {
   width: 40px;
   height: 40px;
-  /* cursor: pointer; */
-  /* border: 1px solid red; */
 }
 .title {
-  /* color: black; */
   color: rgb(255, 255, 255);
-  /* border: 1px solid green; */
   font-size: 40px;
   letter-spacing: 5px;
 }
@@ -117,24 +94,11 @@
   align-items: center;
   gap: 150px;
   height: 100%;
-  /* border: 1px solid green; */
 }
 .logo_image {
-  /* width: 500px;
-  height: 550px;
-  background-image: url("../asset/logoo.svg");
-  background-repeat: no-repeat;
-  background-position: 100%;
-  background-size: cover; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-  /* transition: transform 2s ease, opacity 2s ease; */
   padding: 0;
-  /* border: 1px solid red; */
 }
 .about_logo_styles {
-  /* width: 300px; */
   height: 350px;
   transition: transform 2s ease, opacity 2s ease;
 }
@@ -151,31 +115,20 @@
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   gap: 15px;
-  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
-  /* border: 1px solid rgb(21, 0, 255); */
 }
 .paragraph p {
   font-size: 18px;
-  /* border: 1px solid red; */
 }
 .paragraph span {
   font-size: 18px;
 }
 .paragraph .para_span .tit {
   font-size: 23px;
-  /* border: 2px solid red; */
 }
-/* .grow-logo {
-  animation: grow 2s forwards;
-  opacity: 4;
-} */
-
 .grow-logo {
   animation: grow 1s ease-in-out forwards;
   opacity: 1;
-  transform-origin: 50% 60%;
+  transform-origin: 50% 62%;
 }
 @keyframes grow {
   0% {
@@ -193,13 +146,11 @@
 @media (min-width: 530px) and (max-width: 949px) {
   .about_container {
     padding-bottom: 7%;
-    /* border: 1px solid red; */
   }
   .flex_container {
     padding-left: 5%;
     padding-right: 4%;
     gap: 30px;
-    /* border: 1px solid red; */
   }
   .close_icon img {
     width: 20px;
@@ -208,7 +159,6 @@
   .abouttext_paragraph {
     width: auto;
     align-items: start;
-    /* border: 1px solid red; */
     gap: 15px;
   }
   .close_icon img {
@@ -216,8 +166,6 @@
     height: 20px;
   }
   .title {
-    /* color: rgb(190, 15, 15);
-    border: 1px solid green; */
     font-size: 25px;
     letter-spacing: 3px;
   }
@@ -227,32 +175,23 @@
     display: flex;
     align-items: center;
     gap: 55px;
-    /* border: 1px solid green; */
   }
-  /* .logo_image img {
-    width: 100px;
-    height: 150px;
-  } */
   .paragraph {
     max-height: 200px;
     width: 100%;
     border-radius: 10px;
     padding: 5px;
-    /* border: 1px solid rgb(21, 0, 255); */
   }
   .paragraph p {
     font-size: 15px;
-    /* border: 1px solid red; */
   }
   .paragraph span {
     font-size: 15px;
   }
   .paragraph .para_span .tit {
     font-size: 20px;
-    /* border: 2px solid red; */
   }
   .about_logo_styles {
-    /* width: 120px; */
     height: 100px;
     transition: transform 2s ease, opacity 2s ease;
   }
@@ -265,21 +204,17 @@
 @media (min-width: 950px) and (max-width: 1400px) {
   .about_container {
     padding-bottom: 7%;
-    /* border: 1px solid red; */
   }
   .flex_container {
     padding-left: 8%;
     padding-right: 5%;
     gap: 50px;
-    /* border: 1px solid red; */
-    /* gap: 70px;  */
   }
   .close_icon img {
     width: 30px;
     height: 30px;
   }
   .abouttext_paragraph {
-    /* border: 1px solid red; */
     gap: 40px;
   }
   .close_icon img {
@@ -287,62 +222,48 @@
     height: 30px;
   }
   .title {
-    /* color: black; */
-    /* border: 1px solid green; */
     font-size: 30px;
     letter-spacing: 2px;
   }
   .closebutt_logo {
     gap: 160px;
     display: flex;
-    /* margin: 0; */
     width: auto;
-    /* border: 1px solid green; */
   }
   .logo_image img {
-    /* border: 2px solid red; */
-    /* width: 280; */
     height: 180px;
   }
   .paragraph {
     max-height: 450px;
     width: 100%;
-    /* border: 1px solid rgb(21, 0, 255); */
   }
   .paragraph p {
     font-size: 18px;
-    /* border: 1px solid red; */
   }
   .paragraph span {
     font-size: 18px;
   }
   .paragraph .para_span .tit {
     font-size: 25px;
-    /* border: 2px solid red; */
   }
 }
 @media (min-width: 2000px) {
   .about_container {
     padding-bottom: 10%;
-    /* border: 1px solid red; */
   }
   .flex_container {
     padding-left: 9%;
     padding-right: 6%;
     gap: 100px;
-    /* border: 1px solid red; */
-    /* gap: 70px;  */
   }
   .close_icon img {
     width: 40px;
     height: 40px;
   }
   .abouttext_paragraph {
-    /* border: 1px solid red; */
     gap: 60px;
   }
   .title {
-    /* border: 1px solid green; */
     font-size: 43px;
     letter-spacing: 3px;
   }
@@ -351,26 +272,18 @@
     display: flex;
     margin: 0;
     width: auto;
-    /* border: 1px solid green; */
   }
-  /* .logo_image img {
-    width: 450px;
-    height: 500px;
-  } */
   .paragraph {
     max-height: 700px;
     width: 100%;
-    /* border: 1px solid rgb(21, 0, 255); */
   }
   .paragraph p {
     font-size: 25px;
-    /* border: 1px solid red; */
   }
   .paragraph span {
     font-size: 25px;
   }
   .paragraph .para_span .tit {
     font-size: 34px;
-    /* border: 2px solid red; */
   }
 }

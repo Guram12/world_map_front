@@ -36,7 +36,6 @@
 .rotate_image {
   width: 100px;
   height: 100px;
-  /* border: 1px solid red; */
   animation: rotateImage 1s linear forwards;
 }
 
@@ -60,7 +59,6 @@
   }
 }
 
-
 #fullscreen-button {
   position: absolute;
   z-index: 99999999999999999999999999;
@@ -70,7 +68,6 @@
   border: none;
   cursor: pointer;
 }
-
 
 .screen_button {
   width: 30px;

@@ -532,7 +532,7 @@
     height: 160px;
   }
   .lang_input:hover {
-    background-color: none;
+    background-color: #1b1b1b;
     /* #1b1b1b */
   }
   .flex:hover {
