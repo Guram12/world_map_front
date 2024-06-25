@@ -8,19 +8,14 @@ import CountryMap from "./components/CountryMap";
 import axios from "axios";
 import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 import LanguageJson from "./components/language.json";
-
 
 function App() {
   const [language, setLanguage] = useState("en");
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
-
-  // state for full screen 
-  const [isFullscreen, setIsFullscreen] = useState(false);
- 
 
   const [isLandscape, setIsLandscape] = useState(
     window.innerWidth > window.innerHeight
@@ -87,7 +82,6 @@ function App() {
     console.log("selected country in app", selectedCountry);
   }, [selectedCountry]);
 
-
   if (isMobileDevice && !isLandscape) {
     return (
       <div className="rotate_cont">
@@ -125,7 +119,10 @@ function App() {
               <>
                 <Helmet>
                   <title>About Us - 1inone</title>
-                  <meta name="description" content="Learn more about 1inone and our mission." />
+                  <meta
+                    name="description"
+                    content="Learn more about 1inone and our mission."
+                  />
                 </Helmet>
                 <About />
               </>
@@ -137,7 +134,10 @@ function App() {
               <>
                 <Helmet>
                   <title>Contact Us - 1inone</title>
-                  <meta name="description" content="Get in touch with 1inone." />
+                  <meta
+                    name="description"
+                    content="Get in touch with 1inone."
+                  />
                 </Helmet>
                 <Contact />
               </>
@@ -149,7 +149,10 @@ function App() {
               <>
                 <Helmet>
                   <title>Map - 1inone</title>
-                  <meta name="description" content="Explore the map to see our exclusive advertising partners." />
+                  <meta
+                    name="description"
+                    content="Explore the map to see our exclusive advertising partners."
+                  />
                 </Helmet>
                 <Map
                   language={language}
@@ -167,7 +170,10 @@ function App() {
               <>
                 <Helmet>
                   <title>Country Map - 1inone</title>
-                  <meta name="description" content={`Explore our advertising partners in ${selectedCountry}`} />
+                  <meta
+                    name="description"
+                    content={`Explore our advertising partners in ${selectedCountry}`}
+                  />
                 </Helmet>
                 <CountryMap
                   selectedCountry={selectedCountry}

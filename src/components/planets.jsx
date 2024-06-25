@@ -26,8 +26,6 @@ export default function Planets({ handle_set_language, language }) {
   const handle_set_language_name = (event) => {
     if (language) {
       const names = { en: "English", ru: "Russian", ge: "Georgia" };
-      // console.log("names:", names);
-      // setLanguageName(names[language]);
       return names[event];
     } else {
       return null;
@@ -180,9 +178,7 @@ export default function Planets({ handle_set_language, language }) {
             <div className="earth" onClick={handleEarthClick}></div>
           </div>
           <div className="moon_bck_styles">
-            <div className="moon">
-              {/* <div className="logo-container"></div> */}
-            </div>
+            <div className="moon"></div>
           </div>
         </motion.div>
         <motion.div
