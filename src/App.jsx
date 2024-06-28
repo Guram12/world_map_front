@@ -44,9 +44,9 @@ function App() {
     setIsLandscape(landscape);
 
     if (!landscape) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling when showing the rotate message
+      document.body.style.overflow = "hidden"; 
     } else {
-      document.body.style.overflow = "auto"; // Allow scrolling when the site is displayed
+      document.body.style.overflow = "auto";
     }
   };
 
