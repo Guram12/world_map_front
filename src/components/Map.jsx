@@ -242,7 +242,7 @@ function Map({
 
       const country_name_props = LanguageJson[arg][language];
       setCountry_name_props(country_name_props);
-      console.log("----------", country_name_props);
+      // console.log("----------", country_name_props);
 
       setCountryClicked(arg);
     }
