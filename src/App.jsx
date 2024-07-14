@@ -78,9 +78,9 @@ function App() {
     fetchCountryImages();
   }, []);
 
-  useEffect(() => {
-    console.log("selected country in app", selectedCountry);
-  }, [selectedCountry]);
+  // useEffect(() => {
+  //   console.log("selected country in app", selectedCountry);
+  // }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
     return (
