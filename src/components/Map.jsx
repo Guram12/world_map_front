@@ -251,6 +251,21 @@ function Map({
     window.open(countryMapUrl, "_blank", "noopener,noreferrer");
   };
 
+  // const openGoogleMaps = (arg) => {
+  //   // Check if the argument is for a US state
+  //   const isUSState = arg.startsWith('us-');
+    
+  //   // Construct the URL based on whether it's a US state or a country
+  //   const countryMapUrl = isUSState 
+  //     ? `https://www.google.com/maps/place/${arg.replace('us-', '')}`
+  //     : `${window.location.origin}/country-map/${arg}`;
+    
+  //   // Open the URL in a new window
+  //   window.open(countryMapUrl, "_blank", "noopener,noreferrer");
+  // };
+  
+
+
   useEffect(() => {
     const applyAnimation = () => {
       if (svgRef.current) {
