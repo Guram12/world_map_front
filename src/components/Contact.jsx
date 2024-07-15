@@ -11,7 +11,7 @@ import Inst from "../asset/instagram.png";
 import Face from "../asset/facebook.png";
 import Linke from "../asset/linkedin.png";
 
-const Contact = () => {
+const Contact = ({language}) => {
   const navigate = useNavigate();
 
   const handleLogoClickContact = () => {
@@ -36,6 +36,33 @@ const Contact = () => {
       },
     },
   });
+
+
+
+  const translateAboutText = (lang) => {
+    var languageInfo = {
+      statusInfoLanguage: "en",
+    };
+
+    switch (lang) {
+      case "en":
+        languageInfo.statusInfoLanguage = "Status";
+        break;
+
+      case "ka":
+        languageInfo.statusInfoLanguage = "სტატუსი";
+        break;
+
+      case "ru":
+        languageInfo.statusInfoLanguage = "статус";
+        break;
+    }
+    return languageInfo;
+  };
+
+
+
+
   return (
     <div className="contact_container">
 

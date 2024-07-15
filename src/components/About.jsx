@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 // import Cancel from "../asset/cancel.png";
 import Cancel from "../asset/delete.png";
 
-const About = () => {
+const About = ({language}) => {
   const navigate = useNavigate();
   // const [isIOS, setIsIOS] = useState(false);
 
@@ -41,6 +41,32 @@ const About = () => {
       },
     },
   });
+
+
+
+  const translateAboutText = (lang) => {
+    var languageInfo = {
+      statusInfoLanguage: "en",
+    };
+
+    switch (lang) {
+      case "en":
+        languageInfo.statusInfoLanguage = "Status";
+        break;
+
+      case "ka":
+        languageInfo.statusInfoLanguage = "სტატუსი";
+        break;
+
+      case "ru":
+        languageInfo.statusInfoLanguage = "статус";
+        break;
+    }
+    return languageInfo;
+  };
+
+
+
 
   return (
     <div className="about_container">
