@@ -9,7 +9,7 @@ import axios from "axios";
 import Planets from "./components/planets";
 import Rotate from "./asset/rotate.png";
 import { Helmet } from "react-helmet-async";
-import LanguageJson from "./components/language.json";
+// import LanguageJson from "./components/language.json";
 
 function App() {
   const [language, setLanguage] = useState("en");
@@ -44,9 +44,9 @@ function App() {
     setIsLandscape(landscape);
 
     if (!landscape) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling when showing the rotate message
+      document.body.style.overflow = "hidden"; 
     } else {
-      document.body.style.overflow = "auto"; // Allow scrolling when the site is displayed
+      document.body.style.overflow = "auto";
     }
   };
 
@@ -78,9 +78,9 @@ function App() {
     fetchCountryImages();
   }, []);
 
-  useEffect(() => {
-    console.log("selected country in app", selectedCountry);
-  }, [selectedCountry]);
+  // useEffect(() => {
+  //   console.log("selected country in app", selectedCountry);
+  // }, [selectedCountry]);
 
   if (isMobileDevice && !isLandscape) {
     return (
@@ -124,7 +124,7 @@ function App() {
                     content="Learn more about 1inone and our mission."
                   />
                 </Helmet>
-                <About />
+                <About language={language} />
               </>
             }
           />
@@ -139,7 +139,7 @@ function App() {
                     content="Get in touch with 1inone."
                   />
                 </Helmet>
-                <Contact />
+                <Contact language={language} />
               </>
             }
           />
