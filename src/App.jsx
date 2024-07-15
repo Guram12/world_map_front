@@ -124,7 +124,7 @@ function App() {
                     content="Learn more about 1inone and our mission."
                   />
                 </Helmet>
-                <About />
+                <About language={language} />
               </>
             }
           />
@@ -139,7 +139,7 @@ function App() {
                     content="Get in touch with 1inone."
                   />
                 </Helmet>
-                <Contact />
+                <Contact language={language} />
               </>
             }
           />
