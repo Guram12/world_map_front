@@ -37,23 +37,41 @@ const Contact = ({ language }) => {
     },
   });
 
-  // const translateAboutText = (lang) => {
-  //   const translations = {
-  //     en: {
-  //       contact: "Contact Us",
-  //     },
-  //     ge: {
-  //       contact: "კონტაქტი",
-  //     },
-  //     ru: {
-  //       contact: "kontact",
-  //     },
-  //   };
+  const translateAboutText = (lang) => {
+    const translations = {
+      en: {
+        contact: "Contact Us",
+        txt1: "- Your way to global success.",
+        txt2: "Become our partner by contacting us",
+        email: ". e-mail:",
+        phone: ". Phone: ",
+        address: ". Address: ",
+        tbilisi: "Tbilisi, Georgia",
+      },
+      ge: {
+        contact: "კონტაქტი",
+        txt1: "- თქვენი გზა გლობალური წარმატებისკენ. ",
+        txt2: "გახდით ჩვენი პარტნიორი, დაგვიკავშირდით",
+        email: ". ელექტრონული ფოსტა: ",
+        phone: ". ტელეფონი: ",
+        address: ". მისამართი: ",
+        tbilisi: " თბილისი, საქართველო",
+      },
+      ru: {
+        contact: "Контакт",
+        txt1: "- Ваш путь к глобальному успеху. ",
+        txt2: "Станьте нашим партнером, связавшись с нами",
+        email: ". электронная почта:",
+        phone: ". Телефон: ",
+        address: ". Адрес:",
+        tbilisi: "Тбилиси, Грузия",
+      },
+    };
 
-  //   return translations[lang] || translations.en;
-  // };
+    return translations[lang] || translations.en;
+  };
 
-  // const translatedText = translateAboutText(language);
+  const translatedText = translateAboutText(language);
   return (
     <div className="contact_container">
       <div className="flex_container_contact">
@@ -69,7 +87,7 @@ const Contact = ({ language }) => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="title_contact"> Contact Us</h1>
+              <h1 className="title_contact"> {translatedText.contact}</h1>
             </motion.div>
             <motion.div
               className="social_links"
@@ -78,21 +96,21 @@ const Contact = ({ language }) => {
               transition={{ duration: 0.5 }}
             >
               <a
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/1inone2024?fbclid=IwZXh0bgNhZW0CMTAAAR3baXbz2T4gYOfGlOvdNZgIOzqrDihrWkadcHiNOmKEqnYpUOsv0C4cnZ4_aem_V0AFv3B1buKaVlPeCL50cA"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img src={Inst} alt="Instagram"></img>
               </a>
               <a
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/profile.php?id=61561087984261"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img src={Face} alt="Facebook"></img>
               </a>
               <a
-                href="https://www.linkedin.com"
+                href="https://www.linkedin.com/company/1inone/posts/?feedView=all"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -108,32 +126,41 @@ const Contact = ({ language }) => {
             viewport={{ once: false, amount: 0.3 }}
           >
             <motion.p variants={textVariant("left", 0.1)}>
-              This setup ensures that each text block animates down from the top
-              sequentially, with a one-second delay between each. The title will
-              appear last, after all other elements. This setup ensures that
-              each text block animates down from the top sequentially, with a
-              one-second delay between each. The title will appear last, after
-              all other elements.
+              <a
+                className="oneinone"
+                href="https://www.1inone.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                1inone.com
+              </a>
+              {translatedText.txt1}
+            </motion.p>
+            <motion.p variants={textVariant("left", 0.1)}>
+              {translatedText.txt2}
             </motion.p>
             <motion.div className="contact_info">
               <motion.p variants={textVariant("left", 0.2)}>
-                . Email:<span>robakidzenino89@mail.com</span>
+                {translatedText.email}
+                <span>1inOne2024@gmail.com</span>
               </motion.p>
               <motion.p variants={textVariant("left", 0.3)}>
-                . Phone:<span>577424310</span>
+                {translatedText.phone}
+                <span> +995 951 010 441</span>
               </motion.p>
               <motion.p variants={textVariant("left", 0.4)}>
-                . Address:<span>Mtatsminda, Vedzini #9</span>
+                {translatedText.address}
+                <span>{translatedText.tbilisi}</span>
               </motion.p>
             </motion.div>
-            <motion.p variants={textVariant("left", 0.5)}>
+            {/* <motion.p variants={textVariant("left", 0.5)}>
               This setup ensures that each text block animates down from the top
               sequentially, with a one-second delay between each. The title will
               appear last, after all other elements. This setup ensures that
               each text block animates down from the top sequentially, with a
               one-second delay between each. The title will appear last, after
               all other elements.
-            </motion.p>
+            </motion.p> */}
           </motion.div>
         </div>
         <motion.div
