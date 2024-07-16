@@ -3,7 +3,7 @@ import "../styles/Contact.css";
 import Logo from "../asset/logoo.png";
 // import Cancel from "../asset/cancel.png";
 import Cancel from "../asset/delete.png";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeIn } from "../Variants";
@@ -11,7 +11,7 @@ import Inst from "../asset/instagram.png";
 import Face from "../asset/facebook.png";
 import Linke from "../asset/linkedin.png";
 
-const Contact = ({language}) => {
+const Contact = ({ language }) => {
   const navigate = useNavigate();
 
   const handleLogoClickContact = () => {
@@ -37,35 +37,25 @@ const Contact = ({language}) => {
     },
   });
 
+  // const translateAboutText = (lang) => {
+  //   const translations = {
+  //     en: {
+  //       contact: "Contact Us",
+  //     },
+  //     ge: {
+  //       contact: "კონტაქტი",
+  //     },
+  //     ru: {
+  //       contact: "kontact",
+  //     },
+  //   };
 
+  //   return translations[lang] || translations.en;
+  // };
 
-  const translateAboutText = (lang) => {
-    var languageInfo = {
-      statusInfoLanguage: "en",
-    };
-
-    switch (lang) {
-      case "en":
-        languageInfo.statusInfoLanguage = "Status";
-        break;
-
-      case "ka":
-        languageInfo.statusInfoLanguage = "სტატუსი";
-        break;
-
-      case "ru":
-        languageInfo.statusInfoLanguage = "статус";
-        break;
-    }
-    return languageInfo;
-  };
-
-
-
-
+  // const translatedText = translateAboutText(language);
   return (
     <div className="contact_container">
-
       <div className="flex_container_contact">
         <Helmet>
           <title>Contact Us - 1inone</title>
@@ -79,7 +69,7 @@ const Contact = ({language}) => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="title_contact">Contact Us</h1>
+              <h1 className="title_contact"> Contact Us</h1>
             </motion.div>
             <motion.div
               className="social_links"
