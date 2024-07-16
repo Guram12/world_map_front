@@ -86,11 +86,11 @@ export default function Planets({ handle_set_language, language }) {
       },
       ge: {
         aboutUs: "ჩვენს შესახებ",
-        contact: "კონტაქტები",
+        contact: "კონტაქტი",
       },
       ru: {
         aboutUs: "О нас",
-        contact: "kontact",
+        contact: "Контакт",
       },
     };
 
