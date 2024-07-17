@@ -110,7 +110,8 @@
   cursor: pointer;
 }
 .textt {
-  font-size: 15px;
+  font-size: 20px;
+  /* border: 6px solid red; */
   fill: #f1f5f8;
   letter-spacing: 3px;
 }
@@ -484,6 +485,7 @@
   }
   .textt {
     font-size: 20px;
+    /* border: 5px solid red; */
     fill: #f1f5f8;
     letter-spacing: 4px;
   }

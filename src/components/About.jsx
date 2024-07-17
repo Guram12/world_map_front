@@ -49,29 +49,29 @@ const About = ({ language }) => {
         aboutUs: "About Us",
         ourMission: "OUR MISSION",
         oneInOne:
-          "-is a modern, innovative advertising platform that offers a unique opportunity to make your brand a global leader, effectively develop your business.",
+          "is a modern, innovative advertising platform that offers a unique opportunity to make your brand a global leader, effectively developing your business.",
         text: " We help companies achieve their goals faster and more efficiently, ensure global availability of their products and services, and present themselves to a wider audience. By cooperating with us, you will be able to attract customers and partners from any part of the world, expand the scope of your activities.",
         HowWeWork: "How we work:",
         selectCountry: "Selecting a country: ",
         txt1: "each company can select the country it wants from the world map. This capability gives them a strategic advantage in local markets.",
         logo: "Logo Placement:",
-        txt2: "We ensure that the company logo is overlaid on the map of the selected country. This increases brand visibility and helps increase awareness.",
+        txt2: " We ensure that the company logo is overlaid on the map of the selected country. This increases brand visibility and helps them to  increase their  awareness.",
         layout: "Layout of branches and locations:",
-        txt3: " Our team works to ensure that the branches and locations of companies are accurately and completely displayed on the map. This makes it easier for users to find their preferred branch.",
+        txt3: "Our team works to ensure that the branches and locations of companies are accurately and completely displayed on the map. This makes it easier for users to find their preferred branch.",
         providing: "Providing information:",
-        txt4: "any visitor to the site can easily find different brands, and by clicking on the logo, get complete information about these companies and the addresses of their branches in the marked country.",
+        txt4: "Any visitor to the site can easily find different brands, and by clicking on the logo, get complete information about these companies and the addresses of their branches in the marked country.",
         ourGoal:
-          "Our goal is to create a global network that will allow interested brands to establish themselves in the international market, increase global awareness, provide their products and services to a wide audience from any part of the world.",
+          "Our goal is to create a global network that will allow interested brands to establish themselves in the international market, increase global awareness, and provide their products and services to a wide audience from any part of the world.",
         ourValue: "AUR VALUES:",
         GlobalVision: "Global vision: ",
         txt5: "Our platform enables companies to establish their place in the global market and discover a new way to achieve their goals.",
         inovation: "Innovation: ",
         txt6: "We offer innovative, modern, unique advertising means to ensure effective development of your brand.",
         reliability: "Reliability: ",
-        txt7: " Our services are based on reliable and verified data to ensure that your branches and locations are accurately reflected on the platform.",
+        txt7: "Our services are based on reliable and verified data to ensure that your branches and locations are accurately reflected on the platform.",
         communication: "Communication: ",
-        txt8: "We create a bridge between the company and customers partners. Provide easy and effective communication.",
-        yourWay: "- your way to global success",
+        txt8: " We create a bridge between the company and customers/partners. Provide easy and effective communication.",
+        yourWay: "- Your way to global success ",
       },
       ge: {
         aboutUs: "ჩვენს შესახებ",
@@ -215,7 +215,7 @@ const About = ({ language }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                1inone.com
+                1inone
               </a>
               {translatedText.oneInOne}
             </motion.p>

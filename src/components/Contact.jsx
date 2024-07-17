@@ -142,11 +142,11 @@ const Contact = ({ language }) => {
             <motion.div className="contact_info">
               <motion.p variants={textVariant("left", 0.2)}>
                 {translatedText.email}
-                <span>1inOne900@gmail.com</span>
+                <span>Oninone900@gmail.com</span>
               </motion.p>
               <motion.p variants={textVariant("left", 0.3)}>
                 {translatedText.phone}
-                <span> +995 951 010 441</span>
+                <span> +995 591 01 04 41</span>
               </motion.p>
               <motion.p variants={textVariant("left", 0.4)}>
                 {translatedText.address}
