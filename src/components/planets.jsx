@@ -78,6 +78,26 @@ export default function Planets({ handle_set_language, language }) {
       navigate("/about");
     }, 1000);
   };
+  const translateAboutText = (lang) => {
+    const translations = {
+      en: {
+        aboutUs: "About Us",
+        contact: "Contact Us",
+      },
+      ge: {
+        aboutUs: "ჩვენს შესახებ",
+        contact: "კონტაქტი",
+      },
+      ru: {
+        aboutUs: "О нас",
+        contact: "Контакт",
+      },
+    };
+
+    return translations[lang] || translations.en;
+  };
+
+  const translatedText = translateAboutText(language);
 
   return (
     <div className="main_planets_container">
@@ -159,7 +179,7 @@ export default function Planets({ handle_set_language, language }) {
                   startOffset="50%"
                   textAnchor="middle"
                 >
-                  About Us
+                  {translatedText.aboutUs}
                 </textPath>
               </text>
             </svg>
@@ -203,7 +223,7 @@ export default function Planets({ handle_set_language, language }) {
                   startOffset="50%"
                   textAnchor="middle"
                 >
-                  Contact Us
+                  {translatedText.contact}
                 </textPath>
               </text>
             </svg>

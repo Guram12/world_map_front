@@ -37,7 +37,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  /* justify-content: space-evenly; */
   gap: 50px;
+  /* border: 1px solid red; */
 }
 .contact_social_cont {
   width: 100%;
@@ -63,7 +65,7 @@
   max-height: 600px;
   width: 800px;
   overflow-y: auto;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   padding: 10px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
@@ -71,7 +73,8 @@
 }
 
 .closebutt_logo_cont {
-  gap: 70px;
+  gap: 50px;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,12 +108,15 @@
 .logo_image_cont img {
   transition: transform 2s ease, opacity 2s ease;
   /* width: 280px; */
-  height: 300px;
+  height: 200px;
 }
 
 .text_contact p {
-  font-size: 20px;
+  font-size: 25px !important;
   letter-spacing: 5;
+}
+.text_contact p a {
+  font-size: 30px;
 }
 .contact_info p {
   font-size: 25px;
