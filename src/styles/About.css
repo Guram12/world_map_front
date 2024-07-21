@@ -53,8 +53,8 @@
 .flex_container {
   position: absolute;
   display: flex;
-  gap: 80px;
-  z-index: 99999999999999;
+  gap: 100px;
+  z-index: 999999999999999999999;
 }
 .abouttext_paragraph {
   width: 100%;

@@ -6,11 +6,11 @@ const Starfield = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return; // Ensure canvas is available
+    if (!canvas) return; 
     const ctx = canvas.getContext("2d");
 
     const setCanvasSize = () => {
-      if (!canvas) return; // Ensure canvas is available
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
