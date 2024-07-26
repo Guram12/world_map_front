@@ -5,7 +5,6 @@ import Logo from "../asset/logoo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "./Starfield";
 import Gflag from "../asset/georgiaflag.png";
-// import Lang from "../asset/lang.png";
 import Lang1 from "../asset/lang1.png";
 import Russ from "../asset/russ.png";
 import EnglishFlag from "../asset/english.png";
