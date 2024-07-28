@@ -31,12 +31,12 @@ export default function Planets({ handle_set_language, language }) {
     }
   };
 
-
   const handleEarthClick = () => {
     document.querySelector(".moon").style.display = "none";
     document.querySelector(".links").style.display = "none";
     document.querySelector(".link").style.display = "none";
     document.querySelector(".none").style.display = "none";
+    document.querySelector(".logo_about_planet").style.display = "none";
     document.querySelector(".select_language").style.display = "none";
     document.querySelector(".planet_img").style.display = "none";
     const earth = document.querySelector(".earth");
@@ -52,6 +52,8 @@ export default function Planets({ handle_set_language, language }) {
     document.querySelector(".earth").style.display = "none";
     document.querySelector(".textt").style.display = "none";
     document.querySelector(".txt").style.display = "none";
+    document.querySelector(".logo_about_planet").style.display = "none";
+
     document.querySelector(".select_language").style.display = "none";
     const contact = document.querySelector(".link_contact");
     contact.classList.add("grow-contact");
@@ -65,6 +67,8 @@ export default function Planets({ handle_set_language, language }) {
     document.querySelector(".earth").style.display = "none";
     document.querySelector(".textt").style.display = "none";
     document.querySelector(".txt").style.display = "none";
+    document.querySelector(".logo_about_planet").style.display = "none";
+
     document.querySelector(".select_language").style.display = "none";
 
     document.querySelector(".logo_about").style.display = "none";
@@ -151,6 +155,9 @@ export default function Planets({ handle_set_language, language }) {
           )}
         </AnimatePresence>
       </div>
+      <div className="logo_about_planet">
+        <img className="logo_about" src={Logo} alt="logo" />
+      </div>
       <Starfield />
       <div className="same_class">
         <motion.div
@@ -181,7 +188,7 @@ export default function Planets({ handle_set_language, language }) {
             </svg>
           </div>
           <div className="links link_about" onClick={handleAboutClick}>
-            <img className="logo_about" src={Logo} alt="logo" />
+            {/* <img className="logo_about" src={Logo} alt="logo" /> */}
           </div>
         </motion.div>
         <motion.div

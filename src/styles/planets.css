@@ -12,6 +12,18 @@
   overflow: hidden;
   /* border: 1px solid green; */
 }
+.logo_about_planet {
+  /* width: 120px;
+  height: 120px; */
+  position: absolute;
+  z-index: 200000000000;
+  top: 30px;
+  left: 30px;
+}
+.logo_about {
+  width: 100px;
+  height: 140px;
+}
 .select_language {
   position: absolute;
   z-index: 99999999999999;
@@ -120,7 +132,9 @@
   background-image: url("../asset/planet1.png");
   text-align: center;
   position: relative;
-  transition: transform 2s ease, opacity 2s ease;
+  transition:
+    transform 2s ease,
+    opacity 2s ease;
   /* border: 1px solid red; */
   z-index: 1;
   text-align: center;
@@ -274,9 +288,12 @@
 }
 .moon {
   animation: orbit 40s linear infinite;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
   width: 150px;
   height: 150px;
   display: flex;
@@ -303,10 +320,15 @@
   justify-content: center;
   cursor: pointer;
   background-image: url("../asset/earth1.png");
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  transition: transform 2s ease, opacity 2s ease;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transition:
+    transform 2s ease,
+    opacity 2s ease;
   /* border: 1px solid red; */
 }
 .earth:hover {
@@ -416,10 +438,15 @@
     width: 150px;
     height: 150px;
     background-image: url("../asset/earth1.png");
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    transition: transform 2s ease, opacity 2s ease;
+    box-shadow:
+      rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px,
+      rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px,
+      rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition:
+      transform 2s ease,
+      opacity 2s ease;
     /* border: 1px solid red; */
   }
   .moon {
@@ -477,6 +504,18 @@
   .moon_bck_styles:hover ~ .earth_bck_styles .earth {
     box-shadow: none;
   }
+  .logo_about_planet {
+    /* width: 120px;
+    height: 120px; */
+    position: absolute;
+    z-index: 200000000000;
+    top: 30px;
+    left: 30px;
+  }
+  .logo_about {
+    width: 60px;
+    height: 90px;
+  }
 }
 @media (min-width: 950px) and (max-width: 1450px) {
   .same_class {
@@ -502,10 +541,15 @@
     width: 300px;
     height: 300px;
     background-image: url("../asset/earth1.png");
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    transition: transform 2s ease, opacity 2s ease;
+    box-shadow:
+      rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px,
+      rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px,
+      rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition:
+      transform 2s ease,
+      opacity 2s ease;
     /* border: 1px solid red; */
   }
   .moon {
@@ -555,6 +599,18 @@
   .moon_bck_styles:hover ~ .earth_bck_styles .earth {
     box-shadow: none;
   }
+  .logo_about_planet {
+    /* width: 120px;
+    height: 120px; */
+    position: absolute;
+    z-index: 200000000000;
+    top: 30px;
+    left: 30px;
+  }
+  .logo_about {
+    width: 90px;
+    height: 130px;
+  }
 }
 @media (min-width: 1920px) {
   .same_class {
@@ -579,10 +635,15 @@
     width: 500px;
     height: 500px;
     background-image: url("../asset/earth1.png");
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    transition: transform 2s ease, opacity 2s ease;
+    box-shadow:
+      rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px,
+      rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px,
+      rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition:
+      transform 2s ease,
+      opacity 2s ease;
     /* border: 1px solid red; */
   }
   .moon {
@@ -616,5 +677,17 @@
   .link_about img {
     /* width: 180px; */
     height: 220px;
+  }
+  .logo_about_planet {
+    /* width: 120px;
+    height: 120px; */
+    position: absolute;
+    z-index: 200000000000;
+    top: 30px;
+    left: 30px;
+  }
+  .logo_about {
+    width: 100px;
+    height: 140px;
   }
 }
