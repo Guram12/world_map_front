@@ -181,26 +181,23 @@
 /* =======================   hovered  country style   ============================  */
 
 .selected-country-hover {
-  /* transform: scale(1.26) !important; */
-  /* transform-origin: center;
-  transition: transform 0.3s ease; */
-  stroke: #19b43b;
+  stroke: #19b43b; /* Initial color */
   stroke-width: 1;
-  stroke-dasharray: 50, 50, 50, 50;
-  /* Adjust these values based on your path length */
-  animation: animate 2s linear infinite;
+  animation: colorChange 1s linear infinite;
 }
 
-@keyframes animate {
+@keyframes colorChange {
   0% {
-    stroke-dashoffset: 0;
+    stroke: #19b43b; /* Green */
   }
-
+  50% {
+    stroke: #ff0000; /* Red */
+  }
   100% {
-    stroke-dashoffset: -300;
-    /* Adjust this value to control the speed */
+    stroke: #19b43b; /* Green */
   }
 }
+
 
 /* =======================   selected continent style   ============================  */
 
@@ -276,7 +273,7 @@
 }
 
 .continent-dark {
-  opacity: 0.5;
+  opacity: 0.2;
   transition: opacity 0.3s ease;
 }
 
