@@ -10,6 +10,7 @@ import { fadeIn } from "../Variants";
 import Inst from "../asset/instagram.png";
 import Face from "../asset/facebook.png";
 import Linke from "../asset/linkedin.png";
+import Youtube from "../asset/youtube.png";
 
 const Contact = ({ language }) => {
   const navigate = useNavigate();
@@ -101,6 +102,13 @@ const Contact = ({ language }) => {
                 rel="noopener noreferrer"
               >
                 <img src={Inst} alt="Instagram"></img>
+              </a>
+              <a
+                href="https://www.youtube.com/@1_inone"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Youtube} alt="Instagram"></img>
               </a>
               <a
                 href="https://www.facebook.com/profile.php?id=61561087984261"
