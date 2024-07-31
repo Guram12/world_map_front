@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/Contact.css";
 import Logo from "../asset/logoo.png";
-// import Cancel from "../asset/cancel.png";
 import Cancel from "../asset/delete.png";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
