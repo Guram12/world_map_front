@@ -78,7 +78,7 @@ function CountryMap({ countryData, selectedCountry }) {
   const handleMarkerClick = (location) => {
     if (map) {
       map.panTo({ lat: location.latitude, lng: location.longitude });
-      map.setZoom(100); // Set to maximum zoom level as desired
+      map.setZoom(100); 
     }
   };
 
@@ -151,7 +151,7 @@ function CountryMap({ countryData, selectedCountry }) {
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "100vh" }}
         center={center}
-        zoom={4} 
+        zoom={4}
         onLoad={(map) => setMap(map)} // Store the map instance
         options={{
           gestureHandling: "greedy", // Allow single-finger map movement on mobile
