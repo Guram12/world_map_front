@@ -20,7 +20,6 @@ const loadGTag = () => {
   };
   document.head.appendChild(script);
 
-  // Initializing GTM data layer and configuration
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());

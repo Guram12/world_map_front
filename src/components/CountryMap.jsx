@@ -78,7 +78,7 @@ function CountryMap({ countryData, selectedCountry }) {
   const handleMarkerClick = (location) => {
     if (map) {
       map.panTo({ lat: location.latitude, lng: location.longitude });
-      map.setZoom(100); 
+      map.setZoom(100);  
     }
   };
 
